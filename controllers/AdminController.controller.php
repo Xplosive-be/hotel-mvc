@@ -99,7 +99,7 @@ class AdminController
                     "message" => 'Les informations ont été modifiés avec succès.',
                     "type" => 'alert-success'
                 ];
-                header('Location: adEditAccount&id=' . $idAccount . '');
+                header('Location: adEditAccount&id=' . $idAccount);
             }
             $countrys = $this->frontManager->getCountryList();
             $data_page = [
@@ -148,6 +148,7 @@ class AdminController
             $idEditBed = Securite::secureHTML($_GET['idEditBed']);
             if (!$idEditBed) {
                 header('Location: adminBedrooms');
+                exit();
             }
             if (isset($_POST['btnEditBed'])) {
                 $name = Securite::secureHTML($_POST['name']);
@@ -161,7 +162,8 @@ class AdminController
                     "message" => 'Les informations ont été modifiés avec succès.',
                     "type" => 'alert-success'
                 ];
-                header('Location: adminManageBed&idEditBed=' . $idEditBed . '');
+                header('Location: adminManageBed&idEditBed=' . $idEditBed);
+                exit();
             }
             $data_page = [
                 "page_description" => "Administration des chambres",
@@ -226,7 +228,39 @@ class AdminController
             header('Location: accueil');
         }
     }
-
+    public function adminBedroomAdd()
+    {
+        if (Securite::verifAccessSession()) {
+            if (isset($_POST['btnAddBed'])) {
+                $name = htmlspecialchars($_POST['name']);
+                $description = $_POST['description'];
+                $typeBed = htmlspecialchars($_POST['typeBed']);
+                $category = htmlspecialchars($_POST['category']);
+                $price = htmlspecialchars($_POST['price']);
+                // Requête pour rajouter la nouvelle chambre
+                $this->adminManager->addBed($name, $description, $typeBed, $category, $price);
+                $_SESSION['alert'] = [
+                    "message" => "Admin --- Chambre rajouté avec succès",
+                    "type" => 'alert-success'
+                ];
+                header('Location: adminBedrooms');
+            }
+            $data_page = [
+                "page_description" => "Ajouter une chambre",
+                "page_title" => "Ajouter une chambre",
+                "categoryBed" => $this->frontManager->getCategoryBedList(),
+                "view" => "views/back/adminAddBed.view.php",
+                "template" => "views/common/template_front.php"
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
     public function pictureDelete()
     {
         if ($_GET['delIdPicture']) {
@@ -243,21 +277,35 @@ class AdminController
             } else {
                 $_SESSION['alert'] = [
                     "message" => $verificationPicture,
-                    "type" => 'alert-success'
+                    "type" => 'alert-danger'
                 ];
             }
         } else {
             $_SESSION['alert'] = [
                 "message" => "Admin --- Erreur informations manquant!",
-                "type" => 'alert-success'
+                "type" => 'alert-danger'
             ];
         }
-        return header('Location: adminManagerBedPicture&idEditBed=' . $_SESSION['idEditBed']);
+        header('Location: adminManagerBedPicture&idEditBed=' . $_SESSION['idEditBed']);
     }
 
     public function bedroomDelete()
     {
+        if (isset($_GET['idDelBedRoom'])) {
+            $idDelBedRoom = $_GET['idDelBedRoom'];
+            $this->adminManager->deleteIdBed($idDelBedRoom);
+            $_SESSION['alert'] = [
 
+                "message" => "Admin --- La chambre a été supprimée avec succès.",
+                "type" => 'alert-success'
+            ];
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Admin --- Erreur informations manquant!",
+                "type" => 'alert-danger'
+            ];
+        }
+        header('Location: adminBedrooms');
     }
 }
 

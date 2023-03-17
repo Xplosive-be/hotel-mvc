@@ -108,5 +108,28 @@ class AdminManager extends Model
         $stmt->execute();
     }
 
+    public function deleteIdBed($idBedroom)
+    {
+        // Supprime les images liées à la chambre
+        $stmt = $this->getBdd()->prepare('DELETE FROM `gallery` WHERE `id_bedroom` = :idBedroom');
+        $stmt->bindParam(':idBedroom', $idBedroom);
+        $stmt->execute();
+
+        // Supprime la chambre elle-même
+        $stmt = $this->getBdd()->prepare('DELETE FROM `bedroom` WHERE `bedroom_id` = :idBedroom');
+        $stmt->bindParam(':idBedroom', $idBedroom);
+        $stmt->execute();
+    }
+
+    public function addBed($name,$description,$typeBed,$category,$price){
+        $stmt = $this->getBdd()->prepare('INSERT INTO `bedroom` (`bedroom_name`, `bedroom_description`, `bedroom_bed`, `id_roomcategory`, `bedroom_priceday`) VALUES (:name, :description, :typeBed, :category, :price)');
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':typeBed', $typeBed);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':price', $price);
+        $stmt->execute();
+
+    }
 
 }

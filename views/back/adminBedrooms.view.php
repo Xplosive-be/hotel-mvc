@@ -1,6 +1,6 @@
 <h1 class='text-center my-3 text-danger fw-bolder mb-5'>Gestionnaire des chambres</h1>
 <table class="table container bg-light p-5 rounded mb-5 border border-2 border-dark">
-    <a href="admin_addroom.php"><button class="btn btn-danger btn-lg position-fixed top-1 end-0 me-2" name="btnRegistration">+</button></a>
+    <a href="adminBedroomAdd"><button class="btn btn-danger btn-lg position-fixed top-1 end-0 me-2" name="btnRegistration">+</button></a>
     <thead class="bg-light">
     <tr>
         <th>ID</th>
@@ -43,7 +43,7 @@
                             <a href="adminManagerBedPicture&idEditBed=' . $bedroom['bedroom_id'] . '" class="text-succes mt-5">
                                 <i class="fa-solid fa-image fa-xl  mt-3"></i>
                             </a></br>
-                            <a href="delete&idDelBedRoom=' . $bedroom['bedroom_id'] . '" class="text-danger text-end mt-3">
+                            <a href="deleteBedroom&idDelBedRoom=' . $bedroom['bedroom_id'] . '" class="text-danger text-end mt-3">
                                 <i class="fa-solid fa-xl fa-trash-can  mt-3"></i>
                             </a>
                         </td>
