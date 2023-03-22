@@ -1,3 +1,26 @@
+<div class="shadow-lg p-3 mb-5 bg-body rounded" id="available">
+    <h2 class="text-center mb-4">Consultation des disponibilités et des tarifs</h2>
+    <form class="row g-3 align-items-end">
+        <div class="col-md-5">
+            <div class="form-floating mb-3">
+                <input type="date" name="dateBegin" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date de départ ">
+                <label for="dateBegin">Date de départ :</label>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-floating mb-3">
+                <input type="date" name="dateEnd" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder=" ">
+                <label for="dateEnd">Date d'arrivée :</label>
+            </div>
+        </div>
+        <div class="col-md-2 mb-3 align-self-end">
+            <button type="submit" class="btn btn-primary rounded bg-danger">Afficher les disponibilités</button>
+        </div>
+    </form>
+</div>
+
+
+
 <?php foreach ($bedrooms as $bedroom) : ?>
     <?php $carousel = 'carousel'.$bedroom['bedroom_id']?>
     <main class="container bg-light p-5 border border-danger rounded mb-5 mt-5">
@@ -47,7 +70,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <button class="mt-3 btn btn-danger align-self-end">Voir les disponibilités</button>
+            <a href="#available"><button class="mt-3 btn btn-danger align-self-end">Voir les disponibilités</button></a>
         </div>
     </main>
 <?php endforeach; ?>

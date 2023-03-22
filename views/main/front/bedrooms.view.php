@@ -1,3 +1,4 @@
+<h1 class='text-center my-3 text-danger fw-bolder mt-5'>Nos chambres</h1>
 <?php foreach ($bedrooms as $bedroom) : ?>
     <?php $carousel = 'carousel'.$bedroom['bedroom_id']?>
     <main class="container bg-light p-5 border border-danger rounded mb-5">

@@ -27,7 +27,7 @@
 </head>
 <?php require_once("views/main/common/menu.php"); ?>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <?php if (!empty($_SESSION['alert'])) : ?>
             <div class="alert font-weight-bold text-center <?= $_SESSION['alert']['type']; ?>" role="alert">
                 <?php var_dump($_SESSION['alert']['message']); ?>
