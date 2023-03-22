@@ -24,8 +24,8 @@ class FrontController{
         $data_page = [
             "page_description" => "Description de la page d'accueil",
             "page_title" => "Hôtel Belle-Nuit | Accueil",
-            "view" => "views/front/accueil.view.php",
-            "template" => "views/common/template_front.php"
+            "view" => "views/main/front/accueil.view.php",
+            "template" => "views/main/common/template_front.php"
         ];
         $this->genererPage($data_page);
     }
@@ -35,8 +35,8 @@ class FrontController{
                 "page_description" => "Description de nos différentes chambres",
                 "page_title" => "Hôtel Belle-Nuit | Nos Chambres",
                 "bedrooms" => $bedrooms,
-                "view" => "views/front/bedrooms.view.php",
-                "template" => "views/common/template_front.php"
+                "view" => "views/main/front/bedrooms.view.php",
+                "template" => "views/main/common/template_front.php"
         ];
         $this->genererPage($data_page);
     }
@@ -59,8 +59,8 @@ class FrontController{
         $data_page = [
             "page_description" => "Description de la page d'accueil",
             "page_title" => "Hôtel Belle-Nuit | Contactez-nous",
-            "view" => "views/front/contact.view.php",
-            "template" => "views/common/template_front.php",
+            "view" => "views/main/front/contact.view.php",
+            "template" => "views/main/common/template_front.php",
             "page_javascript" => ["contact.js"],
         ];
 
@@ -81,8 +81,8 @@ class FrontController{
             "page_description" => "Page permettant de gérer les erreurs",
             "page_title" => "Page d'erreur",
             "msg" => $msg,
-            "view" => "./views/front/erreur.view.php",
-            "template" => "views/common/template_front.php"
+            "view" => "./views/main/front/erreur.view.php",
+            "template" => "views/main/common/template_front.php"
         ];
         $this->genererPage($data_page);
     }

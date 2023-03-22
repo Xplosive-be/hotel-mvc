@@ -1,6 +1,6 @@
 <h1 class='text-center my-3 text-danger fw-bolder mb-5'>Gestionnaire des chambres</h1>
 <table class="table container bg-light p-5 rounded mb-5 border border-2 border-dark">
-    <a href="adminBedroomAdd"><button class="btn btn-danger btn-lg position-fixed top-1 end-0 me-2" name="btnRegistration">+</button></a>
+    <a href="apply"><button class="btn btn-danger btn-lg position-fixed top-1 end-0 me-2" name="btnRegistration">+</button></a>
     <thead class="bg-light">
     <tr>
         <th>ID</th>

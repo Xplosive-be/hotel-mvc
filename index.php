@@ -4,13 +4,15 @@ session_start();
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") .
     "://" . $_SERVER['HTTP_HOST'] . $_SERVER["PHP_SELF"]));
 
-require_once("./controllers/FrontController.controller.php");
-require_once("./controllers/BackController.controller.php");
-require_once("./controllers/AdminController.controller.php");
+require_once("./controllers/FrontController.php");
+require_once("./controllers/BackController.php");
+require_once("./controllers/AdminController.php");
+require_once("./controllers/BookingController.php");
 require_once("./config/Securite.class.php");
 $frontController = new FrontController();
 $backController = new BackController();
 $adminController = new AdminController();
+$bookingController = new BookingController();
 
 try {
     if (empty($_GET['page'])) {
@@ -73,6 +75,9 @@ try {
             break;
         case "deleteBedroom":
             $adminController->bedroomDelete();
+            break;
+        case "accueilBooking":
+            $bookingController->accueilBooking();
             break;
         default :
             throw new Exception("La page n'existe pas");

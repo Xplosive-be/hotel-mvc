@@ -30,6 +30,9 @@ class Securite {
     public static function verifAccessSession(){
         return (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && $_SESSION['admin'] === 1);
     }
+    public  static function verifConnectSession(){
+        return (isset($_SESSION['admin']) && $_SESSION['online'] === 1 && !empty($_SESSION['online'] = 1));
+    }
 
     public static function verificationAccess(){
         return (self::verifAccessSession() && self::verificationCookie());

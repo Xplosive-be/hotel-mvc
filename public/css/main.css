@@ -135,3 +135,15 @@
     border-top-right-radius: 0;
   }
 
+  .carousel-img {
+    width: 578px; /* Remplacez 500px par la taille souhaitée */
+    height: 500px; /* Remplacez 300px par la taille souhaitée */
+    object-fit: contain;
+    background-color: #F8F9FA;
+  }
+
+  .svg-fill-red {
+    /*filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(293deg) brightness(95%) contrast(105%);*/
+    background-color: rgba(220, 53, 69, 0.27);
+  }
+

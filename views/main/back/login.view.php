@@ -14,7 +14,7 @@
                 <label for="floatingPassword">Mot de passe</label>
             </div>
             <button class="w-100 mt-3 btn btn-danger type="submit" name="btnConnection">Se connecter</button>
-            <a href="../../index.php"><button class="w-100 my-3 btn btn-danger" type="button">Retour à l'acceuil</button></a>
+            <a href="accueil"><button class="w-100 my-3 btn btn-danger" type="button">Retour à l'acceuil</button></a>
             <p class="mt-5 mb-3 text-danger">&copy; Site Web dynamique 2021 - 2022 </p>
         </form>
     </main>
