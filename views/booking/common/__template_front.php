@@ -25,18 +25,18 @@
     <?php endif; ?>
 </head>
 <body>
-<?php require_once("views/booking/common/__menu.php"); ?>
-<div class="container">
-    <?php if (!empty($_SESSION['alert'])) : ?>
-        <div class="alert font-weight-bold text-center <?= $_SESSION['alert']['type']; ?>" role="alert">
-            <?php var_dump($_SESSION['alert']['message']); ?>
-        </div>
-        <?php
-        unset($_SESSION['alert']);
-    endif;
-    ?>
-    <?= $page_content; ?>
-</div>
+    <?php require_once("views/booking/common/__menu.php"); ?>
+    <div class="container">
+        <?php if (!empty($_SESSION['alert'])) : ?>
+            <div class="alert font-weight-bold text-center <?= $_SESSION['alert']['type']; ?>" role="alert">
+                <?php var_dump($_SESSION['alert']['message']); ?>
+            </div>
+            <?php
+            unset($_SESSION['alert']);
+        endif;
+        ?>
+        <?= $page_content; ?>
+    </div>
 </body>
 
 </html>

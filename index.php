@@ -77,7 +77,10 @@ try {
             $adminController->bedroomDelete();
             break;
         case "accueilBooking":
-            $bookingController->accueilBooking();
+            $bookingController->bookingHome();
+            break;
+        case "BookingAvailable":
+            $bookingController->BookingAvailable();
             break;
         default :
             throw new Exception("La page n'existe pas");

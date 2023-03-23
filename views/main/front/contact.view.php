@@ -1,5 +1,5 @@
 
-<section class="container bg-light p-5 border rounded mb-5">
+<section class="container bg-light p-5 border rounded">
     <h2 class="h1-responsive  text-center my-4 fw-bold text-danger">Contactez-nous</h2>
     <p class="text-center w-responsive mx-auto mb-5 fst-italic ">Vous souhaitez effectuer une réservation ? Demander de plus amples renseignements à propos de nos chambres ou activités? N’hésitez pas à contacter notre Hôtel par téléphone, mail ou via notre formulaire ci-dessous. Nous nous ferrons un plaisir de répondre à vos questions.</p>
     <div class="row">

@@ -1,9 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg  justify-content-around">
         <a href="accueil">
             <img class="logo-menu" src="<?= URL ?>/public/assets/images/logo.png" alt="" srcset="">
         </a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+        <ul class="navbar-nav me-auto mx-auto mb-lg-0 ">
             <li><a href="accueil" class="nav-link px-6 link-dark">Accueil</a></li>
             <li><a href="restaurant" class="nav-link px-6 link-dark">Restaurant</a></li>
             <li><a href="spa" class="nav-link px-6 link-dark">Spa & Bien-être</a></li>
@@ -38,8 +37,6 @@
             }
             ?>
         </div>
-    </div>
-
 </nav>
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <button class="mt-3 btn btn-danger align-self-end">Voir les disponibilités</button>
+            <a href="accueilBooking"><button class="mt-3 btn btn-danger align-self-end">Voir les disponibilités</button></a>
         </div>
     </main>
 <?php endforeach; ?>

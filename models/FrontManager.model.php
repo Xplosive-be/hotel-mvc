@@ -14,6 +14,17 @@ class FrontManager extends Model
         $stmt->closeCursor();
         return $bedrooms;
     }
+    public function getAllBedroomsByAvailable($dateBegin,$dateEnd)
+    {
+        $stmt = $this->getBdd()->prepare('
+        SELECT * FROM bedroom WHERE bedroom_id NOT IN ( SELECT id_bedroom FROM reservation WHERE date_begin <= :dateBegin AND date_end >= :dateEnd )');
+        $stmt->bindValue(':dateBegin', $dateBegin);
+        $stmt->bindValue(':dateEnd', $dateEnd);
+        $stmt->execute();
+        $bedroomsAvailable = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $bedroomsAvailable;
+    }
 
     public function getImagesBedroom($idBedroom)
     {
@@ -23,7 +34,7 @@ class FrontManager extends Model
         INNER JOIN gallery g on p.picture_id = g.id_picture
         INNER JOIN bedroom b on b.bedroom_id = g.id_bedroom
         WHERE b.bedroom_id = :idBedroom;');
-        $stmt->bindValue(":idBedroom", $idBedroom);
+        $stmt->bindValue(':idBedroom', $idBedroom);
         $stmt->execute();
         $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
@@ -46,5 +57,6 @@ class FrontManager extends Model
         $stmt->closeCursor();
         return $getCategoryBedList;
     }
+
 }
 

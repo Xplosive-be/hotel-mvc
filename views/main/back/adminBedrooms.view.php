@@ -40,7 +40,7 @@
                             <a href="adminEditBed&idEditBed=' . $bedroom['bedroom_id'] . '" class="mb-3 text-warning">
                                 <i class="fa-solid fa-wrench fa-xl  mt-2"></i>
                             </a></br>
-                            <a href="adminManagerBedPicture&idEditBed=' . $bedroom['bedroom_id'] . '" class="text-succes mt-5">
+                            <a href="adminManagerBedPicture?idEditBed=' . $bedroom['bedroom_id'] . '" class="text-succes mt-5">
                                 <i class="fa-solid fa-image fa-xl  mt-3"></i>
                             </a></br>
                             <a href="deleteBedroom&idDelBedRoom=' . $bedroom['bedroom_id'] . '" class="text-danger text-end mt-3">
