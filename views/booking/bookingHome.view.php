@@ -1,8 +1,6 @@
 <div class="container-fluid">
-    <?php
-var_dump($bedroomsAvailable);
-    ?>
     <div class="row">
+        <?php  var_dump($_SESSION); ?>
         <div class="col-md-10">
             <div class="shadow-lg p-3 mb-5 bg-body rounded" id="available">
                 <h2 class="text-center mb-4 text-danger fst-italic fw-bolder">Consultation des disponibilités et des
@@ -86,7 +84,7 @@ var_dump($bedroomsAvailable);
         </div>
         <div class="col-md-2">
             <div class="shadow-lg p-3 mb-5 bg-body rounded">
-                <h4 class="text-center mb-4 text-danger fst-italic fw-bolder">Hôtel <br> Belle-Nuit</h4>
+                <h6 class="text-center mb-4 text-danger fst-italic fw-bolder">Hôtel <br> Belle-Nuit</h6>
                 <hr class="solid">
                 <div class="text-center">
                     <i class="fas fa-map-marker-alt fa-2x"></i>
