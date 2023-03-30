@@ -15,26 +15,35 @@ class BackManager extends Model
         $stmt->closeCursor();
         return $account;
     }
-    public function setApplyAccount($name,$surname,$address,$city,$country,$email,$password,$codeactivation){
-        $stmt = $this->getBdd()->prepare('
-        SELECT count(*) as numberEmail 
-        FROM account 
-        WHERE acc_email = :mail');
+    public function setApplyAccount($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$email,$password,$codeactivation){
+        $stmt = $this->getBdd()->prepare('SELECT count(*) as numberEmail FROM account WHERE acc_email = :mail');
         $stmt->bindValue(':mail', $email, PDO::PARAM_STR);
         $stmt->execute();
-        // Boucle pour savoir si le
+
         while($email_verification = $stmt->fetch(PDO::FETCH_ASSOC)) {
             if($email_verification['numberEmail'] != 0) {
                 $stmt->closeCursor();
                 return  false;
             }
-        $stmt = $this->getBdd()->prepare('
-        INSERT `account` SET `acc_name` = "'. $name . '", `acc_surname` = "' . $surname . '", `acc_address` = "' . $address . '", `acc_city` = "' . $city . '", `acc_id_country` = "' . $country . '", `acc_email` = "' . $email . '", `acc_password` = "' . $password . '", `acc_code_activation` = "' . $codeactivation .'", `acc_admin` = "0", `acc_active` = "0"');
+        }
+
+        $stmt = $this->getBdd()->prepare('INSERT INTO account (acc_name, acc_surname, acc_address, acc_addressbox, acc_city, acc_codepostal, acc_id_country, acc_phone, acc_email, acc_password, acc_code_activation, acc_admin, acc_active) VALUES (:name, :surname, :address, :box, :city, :codepostal, :country, :phone, :email, :password, :codeactivation, 0, 0)');
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->bindValue(':surname', $surname, PDO::PARAM_STR);
+        $stmt->bindValue(':address', $address, PDO::PARAM_STR);
+        $stmt->bindValue(':box', $box, PDO::PARAM_INT);
+        $stmt->bindValue(':city', $city, PDO::PARAM_STR);
+        $stmt->bindValue(':codepostal', $codePostal, PDO::PARAM_INT);
+        $stmt->bindValue(':country', $country, PDO::PARAM_INT);
+        $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR);
+        $stmt->bindValue(':codeactivation', $codeactivation, PDO::PARAM_STR);
         $stmt->execute();
         $stmt->closeCursor();
         return true;
-        }
     }
+
 
     public function getAccountCodeActivation($idAccount) {
         $stmt = $this->getBdd()->prepare('
@@ -56,13 +65,28 @@ class BackManager extends Model
         $stmt->execute();
         $stmt->closeCursor();
     }
-    public function setEditProfil($name,$surname,$address,$city,$country,$idAccount){
+    public function setEditProfil($name, $surname, $address, $box, $city, $codePostal, $country, $phone, $idAccount){
         $stmt = $this->getBdd()->prepare('
-        UPDATE `account` SET `acc_name` = "'. $name . '", `acc_surname` = "' . $surname . '", `acc_address` = "' . $address . '", `acc_city` = "' . $city . '", `acc_id_country` = "' . $country . '" 
-        WHERE `account`.`acc_id` = "'. $idAccount . '"');
+        UPDATE `account` 
+        SET `acc_name` = :name, `acc_surname` = :surname, `acc_address` = :address, `acc_addressbox` = :box, 
+            `acc_city` = :city, `acc_codepostal` = :codePostal, `acc_id_country` = :country, `acc_phone` = :phone
+        WHERE `acc_id` = :idAccount
+    ');
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->bindValue(':surname', $surname, PDO::PARAM_STR);
+        $stmt->bindValue(':address', $address, PDO::PARAM_STR);
+        $stmt->bindValue(':box', $box, PDO::PARAM_INT);
+        $stmt->bindValue(':city', $city, PDO::PARAM_STR);
+        $stmt->bindValue(':codePostal', $codePostal, PDO::PARAM_INT);
+        $stmt->bindValue(':country', $country, PDO::PARAM_INT);
+        $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindValue(':idAccount', $idAccount, PDO::PARAM_INT);
+
         $stmt->execute();
         $stmt->closeCursor();
+
         return true;
     }
+
 }
 

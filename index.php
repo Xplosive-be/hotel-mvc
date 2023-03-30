@@ -79,8 +79,17 @@ try {
         case "accueilBooking":
             $bookingController->bookingHome();
             break;
-        case "BookingAvailable":
-            $bookingController->BookingAvailable();
+        case "bookingAvailable":
+            $bookingController->bookingAvailable();
+            break;
+        case "bookingServices":
+            $bookingController->bookingServices();
+            break;
+        case "bookingCustomers":
+            $bookingController->bookingCustomers();
+            break;
+        case "bookingResume":
+            $bookingController->bookingResume();
             break;
         default :
             throw new Exception("La page n'existe pas");

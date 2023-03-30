@@ -43,12 +43,23 @@ class AdminManager extends Model
         return $bedroomById;
     }
 
-    public function setAdminEditProfil($name, $surname, $address, $city, $country, $active, $admin, $idAccount)
+    public function setAdminEditProfil($name, $surname, $address, $city, $country, $active, $box, $codePostal, $phone, $admin, $idAccount)
     {
         $stmt = $this->getBdd()->prepare('
         UPDATE `account` 
-        SET `acc_name` = "' . $name . '", `acc_surname` = "' . $surname . '", `acc_address` = "' . $address . '", `acc_city` = "' . $city . '", `acc_id_country` = "' . $country . '" , `acc_admin` = "' . $admin . '" , `acc_active` = "' . $active . '"  
-        WHERE `account`.`acc_id` = "' . $idAccount . '"');
+        SET `acc_name` = :name, `acc_surname` = :surname, `acc_address` = :address, `acc_addressbox` = :box, `acc_city` = :city, `acc_codepostal` = :codePostal, `acc_id_country` = :country, `acc_phone` = :phone, `acc_admin` = :admin, `acc_active` = :active  
+        WHERE `account`.`acc_id` = :idAccount');
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->bindValue(':surname', $surname, PDO::PARAM_STR);
+        $stmt->bindValue(':address', $address, PDO::PARAM_STR);
+        $stmt->bindValue(':box', $box, PDO::PARAM_INT);
+        $stmt->bindValue(':city', $city, PDO::PARAM_STR);
+        $stmt->bindValue(':codePostal', $codePostal, PDO::PARAM_INT);
+        $stmt->bindValue(':country', $country, PDO::PARAM_INT);
+        $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
+        $stmt->bindValue(':admin', $admin, PDO::PARAM_INT);
+        $stmt->bindValue(':active', $active, PDO::PARAM_INT);
+        $stmt->bindValue(':idAccount', $idAccount, PDO::PARAM_INT);
         $stmt->execute();
         $stmt->closeCursor();
     }

@@ -51,6 +51,11 @@ class BackController{
                         "message" => "Connection réussis avec succès",
                         "type" => "alert-success"
                     ];
+                    if(isset($_SESSION['loginBooking'])){
+                        unset($_SESSION['loginBooking']);
+                        header('Location: accueilBooking');
+                        exit();
+                    }
                     header('Location: accueil');
                     exit();
                 } elseif ($account["acc_active"] == 0){
@@ -98,15 +103,21 @@ class BackController{
             $address = Securite::secureHTML($_POST['address']);
             $country = Securite::secureHTML($_POST['country']);
             $city = Securite::secureHTML($_POST['city']);
+            $box = Securite::secureHTML($_POST['box']);
+            $codePostal = Securite::secureHTML($_POST['codePostal']);
+            $phone = Securite::secureHTML($_POST['phone']);
             //SQL pour mettre à jour la DB
-            $this->backManager->setEditProfil($name,$surname,$address,$city,$country,$_SESSION["idAccount"]);
+            $this->backManager->setEditProfil($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$_SESSION["idAccount"]);
             //Update Session avec les nouvelles valeurs.
             $_SESSION['surname'] = $surname;
             $_SESSION['name'] = $name;
             $_SESSION['address'] = $address;
             $_SESSION['city'] = $city;
             $_SESSION['country'] = $country;
-            // $msg_succes = "Vos informations ont été modifiés avec succès.";
+            $_SESSION['box'] = $box;
+            $_SESSION['codePostal'] = $codePostal;
+            $_SESSION['phone'] = $phone;
+            // $msg_succes = "Vos informations ont été modifiées avec succès.";
             $_SESSION['alert'] = [
                 "message" => 'Vos informations ont été modifiés avec succès.',
                 "type" => 'alert-success'
@@ -135,8 +146,11 @@ class BackController{
             $address = Securite::secureHTML($_POST['address']);
             $country = Securite::secureHTML($_POST['country']);
             $city = Securite::secureHTML($_POST['city']);
+            $box = Securite::secureHTML($_POST['box']);
+            $codePostal = Securite::secureHTML($_POST['$codePostal']);
+            $phone = Securite::secureHTML($_POST['phone']);
 
-            // Vérification si les mots de passes ne sont pas les même.
+            // Vérification si les mots de passes ne sont pas les mêmes.
             if($password != $password_two) {
                 $_SESSION['alert'] = [
                     "message" => 'Vos mots de passe ne sont pas identique!',
@@ -149,7 +163,7 @@ class BackController{
             // Code généré pour permettre d'avoir un code unique pour valider son compte.
             $codeactivation = hash('md2', 'Hello'. rand(5000, 10000) . 'Inscription');
 
-            $apply = $this->backManager->setApplyAccount($name,$surname,$address,$city,$country,$email,$password,$codeactivation);
+            $apply = $this->backManager->setApplyAccount($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$email,$password,$codeactivation);
             if($apply === true) {
                 $_SESSION['alert'] = [
                     "message" => "Votre compte a été créé. Vérifier votre boîte mail pour valider votre compte.",

@@ -80,7 +80,11 @@ class AdminController
                 $address = Securite::secureHTML($_POST['address']);
                 $country = Securite::secureHTML($_POST['country']);
                 $city = Securite::secureHTML($_POST['city']);
+                $box = Securite::secureHTML($_POST['box']);
+                $codePostal = Securite::secureHTML($_POST['codePostal']);
+                $phone = Securite::secureHTML($_POST['phone']);
                 $idAccount = Securite::secureHTML($_GET['id']);
+
                 //SQL pour mettre à jour la DB
                 if (!isset($_POST['admin'])) {
                     $admin = 0;
@@ -94,7 +98,7 @@ class AdminController
                 }
                 // Requête pour mettre à jour le profil dans la section Admin.
                 //SQL pour mettre à jour la DB
-                $this->adminManager->setAdminEditProfil($name, $surname, $address, $city, $country, $active, $admin, $idAccount);
+                $this->adminManager->setAdminEditProfil($name, $surname, $address, $city, $country, $active,$box,$codePostal,$phone, $admin, $idAccount);
                 $_SESSION['alert'] = [
                     "message" => 'Les informations ont été modifiés avec succès.',
                     "type" => 'alert-success'
@@ -249,8 +253,8 @@ class AdminController
                 "page_description" => "Ajouter une chambre",
                 "page_title" => "Ajouter une chambre",
                 "categoryBed" => $this->frontManager->getCategoryBedList(),
-                "view" => "views/main/main/back/adminAddBed.view.php",
-                "template" => "views/main/main/common/template_front.php"
+                "view" => "views/main/back/adminAddBed.view.php",
+                "template" => "views/main/common/template_front.php"
             ];
             $this->genererPage($data_page);
         } else {

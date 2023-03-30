@@ -1,21 +1,19 @@
 <div class="container-fluid">
     <div class="row">
-        <?php  var_dump($_SESSION); ?>
         <div class="col-md-10">
             <div class="shadow-lg p-3 mb-5 bg-body rounded" id="available">
                 <h2 class="text-center mb-4 text-danger fst-italic fw-bolder">Consultation des disponibilités et des
                     tarifs</h2>
-                <form class="row g-3 align-items-end" method="post" action="BookingAvailable">
+                <form class="row g-3 align-items-end" method="post" action="bookingAvailable">
                     <div class="col-md-5">
                         <div class="form-floating mb-3">
-                            <input type="date" name="dateBegin" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date de départ" value="<?= isset($_POST['dateBegin']) ? $_POST['dateBegin'] : ''; ?>">
-
+                            <input type="date" name="dateBegin" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date d'arrivée:">
                             <label for="dateBegin">Date de départ :</label>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-floating mb-3">
-                            <input type="date" name="dateEnd" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date d'arrivée :" value="<?= isset($_POST['dateEnd']) ? $_POST['dateEnd'] : ''; ?>">
+                            <input type="date" name="dateEnd" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date départ:">
                             <label for="dateEnd">Date d'arrivée :</label>
                         </div>
                     </div>
@@ -47,7 +45,7 @@
                                         // Si la key est 0 à zéro alors on mets la balise active pour démarer la première image du caroussel
                                         $active = ($key == 0) ? 'active' : '';
                                         echo '<div class="carousel-item ' . $active . '">';
-                                        // Si la Key est 0 alors on mets active pour le carrousel sinon
+                                        // Si la Key est 0 alors on met active pour le carrousel sinon
                                         echo '<img src="' . $bedroomImages["picture_url"] . '" class="d-block carousel-img" alt="">
                         </div>';
                                         $key++;

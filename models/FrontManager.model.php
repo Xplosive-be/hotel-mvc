@@ -14,18 +14,6 @@ class FrontManager extends Model
         $stmt->closeCursor();
         return $bedrooms;
     }
-    public function getAllBedroomsByAvailable($dateBegin,$dateEnd)
-    {
-        $stmt = $this->getBdd()->prepare('
-        SELECT * FROM bedroom WHERE bedroom_id NOT IN ( SELECT id_bedroom FROM reservation WHERE date_begin <= :dateBegin AND date_end >= :dateEnd )');
-        $stmt->bindValue(':dateBegin', $dateBegin);
-        $stmt->bindValue(':dateEnd', $dateEnd);
-        $stmt->execute();
-        $bedroomsAvailable = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        return $bedroomsAvailable;
-    }
-
     public function getImagesBedroom($idBedroom)
     {
         $stmt = $this->getBdd()->prepare('

@@ -13,12 +13,12 @@
                         <!-- Prénom -->
                         <div class="col-sm-6">
                             <label for="surName" class="form-label">Prénom</label>
-                            <input type="text" class="form-control" id="surName" name="surname" required>
+                            <input type="text" class="form-control" id="surName" name="surname" placeholder="Prénom" required>
                         </div>
                         <!-- Nom -->
                         <div class="col-sm-6">
                             <label for="Name" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="Name" name="name" required>
+                            <input type="text" class="form-control" id="Name" name="name"  placeholder="Nom" required>
                         </div>
 
                         <!-- Email -->
@@ -27,24 +27,33 @@
                             <input type="email" class="form-control" id="email" name="email" placeholder="exemple@belle-hotel.com">
                         </div>
                         <!-- mot de passe -->
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="password" class="form-label">Mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <!--  répéter mot de passe -->
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="password" class="form-label">Répéter mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password_two">
                         </div>
                         <!-- Adresse -->
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="address" class="form-label">Adresse</label>
-                            <input type="text" class="form-control" id="address" name="address"placeholder="Rue de la paix" required>
+                            <input type="text" class="form-control" id="address" name="address"placeholder="Adresse" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="codePostal" class="form-label">Code Postal</label>
+                            <input type="text" class="form-control" id="codePostal" name="codePostal"placeholder="Code Postal" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="box" class="form-label">Boite</label>
+                            <input type="text" class="form-control" id="box" name="box" placeholder="Nr" required>
                         </div>
                         <!-- Pays -->
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Pays</label>
-                            <select class="form-select" id="country" name="country" required>
+                            <select class="form-select" id="country" name="country"  required>
+                                <option value="" selected disabled>Choisissez votre pays</option>
                                 <?php
                                 // Donne la possibilité d'avoir la liste des pays
                                 foreach($countrys as $country)
@@ -55,9 +64,13 @@
                             </select>
                         </div>
                         <!-- Ville -->
-                        <div class="col-sm-6">
+                        <div class="col-6">
                             <label for="city" class="form-label">Ville</label>
-                            <input type="text" class="form-control" id="city" name="city" required>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Ville" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="tel" class="form-label">Numéro de téléphone :</label>
+                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[0-9]{4,}$" required>
                         </div>
                     </div>
                     <hr class="my-4">

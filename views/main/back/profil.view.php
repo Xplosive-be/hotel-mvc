@@ -8,28 +8,36 @@
                         <div class="col-sm-6">
                             <label for="surname" class="form-label">Prénom</label>
                             <input type="text" class="form-control" id="surname"
-                                   value="<?php echo $profil['acc_surname'] ?>" name="surname" required>
+                                   value="<?= $profil['acc_surname'] ?>" name="surname" required>
                         </div>
                         <!-- Nom -->
                         <div class="col-sm-6">
                             <label for="Name" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="Name" value="<?php echo $profil['acc_name'] ?>"
+                            <input type="text" class="form-control" id="Name" value="<?= $profil['acc_name'] ?>"
                                    name="name" required>
                         </div>
                         <!-- Email -->
                         <div class="col-12">
                             <label for="email" class="form-label">Adresse e-mail</label>
                             <input type="email" class="form-control" id="email" name="email" disabled
-                                   value="<?php echo $profil['acc_email'] ?>">
+                                   value="<?= $profil['acc_email'] ?>">
                         </div>
                         <!-- Adresse -->
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="address" class="form-label">Adresse</label>
                             <input type="text" class="form-control" id="address" name="address"
-                                   value="<?php echo $profil['acc_address'] ?>" required>
+                                   value="<?= $profil['acc_address'] ?>" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="codePostal" class="form-label">Code Postal</label>
+                            <input type="text" class="form-control"  value="<?= $profil['acc_codepostal'] ?> " id="codePostal" name="codePostal" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="box" class="form-label">Boite</label>
+                            <input type="text" class="form-control" id="box" name="box"  value="<?= $profil['acc_addressbox'] ?>" required>
                         </div>
                         <!-- Pays -->
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="country" class="form-label">Pays</label>
                             <select class="form-select" id="country" name="country" required>
                                 <?php
@@ -40,10 +48,14 @@
                             </select>
                         </div>
                         <!-- Ville -->
-                        <div class="col-12">
+                        <div class="col-6">
                             <label for="city" class="form-label">Ville</label>
-                            <input type="text" class="form-control" id="city" value="<?php echo $profil['acc_city'] ?>"
+                            <input type="text" class="form-control" id="city" value="<?= $profil['acc_city'] ?>"
                                    name="city" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="tel" class="form-label">Numéro de téléphone :</label>
+                            <input type="tel" class="form-control" name="phone" id="phone" value="<?= $profil['acc_phone'] ?>" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[0-9]{4,}$" required>
                         </div>
                         <button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center" type=submit"
                                 name="btnEdit">
