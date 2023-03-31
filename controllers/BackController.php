@@ -91,7 +91,7 @@ class BackController{
             "page_description" => "La page de connection",
             "page_title" => "Hôtel Belle-Nuit | Connectez-vous",
             "view" => "views/main/back/login.view.php",
-            "template" => "views/main/common/template_front.php"
+            "template" => "views/main/common/__template_front.php"
         ];
         $this->genererPage($data_page);
     }
@@ -132,7 +132,7 @@ class BackController{
             "countrys" => $countrys,
             "profil" => $profil,
             "view" => "views/main/back/profil.view.php",
-            "template" => "views/main/common/template_front.php"
+            "template" => "views/main/common/__template_front.php"
         ];
         $this->genererPage($data_page);
     }
@@ -185,7 +185,7 @@ class BackController{
             "page_title" => "",
             "countrys" => $countrys,
             "view" => "views/main/back/apply.view.php",
-            "template" => "views/main/common/template_front.php"
+            "template" => "views/main/common/__template_front.php"
         ];
         $this->genererPage($data_page);
     }

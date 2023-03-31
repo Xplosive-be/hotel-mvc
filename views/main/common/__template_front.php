@@ -25,6 +25,7 @@
             integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/e8c3134b85.js" crossorigin="anonymous"></script>
+
     <?php if (!empty($page_javascript)) : ?>
         <?php foreach ($page_javascript as $fichier_javascript) : ?>
             <script src="<?= URL ?>public/JavaScript/<?= $fichier_javascript ?>"></script>
@@ -34,7 +35,7 @@
 
 <body>
 <div class="container">
-    <?php require_once("views/main/common/menu.php"); ?>
+    <?php require_once("views/main/common/__menu.php"); ?>
     <?php if (!empty($_SESSION['alert'])) : ?>
         <div class="alert font-weight-bold text-center <?= $_SESSION['alert']['type']; ?>" role="alert">
             <?php var_dump($_SESSION['alert']['message']); ?>
@@ -45,7 +46,7 @@
     ?>
     <?= $page_content; ?>
 </div>
-<?php require_once("views/main/common/footer.php"); ?>
+<?php require_once("views/main/common/__footer.php"); ?>
 </body>
 
 </html>

@@ -166,7 +166,7 @@ class AdminController
                     "message" => 'Les informations ont été modifiés avec succès.',
                     "type" => 'alert-success'
                 ];
-                header('Location: adminManageBed&idEditBed=' . $idEditBed);
+                header('Location: adminEditBed&idEditBed=' . $idEditBed);
                 exit();
             }
             $data_page = [

@@ -169,4 +169,5 @@
 
 textarea.inputServices {
   resize: none;
+  height: 300px;
 }

@@ -25,7 +25,7 @@ class FrontController{
             "page_description" => "Description de la page d'accueil",
             "page_title" => "Hôtel Belle-Nuit | Accueil",
             "view" => "views/main/front/accueil.view.php",
-            "template" => "views/main/common/template_front.php"
+            "template" => "views/main/common/__template_front.php"
         ];
         $this->genererPage($data_page);
     }
@@ -36,7 +36,7 @@ class FrontController{
                 "page_title" => "Hôtel Belle-Nuit | Nos Chambres",
                 "bedrooms" => $bedrooms,
                 "view" => "views/main/front/bedrooms.view.php",
-                "template" => "views/main/common/template_front.php"
+                "template" => "views/main/common/__template_front.php"
         ];
         $this->genererPage($data_page);
     }
@@ -60,7 +60,7 @@ class FrontController{
             "page_description" => "Description de la page d'accueil",
             "page_title" => "Hôtel Belle-Nuit | Contactez-nous",
             "view" => "views/main/front/contact.view.php",
-            "template" => "views/main/common/template_front.php",
+            "template" => "views/main/common/__template_front.php",
             "page_javascript" => ["contact.js"],
         ];
 
@@ -82,7 +82,7 @@ class FrontController{
             "page_title" => "Page d'erreur",
             "msg" => $msg,
             "view" => "./views/main/front/erreur.view.php",
-            "template" => "views/main/common/template_front.php"
+            "template" => "views/main/common/__template_front.php"
         ];
         $this->genererPage($data_page);
     }

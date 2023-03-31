@@ -117,10 +117,13 @@ class BookingController
                 $allServices = $this->bookingManager->getAllServicesBedroom();
                 $_SESSION['booking']['bedroom_name'] = $bedSelectedAvailable['bedroom_name'];
                 $_SESSION['booking']['price'] = $bedSelectedAvailable['bedroom_priceday'] * $_SESSION['booking']['nights'];
+                $json = json_encode($allServices);
                 $data_page = [
                     "allServices" => $allServices,
                     "page_description" => "Choix des bonus",
                     "page_title" => "Hôtel Belle-Nuit | Choix des bonus",
+                    "json" => $json,
+                    "page_javascript" => ["services.js"],
                     "view" => "views/booking/bookingServices.view.php",
                     "template" => "views/booking/common/__template_front.php",
                 ];
