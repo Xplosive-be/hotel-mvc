@@ -10,7 +10,7 @@ class FrontController{
         $this->frontManager = new FrontManager();
         $this->backManager = new BackManager();
     }
-
+//Cette méthode privée génère une page en extrayant les données passées en paramètre et en incluant les fichiers de vue et de modèle.
     private function genererPage($data){
         extract($data);
         ob_start();

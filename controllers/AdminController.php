@@ -16,6 +16,7 @@ class AdminController
         $this->adminManager = new AdminManager();
     }
 
+//Cette méthode privée génère une page en extrayant les données passées en paramètre et en incluant les fichiers de vue et de modèle.
     private function genererPage($data)
     {
         extract($data);
@@ -32,7 +33,7 @@ class AdminController
                 "page_description" => "Menu d'Administration",
                 "page_title" => "Hôtel Belle-Nuit | Administration",
                 "view" => "views/main/back/adminMenu.view.php",
-                "template" => "views/main/common/template_front.php",
+                "template" => "views/main/common/__template_front.php",
             ];
             $this->genererPage($data_page);
         } else {
@@ -52,7 +53,7 @@ class AdminController
                 "page_description" => "Menu d'Administration",
                 "page_title" => "Hôtel Belle-Nuit | Administration",
                 "view" => "views/main/back/adminAccount.view.php",
-                "template" => "views/main/common/template_front.php",
+                "template" => "views/main/common/__template_front.php",
                 "profils" => $profils
             ];
 
@@ -112,7 +113,7 @@ class AdminController
                 "countrys" => $countrys,
                 "profil" => $profil,
                 "view" => "views/main/back/adminEditAccount.view.php",
-                "template" => "views/main/common/template_front.php"
+                "template" => "views/main/common/__template_front.php"
             ];
             $this->genererPage($data_page);
         } else {
@@ -133,7 +134,7 @@ class AdminController
                 "page_title" => "Edition des chambres",
                 "bedrooms" => $bedrooms,
                 "view" => "views/main/back/adminBedrooms.view.php",
-                "template" => "views/main/common/template_front.php"
+                "template" => "views/main/common/__template_front.php"
             ];
             $this->genererPage($data_page);
         } else {
@@ -175,7 +176,7 @@ class AdminController
                 "CategoryBedList" => $this->frontManager->getCategoryBedList(),
                 "bedroomById" => $this->adminManager->getBedroomFromId(Securite::secureHTML($idEditBed)),
                 "view" => "views/main/back/adminEditBed.view.php",
-                "template" => "views/main/common/template_front.php"
+                "template" => "views/main/common/__template_front.php"
             ];
             $this->genererPage($data_page);
         } else {
@@ -221,7 +222,7 @@ class AdminController
                 "page_title" => "Edition des photos des chambres",
                 "imagesBedroom" => $this->frontManager->getImagesBedroom($_SESSION['idEditBed']),
                 "view" => "views/main/back/adminManagerBedPicture.view.php",
-                "template" => "views/main/common/template_front.php"
+                "template" => "views/main/common/__template_front.php"
             ];
             $this->genererPage($data_page);
         } else {
@@ -254,7 +255,7 @@ class AdminController
                 "page_title" => "Ajouter une chambre",
                 "categoryBed" => $this->frontManager->getCategoryBedList(),
                 "view" => "views/main/back/adminAddBed.view.php",
-                "template" => "views/main/common/template_front.php"
+                "template" => "views/main/common/__template_front.php"
             ];
             $this->genererPage($data_page);
         } else {

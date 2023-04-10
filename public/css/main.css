@@ -147,13 +147,13 @@
   /*filter: invert(0%) sepia(4%) saturate(0%) hue-rotate(293deg) brightness(95%) contrast(105%);*/
   background-color: rgb(0, 0, 0);
 }
-  .FontsModalReservation {
+.FontsModalReservation {
     font-size: 12px;
-  }
+}
 
-  .filter-grey {
-    filter: grayscale(100%) opacity(50%);;
-  }
+.filter-grey {
+  filter: grayscale(100%) opacity(50%);;
+}
 
 .bg-opacity{
   opacity: 50%;
