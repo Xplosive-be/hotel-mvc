@@ -29,6 +29,12 @@ try {
         case "bedrooms" :
             $frontController->bedrooms();
             break;
+        case "spa":
+            $frontController->spa();
+            break;
+        case "restaurant":
+            $frontController->restaurant();
+            break;
         case "contact" :
             $frontController->contact();
             break;

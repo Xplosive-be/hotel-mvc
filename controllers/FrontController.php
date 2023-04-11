@@ -29,6 +29,25 @@ class FrontController{
         ];
         $this->genererPage($data_page);
     }
+    public function spa(){
+        $data_page = [
+            "page_description" => "Description du Spa",
+            "page_title" => "Hôtel Belle-Nuit | Spa",
+            "view" => "views/main/front/spa.view.php",
+            "template" => "views/main/common/__template_front.php"
+        ];
+        $this->genererPage($data_page);
+    }
+
+    public function restaurant(){
+        $data_page = [
+            "page_description" => "Description du restaurant",
+            "page_title" => "Hôtel Belle-Nuit | Restaurant",
+            "view" => "views/main/front/restaurant.view.php",
+            "template" => "views/main/common/__template_front.php"
+        ];
+        $this->genererPage($data_page);
+    }
     public function bedrooms(){
         $bedrooms = $this->frontManager->getAllBedrooms();
         $data_page = [

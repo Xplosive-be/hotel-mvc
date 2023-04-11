@@ -31,7 +31,8 @@ class Securite {
         return (isset($_SESSION['admin']) && !empty($_SESSION['admin']) && $_SESSION['admin'] === 1);
     }
     public  static function verifConnectSession(){
-        return (isset($_SESSION['admin']) && $_SESSION['online'] === 1 && !empty($_SESSION['online'] = 1));
+        return ( $_SESSION['online'] === 1 && !empty($_SESSION['online']));
+
     }
 
     public static function verificationAccess(){
