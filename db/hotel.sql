@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 31 mars 2023 à 12:58
+-- Généré le : mar. 18 avr. 2023 à 16:58
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -49,7 +49,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_addressbox`, `acc_city`, `acc_codepostal`, `acc_id_country`, `acc_phone`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`) VALUES
-(4, 'Smeyers', 'Samir', 'Rue du bourdon 75', 3, 'Bruxelles', 1180, 24, '+324695236', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'd0dc2a7b70bccd7302529ca9b7c46d0a', 1, 1),
+(4, 'Smeyers', 'Samir', 'Rue du bourdon 75', 3, 'Bruxelles', 1180, 25, '+324695236', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'd0dc2a7b70bccd7302529ca9b7c46d0a', 1, 1),
 (5, 'Dorival', 'Sam', 'Rue du bourdon 74', 3, 'Bruxelles', 1180, 25, '+32 496359742', 'test@gmail.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '2efc278e7eca57527811ba5e3cbc8829', 1, 1);
 
 -- --------------------------------------------------------
@@ -72,9 +72,9 @@ CREATE TABLE `bedroom` (
 --
 
 INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_priceday`, `id_roomcategory`) VALUES
-(1, 'Chambre Standard', '                                                      Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> Café et thé équipements. </br> Superficie 20 m² </br> Dans votre salle de bains privative : </br> <ul> <li>Articles de toilette gratuits </li> <li>Peignoir</li> <li>Toilettes</li> <li>Baignoire ou douche</li> <li>Serviettes</li> <li>Chaussons</li> <li>Sèche-cheveux</li> <li>Papier toilette</li> <strong>Vue :</strong> <li>Vue sur la ville</li> <li>Vue sur une cour intérieure</li> </ul>                                                                                                                                                                                                                                                                                                                                                 ', 'double', 120, 1),
-(2, 'Chambre Supérieure', 'Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\n\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\nSuperficie 30 m² </br>\nDans votre salle de bains privative :</br>\n\n<ul> \n    <li>Articles de toilette gratuits </li> \n    <li>Peignoir</li> <li>Toilettes</li> \n    <li>Baignoire ou douche</li> <li>Serviettes</li> \n    <li>Chaussons</li> \n    <li>Sèche-cheveux</li> \n    <li>Papier toilette</li>\n    <strong>Vue :</strong> \n    <li>Vue sur la ville</li> \n    <li>Vue sur une cour intérieure</li> \n </ul>', 'twin', 240, 2),
-(3, 'Suite Deluxe', 'Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'double', 1000, 3),
+(1, 'Chambre Standard', '{\"ops\":[{\"insert\":\"arbtear\"},{\"attributes\":{\"italic\":true},\"insert\":\"tvzevezrtve\"},{\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"vzerervtevzbzretbzert\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"retvztbtyrtyber\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"bybrzytbrtb\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"bzetbzazetb\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"}]}', 'double', 120, 4),
+(2, 'Chambre Sup&eacute;rieure', 'Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>', 'double', 240, 4),
+(3, 'Suite Deluxe', '', 'double', 1000, 4),
 (4, 'Suite Paradis', '                            Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                            ', 'double', 3000, 4);
 
 -- --------------------------------------------------------
@@ -488,6 +488,60 @@ INSERT INTO `services_bedroom` (`service_id`, `service_name`, `service_price`, `
 (3, 'Boite de chocolat Darcis', 15, 1, 'public/assets/images/services/chocolat.png'),
 (4, 'Bouteille de Cava en Chambre', 25, 1, 'public/assets/images/services/champagne.png');
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `spa`
+--
+
+CREATE TABLE `spa` (
+  `spa_id` int(11) NOT NULL,
+  `spa_category` varchar(255) DEFAULT NULL,
+  `spa_title` varchar(255) DEFAULT NULL,
+  `spa_time` int(11) DEFAULT NULL,
+  `spa_price` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `spa`
+--
+
+INSERT INTO `spa` (`spa_id`, `spa_category`, `spa_title`, `spa_time`, `spa_price`) VALUES
+(1, 'MASSAGES', 'Massage relaxant (30 minutes)', 30, '50.00'),
+(2, 'MASSAGES', 'Massage relaxant (60 minutes)', 60, '85.00'),
+(3, 'MASSAGES', 'Massage relaxant (90 minutes)', 90, '120.00'),
+(4, 'MASSAGES', 'Massage suédois (60 minutes)', 60, '95.00'),
+(5, 'MASSAGES', 'Massage suédois (90 minutes)', 90, '130.00'),
+(6, 'MASSAGES', 'Massage profond des tissus (60 minutes)', 60, '100.00'),
+(7, 'MASSAGES', 'Massage profond des tissus (90 minutes)', 90, '140.00'),
+(8, 'MASSAGES', 'Massage aux pierres chaudes (60 minutes)', 60, '110.00'),
+(9, 'MASSAGES', 'Massage aux pierres chaudes (90 minutes)', 90, '150.00'),
+(10, 'MASSAGES', 'Massage thaï (60 minutes)', 60, '110.00'),
+(11, 'MASSAGES', 'Massage thaï (90 minutes)', 90, '150.00'),
+(12, 'MASSAGES', 'Massage pour enfants (30 minutes)', 30, '45.00'),
+(13, 'SOINS DU VISAGE', 'Soin du visage hydratant (60 minutes)', 60, '85.00'),
+(14, 'SOINS DU VISAGE', 'Soin du visage anti-âge (60 minutes)', 60, '95.00'),
+(15, 'SOINS DU VISAGE', 'Soin du visage éclaircissant (60 minutes)', 60, '90.00'),
+(16, 'SOINS DU VISAGE', 'Soin du visage purifiant (60 minutes)', 60, '85.00'),
+(17, 'SOINS DU VISAGE', 'Soin du visage aux acides de fruits (60 minutes)', 60, '95.00'),
+(18, 'SOINS DU VISAGE', 'Soin du visage pour homme (60 minutes)', 60, '80.00'),
+(19, 'SOINS DU CORPS', 'Soin du corps hydratant (60 minutes)', 60, '100.00'),
+(20, 'SOINS DU CORPS', 'Soin du corps exfoliant (60 minutes)', 60, '100.00'),
+(21, 'SOINS DU CORPS', 'Soin du corps minceur (90 minutes)', 90, '140.00'),
+(22, 'SOINS DU CORPS', 'Enveloppement corporel à l\'argile (60 minutes)', 60, '110.00'),
+(23, 'SOINS DU CORPS', 'Enveloppement corporel aux algues (60 minutes)', 60, '110.00'),
+(24, 'SOINS DU CORPS', 'Enveloppement corporel au chocolat (60 minutes)', 60, '120.00'),
+(25, 'SOINS DU CORPS', 'Gommage corporel à la noix de coco (30 minutes)', 30, '60.00'),
+(26, 'SOINS DES MAINS ET DES PIEDS', 'Manucure classique (45 minutes)', 45, '50.00'),
+(27, 'SOINS DES MAINS ET DES PIEDS', 'Manucure française (60 minutes)', 60, '60.00'),
+(28, 'SOINS DES MAINS ET DES PIEDS', 'Pédicure classique (45 minutes)', 45, '60.00'),
+(29, 'SOINS DES MAINS ET DES PIEDS', 'Pédicure française (60 minutes)', 60, '70.00'),
+(30, 'SOINS DES MAINS ET DES PIEDS', 'Pose de vernis simple (15 minutes)', 15, '20.00'),
+(31, 'SOINS DES MAINS ET DES PIEDS', 'Pose de vernis semi-permanent (45 minutes)', 45, '50.00'),
+(32, 'AUTRES SOINS', 'Réflexologie plantaire (45 minutes)', 45, '70.00'),
+(33, 'AUTRES SOINS', 'Séance de yoga privée (60 minutes)', 60, '90.00'),
+(34, 'AUTRES SOINS', 'Séance de méditation guidée (30 minutes)', 30, '45.00');
+
 --
 -- Index pour les tables déchargées
 --
@@ -553,6 +607,12 @@ ALTER TABLE `services_bedroom`
   ADD PRIMARY KEY (`service_id`);
 
 --
+-- Index pour la table `spa`
+--
+ALTER TABLE `spa`
+  ADD PRIMARY KEY (`spa_id`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -597,6 +657,12 @@ ALTER TABLE `picture`
 --
 ALTER TABLE `services_bedroom`
   MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `spa`
+--
+ALTER TABLE `spa`
+  MODIFY `spa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Contraintes pour les tables déchargées
