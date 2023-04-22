@@ -47,7 +47,7 @@ class FrontManager extends Model
     }
 
     public function getCategorySpa(){
-        $stmt = $this->getBdd()->prepare('SELECT * FROM category_spa');
+        $stmt = $this->getBdd()->prepare('SELECT spacategory_name FROM category_spa');
         $stmt->execute();
         $categorySpaList = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
@@ -55,7 +55,7 @@ class FrontManager extends Model
     }
 
     public function getSpaByIdCategory($category){
-        $stmt = $this->getBdd()->prepare('SELECT c.spacategory_id, s.spa_id, s.spa_title, s.spa_time, s.spa_price 
+        $stmt = $this->getBdd()->prepare('SELECT c.spacategory_id, s.spa_title, s.spa_time, s.spa_price 
                                   FROM category_spa c 
                                   LEFT JOIN spa s ON c.spacategory_id = s.id_spacategory 
                                   WHERE s.spa_active = 1 AND s.id_spacategory = ' . $category . '

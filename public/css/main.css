@@ -93,49 +93,49 @@
   background-position: center center;
   background-size: cover;
 }
-  .body-signin{
-    height: 100%;
-  }
+.body-signin{
+  height: 100%;
+}
 
-  .body-signin {
-    display: flex;
-    align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
+.body-signin {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    margin: auto;
-  }
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
 
-  .form-signin .checkbox {
-    font-weight: 400;
-  }
+.form-signin .checkbox {
+  font-weight: 400;
+}
 
-  .form-signin .form-floating:focus-within {
-    z-index: 2;
-  }
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
 
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
-  .form-signin input[type="password"] {
-    margin-bottom: 10px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-  }
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
-  .carousel-img {
-    width: 578px; /* Remplacez 500px par la taille souhaitée */
-    height: 500px; /* Remplacez 300px par la taille souhaitée */
-    object-fit: contain;
-  }
+.carousel-img {
+  width: 578px; /* Remplacez 500px par la taille souhaitée */
+  height: 500px; /* Remplacez 300px par la taille souhaitée */
+  object-fit: contain;
+}
 
   /*Réservation*/
 
@@ -167,19 +167,18 @@
   width: 100%;
 }
 
-textarea.inputServices {
+.textarea.inputServices {
   resize: none;
   height: 300px;
 }
 
-text-justify {
+.text-justify {
   text-align: justify;
 }
 
 /*SPA*/
 
-img-spa-top {
-  width: 250px;
-  height: 175%;
-  border: solid 2px #dc3545;
+.bg-grey {
+  height: auto;
+  background-color: rgba(217, 217, 217, 0.56);
 }

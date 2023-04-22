@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : sam. 22 avr. 2023 à 19:53
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 8.1.6
+-- Hôte : localhost
+-- Généré le : sam. 22 avr. 2023 à 23:50
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `account` (
   `acc_code_activation` varchar(32) NOT NULL,
   `acc_admin` tinyint(1) NOT NULL,
   `acc_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `account`
@@ -65,7 +65,7 @@ CREATE TABLE `bedroom` (
   `bedroom_bed` enum('double','twin','single') NOT NULL,
   `bedroom_priceday` int(11) NOT NULL,
   `id_roomcategory` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `bedroom`
@@ -73,7 +73,7 @@ CREATE TABLE `bedroom` (
 
 INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_priceday`, `id_roomcategory`) VALUES
 (1, 'Chambre Standard', '{\"ops\":[{\"insert\":\"arbtear\"},{\"attributes\":{\"italic\":true},\"insert\":\"tvzevezrtve\"},{\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"vzerervtevzbzretbzert\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"retvztbtyrtyber\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"bybrzytbrtb\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"bzetbzazetb\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"}]}', 'double', 120, 4),
-(2, 'Chambre Sup&eacute;rieure', '                            Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>                            ', 'double', 240000, 4),
+(2, 'Chambre Sup&eacute;rieure', '                                                        Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>                                                        ', 'double', 240, 4),
 (3, 'Suite Deluxe', '', 'double', 1000, 4),
 (4, 'Suite Paradis', '                            Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                            ', 'double', 3000, 4);
 
@@ -92,7 +92,7 @@ CREATE TABLE `bookings` (
   `price_total` float NOT NULL,
   `comments` text NOT NULL,
   `cancelation` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `bookings`
@@ -110,7 +110,7 @@ INSERT INTO `bookings` (`booking_id`, `id_bedroom`, `id_acc`, `date_begin`, `dat
 CREATE TABLE `category_bedroom` (
   `roomcategory_id` int(11) NOT NULL,
   `roomcategory_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `category_bedroom`
@@ -131,7 +131,7 @@ INSERT INTO `category_bedroom` (`roomcategory_id`, `roomcategory_name`) VALUES
 CREATE TABLE `category_spa` (
   `spacategory_id` int(11) NOT NULL,
   `spacategory_name` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `category_spa`
@@ -152,9 +152,9 @@ INSERT INTO `category_spa` (`spacategory_id`, `spacategory_name`) VALUES
 
 CREATE TABLE `country` (
   `country_id` int(11) NOT NULL,
-  `country_code` varchar(2) COLLATE utf8_bin DEFAULT NULL,
-  `country_fr` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `country_en` varchar(100) COLLATE utf8_bin NOT NULL
+  `country_code` varchar(2) DEFAULT NULL,
+  `country_fr` varchar(100) DEFAULT NULL,
+  `country_en` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -409,7 +409,7 @@ INSERT INTO `country` (`country_id`, `country_code`, `country_fr`, `country_en`)
 CREATE TABLE `gallery` (
   `id_picture` int(11) NOT NULL,
   `id_bedroom` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `gallery`
@@ -446,7 +446,7 @@ CREATE TABLE `lnk_services_reservation` (
   `id_booking` int(11) NOT NULL,
   `id_service` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -459,7 +459,7 @@ CREATE TABLE `picture` (
   `picture_name` varchar(50) NOT NULL,
   `picture_url` varchar(100) NOT NULL,
   `picture_description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `picture`
@@ -498,7 +498,7 @@ CREATE TABLE `services_bedroom` (
   `service_price` int(11) NOT NULL,
   `service_active` tinyint(1) NOT NULL,
   `service_picture` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `services_bedroom`
@@ -523,47 +523,47 @@ CREATE TABLE `spa` (
   `spa_time` int(11) DEFAULT NULL,
   `spa_price` decimal(10,2) DEFAULT NULL,
   `spa_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `spa`
 --
 
 INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_price`, `spa_active`) VALUES
-(1, 1, 'Massage relaxant (30 minutes)', 30, '50.00', 1),
-(2, 1, 'Massage relaxant (60 minutes)', 60, '85.00', 1),
-(3, 1, 'Massage relaxant (90 minutes)', 90, '120.00', 1),
-(4, 1, 'Massage suédois (60 minutes)', 60, '95.00', 1),
-(5, 1, 'Massage suédois (90 minutes)', 90, '130.00', 1),
-(6, 1, 'Massage profond des tissus (60 minutes)', 60, '100.00', 1),
-(7, 1, 'Massage profond des tissus (90 minutes)', 90, '140.00', 1),
-(8, 1, 'Massage aux pierres chaudes (60 minutes)', 60, '110.00', 1),
-(9, 1, 'Massage aux pierres chaudes (90 minutes)', 90, '150.00', 1),
-(10, 1, 'Massage thaï (60 minutes)', 60, '110.00', 1),
-(11, 1, 'Massage thaï (90 minutes)', 90, '150.00', 1),
-(12, 1, 'Massage pour enfants (30 minutes)', 30, '45.00', 1),
-(13, 2, 'Soin du visage hydratant (60 minutes)', 60, '85.00', 1),
-(14, 2, 'Soin du visage anti-âge (60 minutes)', 60, '95.00', 1),
-(15, 2, 'Soin du visage éclaircissant (60 minutes)', 60, '90.00', 1),
-(16, 2, 'Soin du visage purifiant (60 minutes)', 60, '85.00', 1),
-(17, 2, 'Soin du visage aux acides de fruits (60 minutes)', 60, '95.00', 1),
-(18, 2, 'Soin du visage pour homme (60 minutes)', 60, '80.00', 1),
-(19, 3, 'Soin du corps hydratant (60 minutes)', 60, '100.00', 1),
-(20, 3, 'Soin du corps exfoliant (60 minutes)', 60, '100.00', 1),
-(21, 3, 'Soin du corps minceur (90 minutes)', 90, '140.00', 1),
-(22, 3, 'Enveloppement corporel à l\'argile (60 minutes)', 60, '110.00', 1),
-(23, 3, 'Enveloppement corporel aux algues (60 minutes)', 60, '110.00', 1),
-(24, 3, 'Enveloppement corporel au chocolat (60 minutes)', 60, '120.00', 1),
-(25, 3, 'Gommage corporel à la noix de coco (30 minutes)', 30, '60.00', 1),
-(26, 4, 'Manucure classique (45 minutes)', 45, '50.00', 1),
-(27, 4, 'Manucure française (60 minutes)', 60, '60.00', 1),
-(28, 4, 'Pédicure classique (45 minutes)', 45, '60.00', 1),
-(29, 4, 'Pédicure française (60 minutes)', 60, '70.00', 1),
-(30, 4, 'Pose de vernis simple (15 minutes)', 15, '20.00', 1),
-(31, 4, 'Pose de vernis semi-permanent (45 minutes)', 45, '50.00', 1),
-(32, 5, 'Réflexologie plantaire (45 minutes)', 45, '70.00', 1),
-(33, 5, 'Séance de yoga privée (60 minutes)', 60, '90.00', 1),
-(34, 5, 'Séance de méditation guidée (30 minutes)', 30, '45.00', 1);
+(1, 1, 'Massage relaxant', 30, 50.00, 1),
+(2, 1, 'Massage relaxant', 60, 85.00, 1),
+(3, 1, 'Massage relaxant', 90, 120.00, 1),
+(4, 1, 'Massage suédois', 60, 95.00, 1),
+(5, 1, 'Massage suédois', 90, 130.00, 1),
+(6, 1, 'Massage profond des tissus', 60, 100.00, 1),
+(7, 1, 'Massage profond des tissus', 90, 140.00, 1),
+(8, 1, 'Massage aux pierres chaudes', 60, 110.00, 1),
+(9, 1, 'Massage aux pierres chaudes', 90, 150.00, 1),
+(10, 1, 'Massage thaï', 60, 110.00, 1),
+(11, 1, 'Massage thaï', 90, 150.00, 1),
+(12, 1, 'Massage pour enfants', 30, 45.00, 1),
+(13, 2, 'Soin du visage hydratant', 60, 85.00, 1),
+(14, 2, 'Soin du visage anti-âge', 60, 95.00, 1),
+(15, 2, 'Soin du visage éclaircissant', 60, 90.00, 1),
+(16, 2, 'Soin du visage purifiant', 60, 85.00, 1),
+(17, 2, 'Soin du visage aux acides de fruits', 60, 95.00, 1),
+(18, 2, 'Soin du visage pour homme', 60, 80.00, 1),
+(19, 3, 'Soin du corps hydratant', 60, 100.00, 1),
+(20, 3, 'Soin du corps exfoliant', 60, 100.00, 1),
+(21, 3, 'Soin du corps minceur', 90, 140.00, 1),
+(22, 3, 'Enveloppement corporel à l\'argile', 60, 110.00, 1),
+(23, 3, 'Enveloppement corporel aux algues', 60, 110.00, 1),
+(24, 3, 'Enveloppement corporel au chocolat', 60, 120.00, 1),
+(25, 3, 'Gommage corporel à la noix de coco', 30, 60.00, 1),
+(26, 4, 'Manucure classique', 45, 50.00, 1),
+(27, 4, 'Manucure française', 60, 60.00, 1),
+(28, 4, 'Pédicure classique', 45, 60.00, 1),
+(29, 4, 'Pédicure française', 60, 70.00, 1),
+(30, 4, 'Pose de vernis simple', 15, 20.00, 1),
+(31, 4, 'Pose de vernis semi-permanent', 45, 50.00, 1),
+(32, 5, 'Réflexologie plantaire', 45, 70.00, 1),
+(33, 5, 'Séance de yoga privée', 60, 90.00, 1),
+(34, 5, 'Séance de méditation guidée', 30, 45.00, 1);
 
 --
 -- Index pour les tables déchargées
