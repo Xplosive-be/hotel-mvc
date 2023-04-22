@@ -171,3 +171,15 @@ textarea.inputServices {
   resize: none;
   height: 300px;
 }
+
+text-justify {
+  text-align: justify;
+}
+
+/*SPA*/
+
+img-spa-top {
+  width: 250px;
+  height: 175%;
+  border: solid 2px #dc3545;
+}

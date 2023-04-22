@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 18 avr. 2023 à 16:58
+-- Généré le : sam. 22 avr. 2023 à 19:53
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -73,7 +73,7 @@ CREATE TABLE `bedroom` (
 
 INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_priceday`, `id_roomcategory`) VALUES
 (1, 'Chambre Standard', '{\"ops\":[{\"insert\":\"arbtear\"},{\"attributes\":{\"italic\":true},\"insert\":\"tvzevezrtve\"},{\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"vzerervtevzbzretbzert\"},{\"attributes\":{\"list\":\"bullet\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"retvztbtyrtyber\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"bybrzytbrtb\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"},{\"attributes\":{\"italic\":true},\"insert\":\"bzetbzazetb\"},{\"attributes\":{\"list\":\"ordered\"},\"insert\":\"\\n\"}]}', 'double', 120, 4),
-(2, 'Chambre Sup&eacute;rieure', 'Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>', 'double', 240, 4),
+(2, 'Chambre Sup&eacute;rieure', '                            Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>                            ', 'double', 240000, 4),
 (3, 'Suite Deluxe', '', 'double', 1000, 4),
 (4, 'Suite Paradis', '                            Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                            ', 'double', 3000, 4);
 
@@ -121,6 +121,28 @@ INSERT INTO `category_bedroom` (`roomcategory_id`, `roomcategory_name`) VALUES
 (2, 'Chambre Supérieure'),
 (3, 'Suite Deluxe'),
 (4, 'Suite Haut-niveau');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `category_spa`
+--
+
+CREATE TABLE `category_spa` (
+  `spacategory_id` int(11) NOT NULL,
+  `spacategory_name` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `category_spa`
+--
+
+INSERT INTO `category_spa` (`spacategory_id`, `spacategory_name`) VALUES
+(1, 'Massages'),
+(2, 'Soins du visage'),
+(3, 'Soins du corps'),
+(4, 'Soins des mains et des pieds'),
+(5, 'Autres soins');
 
 -- --------------------------------------------------------
 
@@ -496,51 +518,52 @@ INSERT INTO `services_bedroom` (`service_id`, `service_name`, `service_price`, `
 
 CREATE TABLE `spa` (
   `spa_id` int(11) NOT NULL,
-  `spa_category` varchar(255) DEFAULT NULL,
+  `id_spacategory` int(11) NOT NULL,
   `spa_title` varchar(255) DEFAULT NULL,
   `spa_time` int(11) DEFAULT NULL,
-  `spa_price` decimal(10,2) DEFAULT NULL
+  `spa_price` decimal(10,2) DEFAULT NULL,
+  `spa_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `spa`
 --
 
-INSERT INTO `spa` (`spa_id`, `spa_category`, `spa_title`, `spa_time`, `spa_price`) VALUES
-(1, 'MASSAGES', 'Massage relaxant (30 minutes)', 30, '50.00'),
-(2, 'MASSAGES', 'Massage relaxant (60 minutes)', 60, '85.00'),
-(3, 'MASSAGES', 'Massage relaxant (90 minutes)', 90, '120.00'),
-(4, 'MASSAGES', 'Massage suédois (60 minutes)', 60, '95.00'),
-(5, 'MASSAGES', 'Massage suédois (90 minutes)', 90, '130.00'),
-(6, 'MASSAGES', 'Massage profond des tissus (60 minutes)', 60, '100.00'),
-(7, 'MASSAGES', 'Massage profond des tissus (90 minutes)', 90, '140.00'),
-(8, 'MASSAGES', 'Massage aux pierres chaudes (60 minutes)', 60, '110.00'),
-(9, 'MASSAGES', 'Massage aux pierres chaudes (90 minutes)', 90, '150.00'),
-(10, 'MASSAGES', 'Massage thaï (60 minutes)', 60, '110.00'),
-(11, 'MASSAGES', 'Massage thaï (90 minutes)', 90, '150.00'),
-(12, 'MASSAGES', 'Massage pour enfants (30 minutes)', 30, '45.00'),
-(13, 'SOINS DU VISAGE', 'Soin du visage hydratant (60 minutes)', 60, '85.00'),
-(14, 'SOINS DU VISAGE', 'Soin du visage anti-âge (60 minutes)', 60, '95.00'),
-(15, 'SOINS DU VISAGE', 'Soin du visage éclaircissant (60 minutes)', 60, '90.00'),
-(16, 'SOINS DU VISAGE', 'Soin du visage purifiant (60 minutes)', 60, '85.00'),
-(17, 'SOINS DU VISAGE', 'Soin du visage aux acides de fruits (60 minutes)', 60, '95.00'),
-(18, 'SOINS DU VISAGE', 'Soin du visage pour homme (60 minutes)', 60, '80.00'),
-(19, 'SOINS DU CORPS', 'Soin du corps hydratant (60 minutes)', 60, '100.00'),
-(20, 'SOINS DU CORPS', 'Soin du corps exfoliant (60 minutes)', 60, '100.00'),
-(21, 'SOINS DU CORPS', 'Soin du corps minceur (90 minutes)', 90, '140.00'),
-(22, 'SOINS DU CORPS', 'Enveloppement corporel à l\'argile (60 minutes)', 60, '110.00'),
-(23, 'SOINS DU CORPS', 'Enveloppement corporel aux algues (60 minutes)', 60, '110.00'),
-(24, 'SOINS DU CORPS', 'Enveloppement corporel au chocolat (60 minutes)', 60, '120.00'),
-(25, 'SOINS DU CORPS', 'Gommage corporel à la noix de coco (30 minutes)', 30, '60.00'),
-(26, 'SOINS DES MAINS ET DES PIEDS', 'Manucure classique (45 minutes)', 45, '50.00'),
-(27, 'SOINS DES MAINS ET DES PIEDS', 'Manucure française (60 minutes)', 60, '60.00'),
-(28, 'SOINS DES MAINS ET DES PIEDS', 'Pédicure classique (45 minutes)', 45, '60.00'),
-(29, 'SOINS DES MAINS ET DES PIEDS', 'Pédicure française (60 minutes)', 60, '70.00'),
-(30, 'SOINS DES MAINS ET DES PIEDS', 'Pose de vernis simple (15 minutes)', 15, '20.00'),
-(31, 'SOINS DES MAINS ET DES PIEDS', 'Pose de vernis semi-permanent (45 minutes)', 45, '50.00'),
-(32, 'AUTRES SOINS', 'Réflexologie plantaire (45 minutes)', 45, '70.00'),
-(33, 'AUTRES SOINS', 'Séance de yoga privée (60 minutes)', 60, '90.00'),
-(34, 'AUTRES SOINS', 'Séance de méditation guidée (30 minutes)', 30, '45.00');
+INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_price`, `spa_active`) VALUES
+(1, 1, 'Massage relaxant (30 minutes)', 30, '50.00', 1),
+(2, 1, 'Massage relaxant (60 minutes)', 60, '85.00', 1),
+(3, 1, 'Massage relaxant (90 minutes)', 90, '120.00', 1),
+(4, 1, 'Massage suédois (60 minutes)', 60, '95.00', 1),
+(5, 1, 'Massage suédois (90 minutes)', 90, '130.00', 1),
+(6, 1, 'Massage profond des tissus (60 minutes)', 60, '100.00', 1),
+(7, 1, 'Massage profond des tissus (90 minutes)', 90, '140.00', 1),
+(8, 1, 'Massage aux pierres chaudes (60 minutes)', 60, '110.00', 1),
+(9, 1, 'Massage aux pierres chaudes (90 minutes)', 90, '150.00', 1),
+(10, 1, 'Massage thaï (60 minutes)', 60, '110.00', 1),
+(11, 1, 'Massage thaï (90 minutes)', 90, '150.00', 1),
+(12, 1, 'Massage pour enfants (30 minutes)', 30, '45.00', 1),
+(13, 2, 'Soin du visage hydratant (60 minutes)', 60, '85.00', 1),
+(14, 2, 'Soin du visage anti-âge (60 minutes)', 60, '95.00', 1),
+(15, 2, 'Soin du visage éclaircissant (60 minutes)', 60, '90.00', 1),
+(16, 2, 'Soin du visage purifiant (60 minutes)', 60, '85.00', 1),
+(17, 2, 'Soin du visage aux acides de fruits (60 minutes)', 60, '95.00', 1),
+(18, 2, 'Soin du visage pour homme (60 minutes)', 60, '80.00', 1),
+(19, 3, 'Soin du corps hydratant (60 minutes)', 60, '100.00', 1),
+(20, 3, 'Soin du corps exfoliant (60 minutes)', 60, '100.00', 1),
+(21, 3, 'Soin du corps minceur (90 minutes)', 90, '140.00', 1),
+(22, 3, 'Enveloppement corporel à l\'argile (60 minutes)', 60, '110.00', 1),
+(23, 3, 'Enveloppement corporel aux algues (60 minutes)', 60, '110.00', 1),
+(24, 3, 'Enveloppement corporel au chocolat (60 minutes)', 60, '120.00', 1),
+(25, 3, 'Gommage corporel à la noix de coco (30 minutes)', 30, '60.00', 1),
+(26, 4, 'Manucure classique (45 minutes)', 45, '50.00', 1),
+(27, 4, 'Manucure française (60 minutes)', 60, '60.00', 1),
+(28, 4, 'Pédicure classique (45 minutes)', 45, '60.00', 1),
+(29, 4, 'Pédicure française (60 minutes)', 60, '70.00', 1),
+(30, 4, 'Pose de vernis simple (15 minutes)', 15, '20.00', 1),
+(31, 4, 'Pose de vernis semi-permanent (45 minutes)', 45, '50.00', 1),
+(32, 5, 'Réflexologie plantaire (45 minutes)', 45, '70.00', 1),
+(33, 5, 'Séance de yoga privée (60 minutes)', 60, '90.00', 1),
+(34, 5, 'Séance de méditation guidée (30 minutes)', 30, '45.00', 1);
 
 --
 -- Index pour les tables déchargées
@@ -573,6 +596,12 @@ ALTER TABLE `bookings`
 --
 ALTER TABLE `category_bedroom`
   ADD PRIMARY KEY (`roomcategory_id`);
+
+--
+-- Index pour la table `category_spa`
+--
+ALTER TABLE `category_spa`
+  ADD PRIMARY KEY (`spacategory_id`);
 
 --
 -- Index pour la table `country`
@@ -610,7 +639,8 @@ ALTER TABLE `services_bedroom`
 -- Index pour la table `spa`
 --
 ALTER TABLE `spa`
-  ADD PRIMARY KEY (`spa_id`);
+  ADD PRIMARY KEY (`spa_id`),
+  ADD KEY `index_category` (`id_spacategory`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -639,6 +669,12 @@ ALTER TABLE `bookings`
 --
 ALTER TABLE `category_bedroom`
   MODIFY `roomcategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `category_spa`
+--
+ALTER TABLE `category_spa`
+  MODIFY `spacategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `country`
@@ -700,6 +736,12 @@ ALTER TABLE `gallery`
 ALTER TABLE `lnk_services_reservation`
   ADD CONSTRAINT `lnk_services_reservation_ibfk_1` FOREIGN KEY (`id_service`) REFERENCES `services_bedroom` (`service_id`),
   ADD CONSTRAINT `lnk_services_reservation_ibfk_2` FOREIGN KEY (`id_booking`) REFERENCES `bookings` (`booking_id`);
+
+--
+-- Contraintes pour la table `spa`
+--
+ALTER TABLE `spa`
+  ADD CONSTRAINT `spa_ibfk_1` FOREIGN KEY (`id_spacategory`) REFERENCES `category_spa` (`spacategory_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

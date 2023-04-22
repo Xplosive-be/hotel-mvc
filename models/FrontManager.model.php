@@ -46,5 +46,27 @@ class FrontManager extends Model
         return $getCategoryBedList;
     }
 
+    public function getCategorySpa(){
+        $stmt = $this->getBdd()->prepare('SELECT * FROM category_spa');
+        $stmt->execute();
+        $categorySpaList = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $categorySpaList;
+    }
+
+    public function getSpaByIdCategory($category){
+        $stmt = $this->getBdd()->prepare('SELECT c.spacategory_id, s.spa_id, s.spa_title, s.spa_time, s.spa_price 
+                                  FROM category_spa c 
+                                  LEFT JOIN spa s ON c.spacategory_id = s.id_spacategory 
+                                  WHERE s.spa_active = 1 AND s.id_spacategory = ' . $category . '
+                                  ORDER BY s.id_spacategory');
+        $stmt->execute();
+        $getSpaById = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $getSpaById;
+}
+
+
+
 }
 

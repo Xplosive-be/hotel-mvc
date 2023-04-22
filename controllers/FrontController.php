@@ -30,7 +30,11 @@ class FrontController{
         $this->genererPage($data_page);
     }
     public function spa(){
+        $categorySpa = $this->frontManager->getCategorySpa();
+        $massages = $this->frontManager->getSpaByIdCategory(1);
         $data_page = [
+            "massages" => $massages,
+            "categorySpa" => $categorySpa,
             "page_description" => "Description du Spa",
             "page_title" => "Hôtel Belle-Nuit | Spa",
             "view" => "views/main/front/spa.view.php",
