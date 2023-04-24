@@ -65,6 +65,16 @@ class FrontManager extends Model
         $stmt->closeCursor();
         return $getSpaById;
 }
+    public function getSpas() {
+        $stmt = $this->getBdd()->prepare('SELECT s.spa_id,s.spa_title, s.spa_time, s.spa_price, s.spa_active, c.spacategory_name
+                                        FROM spa s
+                                        INNER JOIN category_spa c ON s.id_spacategory = c.spacategory_id
+                                        ORDER BY s.spa_id;');
+        $stmt->execute();
+        $getSpas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $getSpas;
+    }
 
 
 

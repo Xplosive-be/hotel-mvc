@@ -190,7 +190,8 @@ class AdminController
 
     public function adminManagerBedPicture()
     {
-        if (isset($_GET['idEditBed'])) {
+
+        if (Securite::verifAccessSession() & isset($_GET['idEditBed'])) {
             $_SESSION['idEditBed'] = Securite::secureHTML($_GET['idEditBed']);
             if (isset($_POST['btnAddPic'])) {
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -222,6 +223,24 @@ class AdminController
                 "page_title" => "Edition des photos des chambres",
                 "imagesBedroom" => $this->frontManager->getImagesBedroom($_SESSION['idEditBed']),
                 "view" => "views/main/back/adminManagerBedPicture.view.php",
+                "template" => "views/main/common/__template_front.php"
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
+    public function adminSpa(){
+        if (Securite::verifAccessSession()) {
+            $data_page = [
+                "page_description" => "Editer un service spa",
+                "page_title" => "Editer un service spa",
+                "spas" => $this->frontManager->getSpas(),
+                "view" => "views/main/back/adminSpa.view.php",
                 "template" => "views/main/common/__template_front.php"
             ];
             $this->genererPage($data_page);

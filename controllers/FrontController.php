@@ -30,19 +30,13 @@ class FrontController{
         $this->genererPage($data_page);
     }
     public function spa(){
-        $categorySpa = $this->frontManager->getCategorySpa();
-        $massages = $this->frontManager->getSpaByIdCategory(1);
-        $facecares = $this->frontManager->getSpaByIdCategory(2);
-        $bodycares = $this->frontManager->getSpaByIdCategory(3);
-        $handfootcares = $this->frontManager->getSpaByIdCategory(4);
-        $othercares = $this->frontManager->getSpaByIdCategory(5);
         $data_page = [
-            "massages" => $massages,
-            "facecares" => $facecares,
-            "bodycares" => $bodycares,
-            "handfootcares" => $handfootcares,
-            "othercares" => $othercares,
-            "categorySpa" => $categorySpa,
+            "massages" => $this->frontManager->getSpaByIdCategory(1),
+            "facecares" => $this->frontManager->getSpaByIdCategory(2),
+            "bodycares" => $this->frontManager->getSpaByIdCategory(3),
+            "handfootcares" => $this->frontManager->getSpaByIdCategory(4),
+            "othercares" => $this->frontManager->getSpaByIdCategory(5),
+            "categorySpa" => $this->frontManager->getCategorySpa(),
             "page_description" => "Description du Spa",
             "page_title" => "Hôtel Belle-Nuit | Spa",
             "view" => "views/main/front/spa.view.php",
