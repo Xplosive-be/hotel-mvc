@@ -92,6 +92,9 @@ try {
         case "deleteBedroom":
             $adminController->bedroomDelete();
             break;
+        case "delSpa":
+            $adminController->adminDelSpa();
+            break;
         // Partie Booking
         case "accueilBooking":
             $bookingController->bookingHome();

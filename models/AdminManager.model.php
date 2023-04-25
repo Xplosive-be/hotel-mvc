@@ -161,5 +161,9 @@ class AdminManager extends Model
         $stmt->bindParam(':active', $active);
         $stmt->execute();
     }
-
+    public function deleteSpa($delIdSpa){
+        $stmt = $this->getBdd()->prepare('DELETE FROM `spa` WHERE `spa_id` = :spaId');
+        $stmt->bindParam(':spaId', $delIdSpa);
+        $stmt->execute();
+    }
 }

@@ -223,21 +223,29 @@ class AdminController
 
     public function bedroomDelete()
     {
-        if (isset($_GET['idDelBedRoom'])) {
-            $idDelBedRoom = $_GET['idDelBedRoom'];
-            $this->adminManager->deleteIdBed($idDelBedRoom);
-            $_SESSION['alert'] = [
+        if(Securite::verifAccessSession()) {
+            if (isset($_GET['idDelBedRoom'])) {
+                $idDelBedRoom = $_GET['idDelBedRoom'];
+                $this->adminManager->deleteIdBed($idDelBedRoom);
+                $_SESSION['alert'] = [
 
-                "message" => "Admin --- La chambre a été supprimée avec succès.",
-                "type" => 'alert-success'
-            ];
+                    "message" => "Admin --- La chambre a été supprimée avec succès.",
+                    "type" => 'alert-success'
+                ];
+            } else {
+                $_SESSION['alert'] = [
+                    "message" => "Admin --- Erreur informations manquant!",
+                    "type" => 'alert-danger'
+                ];
+            }
+            header('Location: adminBedrooms');
         } else {
             $_SESSION['alert'] = [
-                "message" => "Admin --- Erreur informations manquant!",
+                "message" => "Accès non-autorisé",
                 "type" => 'alert-danger'
             ];
+            header('Location: accueil');
         }
-        header('Location: adminBedrooms');
     }
 
     public function adminManagerBedPicture()
@@ -288,30 +296,38 @@ class AdminController
     }
     public function pictureDelete()
     {
-        if ($_GET['delIdPicture']) {
+        if (Securite::verifAccessSession()) {
+            if ($_GET['delIdPicture']) {
 
-            $idPicture = $_GET['delIdPicture'];
-            $idBedroom = $_SESSION['idEditBed'];
-            $verificationPicture = $this->adminManager->verificationPicture($idPicture, $idBedroom);
-            if (!empty($verificationPicture)) {
-                $this->adminManager->deleteIDPicture($idPicture, $idBedroom);
-                $_SESSION['alert'] = [
-                    "message" => "Admin --- La photo a été supprimée avec succès.",
-                    "type" => 'alert-success'
-                ];
+                $idPicture = $_GET['delIdPicture'];
+                $idBedroom = $_SESSION['idEditBed'];
+                $verificationPicture = $this->adminManager->verificationPicture($idPicture, $idBedroom);
+                if (!empty($verificationPicture)) {
+                    $this->adminManager->deleteIDPicture($idPicture, $idBedroom);
+                    $_SESSION['alert'] = [
+                        "message" => "Admin --- La photo a été supprimée avec succès.",
+                        "type" => 'alert-success'
+                    ];
+                } else {
+                    $_SESSION['alert'] = [
+                        "message" => $verificationPicture,
+                        "type" => 'alert-danger'
+                    ];
+                }
             } else {
                 $_SESSION['alert'] = [
-                    "message" => $verificationPicture,
+                    "message" => "Admin --- Erreur informations manquant!",
                     "type" => 'alert-danger'
                 ];
             }
+            header('Location: adminManagerBedPicture&idEditBed=' . $_SESSION['idEditBed']);
         } else {
             $_SESSION['alert'] = [
-                "message" => "Admin --- Erreur informations manquant!",
+                "message" => "Accès non-autorisé",
                 "type" => 'alert-danger'
             ];
+            header('Location: accueil');
         }
-        header('Location: adminManagerBedPicture&idEditBed=' . $_SESSION['idEditBed']);
     }
     public function adminSpa()
     {
@@ -418,6 +434,29 @@ class AdminController
             header('Location: accueil');
         }
     }
+    public function adminDelSpa()
+    {
+        if (isset($_GET['id'])) {
+            $id = Securite::secureHTML($_GET['id']);
+            $delIdSpa = $this->frontManager->getSpaById($id);
+            if (!$delIdSpa) {
+                header('Location: adminaccount');
+            }
+            $this->adminManager->deleteSpa($delIdSpa['spa_id']);
+            $_SESSION['alert'] = [
+
+                "message" => "Admin --- Le service Spa a été supprimée avec succès.",
+                "type" => 'alert-success'
+            ];
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Admin --- Erreur informations manquant!",
+                "type" => 'alert-danger'
+            ];
+        }
+        header('Location: adminSpa');
+    }
+
 }
 
 

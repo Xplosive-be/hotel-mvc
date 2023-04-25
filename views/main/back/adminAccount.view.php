@@ -36,7 +36,7 @@
                 <a href="adEditAccount&id=<?= $profil['acc_id'] ?>" class="text-warning">
                     <i class="fa-solid fa-wrench fa-xl"></i>
                 </a>
-                <a href="models/delete.php?idDelUser=<?= $profil["acc_id"] ?>" class="ms-3 text-danger">
+                <a href="models/delete.php?idDelUser=<?= $profil["acc_id"] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')" class="ms-3 text-danger">
                     <i class="fa-solid fa-xl fa-trash-can"></i>
                 </a>
             </td>

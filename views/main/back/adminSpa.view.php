@@ -34,7 +34,7 @@
                 <a href="editSpa&id=<?= $spa['spa_id'] ?>" class="text-warning">
                     <i class="fa-solid fa-wrench fa-xl"></i>
                 </a>
-                <a href="models/delete.php?idDelUser=<?= $spa['spa_id'] ?>" class="ms-3 text-danger">
+                <a href="delSpa&id=<?= $spa['spa_id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')" class="ms-3 text-danger">
                     <i class="fa-solid fa-xl fa-trash-can"></i>
                 </a>
             </td>
