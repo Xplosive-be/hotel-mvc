@@ -4,16 +4,16 @@
             <div class="shadow-lg p-3 mb-5 bg-body rounded" id="available">
                 <h2 class="text-center mb-4 text-danger fst-italic fw-bolder">Consultation des disponibilités et des
                     tarifs</h2>
-                <form class="row g-3 align-items-end" method="post" action="bookingAvailable">
+                <form class="row g-3 align-items-end" method="post" action="bookingAvailable" onsubmit="return compareDates()">
                     <div class="col-md-5">
                         <div class="form-floating mb-3">
-                            <input type="date" name="dateBegin" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date d'arrivée:">
+                            <input type="date" name="dateBegin" id="dateBegin" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date d'arrivée:">
                             <label for="dateBegin">Date de départ :</label>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-floating mb-3">
-                            <input type="date" name="dateEnd" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date départ:">
+                            <input type="date" name="dateEnd" id="dateEnd" min="<?php echo date('Y-m-d'); ?>" class="form-control" placeholder="Date départ:">
                             <label for="dateEnd">Date d'arrivée :</label>
                         </div>
                     </div>

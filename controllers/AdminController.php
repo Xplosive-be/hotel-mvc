@@ -99,18 +99,17 @@ class AdminController
                 }
                 // Requête pour mettre à jour le profil dans la section Admin.
                 //SQL pour mettre à jour la DB
-                $this->adminManager->setAdminEditProfil($name, $surname, $address, $city, $country, $active,$box,$codePostal,$phone, $admin, $idAccount);
+                $this->adminManager->setAdminEditProfil($name, $surname, $address, $city, $country, $active, $box, $codePostal, $phone, $admin, $idAccount);
                 $_SESSION['alert'] = [
                     "message" => 'Les informations ont été modifiés avec succès.',
                     "type" => 'alert-success'
                 ];
                 header('Location: adEditAccount&id=' . $idAccount);
             }
-            $countrys = $this->frontManager->getCountryList();
             $data_page = [
                 "page_description" => " Page de Profil",
                 "page_title" => "Edition de Profil",
-                "countrys" => $countrys,
+                "countrys" => $this->frontManager->getCountryList(),
                 "profil" => $profil,
                 "view" => "views/main/back/adminEditAccount.view.php",
                 "template" => "views/main/common/__template_front.php"
@@ -188,6 +187,59 @@ class AdminController
         }
     }
 
+    public function adminBedroomAdd()
+    {
+        if (Securite::verifAccessSession()) {
+            if (isset($_POST['btnAddBed'])) {
+                $name = htmlspecialchars($_POST['name']);
+                $description = $_POST['description'];
+                $typeBed = htmlspecialchars($_POST['typeBed']);
+                $category = htmlspecialchars($_POST['category']);
+                $price = htmlspecialchars($_POST['price']);
+                // Requête pour rajouter la nouvelle chambre
+                $this->adminManager->addBed($name, $description, $typeBed, $category, $price);
+                $_SESSION['alert'] = [
+                    "message" => "Admin --- Chambre rajouté avec succès",
+                    "type" => 'alert-success'
+                ];
+                header('Location: adminBedrooms');
+            }
+            $data_page = [
+                "page_description" => "Ajouter une chambre",
+                "page_title" => "Ajouter une chambre",
+                "categoryBed" => $this->frontManager->getCategoryBedList(),
+                "view" => "views/main/back/adminAddBed.view.php",
+                "template" => "views/main/common/__template_front.php"
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
+
+    public function bedroomDelete()
+    {
+        if (isset($_GET['idDelBedRoom'])) {
+            $idDelBedRoom = $_GET['idDelBedRoom'];
+            $this->adminManager->deleteIdBed($idDelBedRoom);
+            $_SESSION['alert'] = [
+
+                "message" => "Admin --- La chambre a été supprimée avec succès.",
+                "type" => 'alert-success'
+            ];
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Admin --- Erreur informations manquant!",
+                "type" => 'alert-danger'
+            ];
+        }
+        header('Location: adminBedrooms');
+    }
+
     public function adminManagerBedPicture()
     {
 
@@ -234,57 +286,6 @@ class AdminController
             header('Location: accueil');
         }
     }
-    public function adminSpa(){
-        if (Securite::verifAccessSession()) {
-            $data_page = [
-                "page_description" => "Editer un service spa",
-                "page_title" => "Editer un service spa",
-                "spas" => $this->frontManager->getSpas(),
-                "view" => "views/main/back/adminSpa.view.php",
-                "template" => "views/main/common/__template_front.php"
-            ];
-            $this->genererPage($data_page);
-        } else {
-            $_SESSION['alert'] = [
-                "message" => "Accès non-autorisé",
-                "type" => 'alert-danger'
-            ];
-            header('Location: accueil');
-        }
-    }
-    public function adminBedroomAdd()
-    {
-        if (Securite::verifAccessSession()) {
-            if (isset($_POST['btnAddBed'])) {
-                $name = htmlspecialchars($_POST['name']);
-                $description = $_POST['description'];
-                $typeBed = htmlspecialchars($_POST['typeBed']);
-                $category = htmlspecialchars($_POST['category']);
-                $price = htmlspecialchars($_POST['price']);
-                // Requête pour rajouter la nouvelle chambre
-                $this->adminManager->addBed($name, $description, $typeBed, $category, $price);
-                $_SESSION['alert'] = [
-                    "message" => "Admin --- Chambre rajouté avec succès",
-                    "type" => 'alert-success'
-                ];
-                header('Location: adminBedrooms');
-            }
-            $data_page = [
-                "page_description" => "Ajouter une chambre",
-                "page_title" => "Ajouter une chambre",
-                "categoryBed" => $this->frontManager->getCategoryBedList(),
-                "view" => "views/main/back/adminAddBed.view.php",
-                "template" => "views/main/common/__template_front.php"
-            ];
-            $this->genererPage($data_page);
-        } else {
-            $_SESSION['alert'] = [
-                "message" => "Accès non-autorisé",
-                "type" => 'alert-danger'
-            ];
-            header('Location: accueil');
-        }
-    }
     public function pictureDelete()
     {
         if ($_GET['delIdPicture']) {
@@ -312,24 +313,112 @@ class AdminController
         }
         header('Location: adminManagerBedPicture&idEditBed=' . $_SESSION['idEditBed']);
     }
-
-    public function bedroomDelete()
+    public function adminSpa()
     {
-        if (isset($_GET['idDelBedRoom'])) {
-            $idDelBedRoom = $_GET['idDelBedRoom'];
-            $this->adminManager->deleteIdBed($idDelBedRoom);
-            $_SESSION['alert'] = [
-
-                "message" => "Admin --- La chambre a été supprimée avec succès.",
-                "type" => 'alert-success'
+        if (Securite::verifAccessSession()) {
+            $data_page = [
+                "page_description" => "Editer un service spa",
+                "page_title" => "Editer un service spa",
+                "spas" => $this->frontManager->getSpas(),
+                "view" => "views/main/back/adminSpa.view.php",
+                "template" => "views/main/common/__template_front.php"
             ];
+            $this->genererPage($data_page);
         } else {
             $_SESSION['alert'] = [
-                "message" => "Admin --- Erreur informations manquant!",
+                "message" => "Accès non-autorisé",
                 "type" => 'alert-danger'
             ];
+            header('Location: accueil');
         }
-        header('Location: adminBedrooms');
+    }
+
+
+    public function adminEditSpa()
+    {
+        if (Securite::verifAccessSession() & isset($_GET['id'])) {
+            $id = Securite::secureHTML($_GET['id']);
+            $spa = $this->frontManager->getSpaById(Securite::secureHTML($id));
+            if (!$spa) {
+                header('Location: adminaccount');
+            }
+            if (isset($_POST['btnEditSpa'])) {
+                $name = Securite::secureHTML($_POST['name']);
+                $time = Securite::secureHTML($_POST['time']);
+                $price = Securite::secureHTML($_POST['price']);
+                $category = Securite::secureHTML($_POST['category']);
+                if (!isset($_POST['active'])) {
+                    $active = 0;
+                } else {
+                    $active = Securite::secureHTML($_POST['active']);
+                }
+
+                $this->adminManager->setAdminEditSpa($id, $name, $time, $price, $category, $active);
+                $_SESSION['alert'] = [
+                    "message" => 'Les informations ont été modifiés avec succès.',
+                    "type" => 'alert-success'
+                ];
+                header('Location: adminEditSpa&id=' . $id);
+                exit();
+            }
+
+            $data_page = [
+                "spaCategories" => $this->frontManager->getCategorySpa(),
+                "spa" => $spa,
+                "page_description" => "Editer un service spa",
+                "page_title" => "Hôtel Belle-Nuit | Editer un service spa",
+                "view" => "views/main/back/adminEditSpa.view.php",
+                "template" => "views/main/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
+    public function adminAddSpa()
+    {
+        if (Securite::verifAccessSession()) {
+            if (isset($_POST['btnAddSpa'])) {
+                $name = Securite::secureHTML($_POST['name']);
+                $time = Securite::secureHTML($_POST['time']);
+                $price = Securite::secureHTML($_POST['price']);
+                $category = Securite::secureHTML($_POST['category']);
+                if (!isset($_POST['active'])) {
+                    $active = 0;
+                } else {
+                    $active = Securite::secureHTML($_POST['active']);
+                }
+
+                $this->adminManager->setAdminAddSpa($name, $time, $price, $category, $active);
+                $_SESSION['alert'] = [
+                    "message" => 'Les informations ont été modifiés avec succès.',
+                    "type" => 'alert-success'
+                ];
+                header('Location: adminSpa' );
+                exit();
+            }
+
+            $data_page = [
+                "spaCategories" => $this->frontManager->getCategorySpa(),
+                "page_description" => "Ajouter un service spa",
+                "page_title" => "Hôtel Belle-Nuit | Ajouter un service spa",
+                "view" => "views/main/back/adminAddSpa.view.php",
+                "template" => "views/main/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
     }
 }
+
+
 

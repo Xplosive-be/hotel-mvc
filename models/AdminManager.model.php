@@ -140,7 +140,26 @@ class AdminManager extends Model
         $stmt->bindParam(':category', $category);
         $stmt->bindParam(':price', $price);
         $stmt->execute();
+    }
 
+    public function setAdminEditSpa($id, $name, $time, $price, $category, $active) {
+        $stmt = $this->getBdd()->prepare('UPDATE spa SET spa_title = :name, spa_time = :time, spa_price = :price, id_spacategory = :category, spa_active = :active WHERE spa_id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':time', $time, PDO::PARAM_INT);
+        $stmt->bindParam(':price', $price, PDO::PARAM_STR);
+        $stmt->bindParam(':category', $category, PDO::PARAM_INT);
+        $stmt->bindParam(':active', $active, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    public function setAdminAddSpa($name, $time, $price, $category, $active) {
+        $stmt = $this->getBdd()->prepare('INSERT INTO spa (spa_title, spa_time, spa_price, id_spacategory, spa_active) VALUES (:name, :time, :price, :category, :active)');
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':time', $time);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':active', $active);
+        $stmt->execute();
     }
 
 }

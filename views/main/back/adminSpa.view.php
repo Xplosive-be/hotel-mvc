@@ -8,6 +8,7 @@
         <th>Prix</th>
         <th>Actif</th>
         <th>Actions</th>
+
     </tr>
     </thead>
     <tbody>
@@ -30,7 +31,7 @@
             </td>
             <td><?= $statusBadge ?></td>
             <td>
-                <a href="adEditAccount&id=<?= $spa['spa_id'] ?>" class="text-warning">
+                <a href="editSpa&id=<?= $spa['spa_id'] ?>" class="text-warning">
                     <i class="fa-solid fa-wrench fa-xl"></i>
                 </a>
                 <a href="models/delete.php?idDelUser=<?= $spa['spa_id'] ?>" class="ms-3 text-danger">

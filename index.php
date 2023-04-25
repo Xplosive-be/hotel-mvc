@@ -78,6 +78,13 @@ try {
         case "adminSpa":
             $adminController->adminSpa();
             break;
+        case "adminEditSpa":
+            $adminController->adminEditSpa();
+            break;
+        case "adminAddSpa":
+            $adminController->adminAddSpa();
+            break;
+
         // Partie suppression
         case "deletePicture":
             $adminController->pictureDelete();

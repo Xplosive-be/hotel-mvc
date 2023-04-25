@@ -18,9 +18,9 @@
                         <div class="col-sm mb-1">
                             <label for="typeBed" class="form-label">Type de lit : </label></br>
                             <select name="typeBed"class="form-select">
-                                <option value="double">Double <?php (($bedroomById['bedroom_bed'] == 'double') ?  'selected' : 'selected') ?></option>
-                                <option value="twin">Jumelle <?php (($bedroomById['bedroom_bed'] == 'twin') ?  'selected' : 'selected') ?></option>
-                                <option value="single">Simple <?php (($bedroomById['bedroom_bed'] == 'single') ?  'selected' : 'selected') ?></option>
+                                <option value="double"<?php echo ($bedroomById['bedroom_bed'] == 'double') ? ' selected' : ''; ?>>Double</option>
+                                <option value="twin"<?php echo ($bedroomById['bedroom_bed'] == 'twin') ? ' selected' : ''; ?>>Jumelle</option>
+                                <option value="single"<?php echo ($bedroomById['bedroom_bed'] == 'single') ? ' selected' : ''; ?>>Simple</option>
                             </select>
                         </div>
                         <div class="col-sm mb-1">
@@ -28,7 +28,7 @@
                             <select class="form-select" id="category" name="category" required>
                                 <?php
                                 foreach ($CategoryBedList as $category) {
-                                    echo '<option value="' . $category['roomcategory_id'] . '"' . (($category['roomcategory_name'] == $category['roomcategory_name']) ? 'selected'  : '') . '>' . $category['roomcategory_name'] . '</option>';
+                                    echo '<option value="' . $category['roomcategory_id'] . '"' . (($bedroomById['id_roomcategory'] == $category['roomcategory_id']) ? ' selected' : '') . '>' . $category['roomcategory_name'] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -39,8 +39,11 @@
                         </div>
                     </div>
                     <!-- Bouton de Modification-->
-            </div class="text-center"><button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center" style="max-width: 80%" type=submit" name="btnEditBed">Modifier</button></div>
-        </form>
-        </main>
+                    <div class="text-center">
+                        <button class="mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center" style="width: 100%" type="submit" name="btnEditBed">Modifier</button>
+                    </div>
+                </form>
+            </main>
+        </div>
     </div>
 </div>

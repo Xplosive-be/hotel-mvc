@@ -73,11 +73,11 @@
                                 </div>
                             </div>
                             <!-- Bouton de Modification-->
-                        </div class="text-center"><button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center" type=submit" name="btnEditAdmin">Modifier</button></div>
+                        </div>
+                    <button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center w-100" type=submit" name="btnEditAdmin">Modifier</button>
                 </form>
             </main>
-
-
         </div>
+
     </div>
 </div>

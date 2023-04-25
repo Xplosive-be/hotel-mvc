@@ -47,7 +47,7 @@ class FrontManager extends Model
     }
 
     public function getCategorySpa(){
-        $stmt = $this->getBdd()->prepare('SELECT spacategory_name FROM category_spa');
+        $stmt = $this->getBdd()->prepare('SELECT * FROM category_spa');
         $stmt->execute();
         $categorySpaList = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
@@ -76,7 +76,17 @@ class FrontManager extends Model
         return $getSpas;
     }
 
-
-
+    public function getSpaById($idSpa) {
+        $stmt = $this->getBdd()->prepare('SELECT s.spa_id, s.spa_title, s.spa_time, s.spa_price, s.spa_active, s.id_spacategory, c.spacategory_name
+                                      FROM spa s
+                                      INNER JOIN category_spa c ON s.id_spacategory = c.spacategory_id
+                                      WHERE s.spa_id = :idSpa
+                                      ORDER BY s.spa_id');
+        $stmt->bindParam(':idSpa', $idSpa, PDO::PARAM_INT);
+        $stmt->execute();
+        $getSpas = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $getSpas;
+    }
 }
 
