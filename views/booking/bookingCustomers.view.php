@@ -22,7 +22,7 @@
         </div>
     </div>
 </div>
-
+<?php  var_dump($_POST);?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9">
@@ -40,12 +40,12 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="prenom" class="form-label">Prénom :</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" required>
+                        <label for="surname" class="form-label">Prénom :</label>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Prénom" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="nom" class="form-label">Nom :</label>
-                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" required>
+                        <label for="name" class="form-label">Nom :</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nom" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -60,13 +60,9 @@
                 <hr class="solid mt-3">
                 <h5 class="text-danger fw-bold mb-3">Vos adresses</h5>
                 <div class="row mb-3">
-                    <div class="col-md-8">
-                        <label for="rue" class="form-label">Rue :</label>
-                        <input type="text" class="form-control" id="rue" name="rue" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="numero" class="form-label">Numéro :</label>
-                        <input type="text" class="form-control" id="numero" name="numero" required>
+                    <div class="col-md-12">
+                        <label for="address" class="form-label">Rue & Numéro:</label>
+                        <input type="text" class="form-control" id="address" name="address" required>
                     </div>
                 </div>
                 <div class="row mb-3 ">
@@ -79,13 +75,13 @@
                         <input type="text" class="form-control" id="ville" name="ville" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="code-postal" class="form-label">Code postal :</label>
-                        <input type="text" class="form-control" id="code-postal" name="code-postal" required>
+                        <label for="codePostal" class="form-label">Code postal :</label>
+                        <input type="text" class="form-control" id="codePostal" name="codePostal" required>
                     </div>
                     <div class="row mb-3 mt-3">
                         <div class="col-md-6 mb-3">
-                            <label for="pays" class="form-label">Pays :</label>
-                            <select class="form-select" id="pays" name="pays" required>
+                            <label for="country" class="form-label">Pays :</label>
+                            <select class="form-select" id="country" name="country" required>
                                 <option value="" selected disabled>Choisissez votre pays</option>
                                 <?php
                                 // Donne la possibilité d'avoir la liste des pays
@@ -97,7 +93,7 @@
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="tel" class="form-label">Numéro de téléphone :</label>
+                            <label for="phone" class="form-label">Numéro de téléphone :</label>
                             <input type="tel" class="form-control" name="phone" id="phone" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[\s][0-9]{4,}$" required>
                         </div>
                     </div>

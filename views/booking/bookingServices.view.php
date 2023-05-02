@@ -21,45 +21,15 @@
         </div>
     </div>
 </div>
-<?php  var_dump($_SESSION['booking']);?>
+<?php // var_dump($_SESSION['booking']);?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10">
-            <!--            <div> Principal de la page où se retrouve tous les services -->
             <div class="container shadow-lg p-3 mb-5 bg-body rounded">
+                <form action="bookingCustomers" method="post">
                 <h3>Profitez bien de votre séjour</h3>
                 <h4 class="mb-5">Suppléments optionnels</h4>
-                    <?php
-                        foreach ($allServices as $service) :
-                        if ($service['service_id'] === 1) :
-                    ?>
-                        <div class="mb-5 row">
-                            <h6><?= $service['service_name'] ?></h6>
-                            <div class="col-md-3">
-                                <img src="<?= $service['service_picture'] ?>" class="sizeImgServices rounded-5" alt="<?= $service['service_name'] ?>">
-                            </div>
-                            <div class="col-md-3">
-                                <div class="align-middle">
-                                    <label for="nb">Personnes</label>
-                                    <select id="nb" name="nb" class="form-select ">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mt-5 text-end">
-                                <span class="fw-bold align-middle"> €<?= $service['service_price'] ?></span>
-                            </div>
-                            <div class="col-md-3 mt-5 text-end">
-                                <button class="btn btn-danger rounded align-middle">Ajouter</button>
-                            </div>
-                        </div>
-                        <hr class="mt-3">
-                    <?php else: ?>
+                    <?php foreach ($allServices as $service) :?>
                         <div class="row">
                             <h6 class="mb-3"><?= $service['service_name']?></h6>
                             <div class="col-md-6">
@@ -69,21 +39,18 @@
                                 <span class="fw-bold align-middle"> €<?= $service['service_price'] ?></span>
                             </div>
                             <div class="col-md-3 mt-5 text-end">
-                                <button class="btn btn-danger rounded align-middle ">Ajouter</button>
+                                <input class="form-check-input large-checkbox" type="checkbox" name="services[]" value="<?= $service['service_id'] ?>" id="flexCheckDefault">
                             </div>
                             <hr class="mt-3">
                         </div>
-                    <?php
-                        endif;
-                        endforeach;
-                    ?>
+                    <?php endforeach; ?>
                 <form>
                     <div class="mb-5 row">
                         <h4 class="mb-3">Informations supplémentaires</h4>
                         <div class="col-md-4">
                             <h5 class="mb-3">Heure d'arrivée estimée</h5>
                             <p class="text-muted mb-1">Check-in à</p>
-                            <select id="hoursbegin" name="hoursbegin" class="form-select mb-3">
+                            <select id="arrivalTime" name="arrivalTime" class="form-select mb-3" required>
                                 <option value="" disabled selected>Sélectionnez une heure</option>
                                 <option value="15:00">15:00</option>
                                 <option value="15:30">15:30</option>
@@ -109,15 +76,15 @@
                             </textarea>
                         </div>
                     </div>
-                </form>
                 <div class="mb-5 row">
                     <div class="col-md-6 text-begin">
                         <a href="bookingAvailable" class="btn  btn-dark rounded">Retour</a>
                     </div>
                     <div class="col-md-6 text-end">
-                        <a href="bookingCustomers" class="btn btn-danger rounded fw-bold">Continuer la réservation</a>
+                        <button class="btn btn-danger rounded fw-bold" type="submit">Continuer la réservation</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <div class="col-md-2" >
@@ -137,6 +104,7 @@
                     <p class="fw-bolder fst-italic">Prix pour <?= $_SESSION['booking']['nights']?> nuits :</p>
                     <p class="bold"><?= $_SESSION['booking']['price'] ?> €</p>
                 </div>
+                <hr class="solid">
                 <div class="text-center sm">
                     <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#condition">
                         Conditions de réservation

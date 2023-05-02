@@ -43,7 +43,11 @@ class BackController{
                     $_SESSION['name'] = $account["acc_name"];
                     $_SESSION['email'] = $account["acc_email"];
                     $_SESSION['address'] = $account["acc_address"];
+                    $_SESSION['addressBox'] = $account["acc_addressbox"];
                     $_SESSION['city'] = $account["acc_city"];
+                    $_SESSION['city'] = $account["acc_city"];
+                    $_SESSION['codePostal'] = $account["acc_codepostal"];
+                    $_SESSION['phone'] = $account['acc_phone'];
                     $_SESSION['country'] = $account["acc_id_country"];
                     $_SESSION['admin'] = $account["acc_admin"];
                     //  Message de succès de connection

@@ -6,7 +6,7 @@ class BookingManager extends Model
     public function getAllBedroomsByAvailable($dateBegin,$dateEnd)
     {
         $stmt = $this->getBdd()->prepare('
-        SELECT * FROM bedroom WHERE bedroom_id NOT IN ( SELECT id_bedroom FROM bookings WHERE date_begin <= :dateBegin AND date_end >= :dateEnd )');
+        SELECT * FROM bedroom WHERE bedroom_id NOT IN ( SELECT id_bedroom FROM bookings WHERE booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd )');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
         $stmt->execute();
@@ -17,7 +17,7 @@ class BookingManager extends Model
     public function getAllBedroomsByNotAvailable($dateBegin,$dateEnd)
     {
         $stmt = $this->getBdd()->prepare('
-        SELECT * FROM bedroom WHERE bedroom_id IN ( SELECT id_bedroom FROM bookings WHERE date_begin <= :dateBegin AND date_end >= :dateEnd )');
+        SELECT * FROM bedroom WHERE bedroom_id IN ( SELECT id_bedroom FROM bookings WHERE booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd )');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
         $stmt->execute();
@@ -43,9 +43,9 @@ class BookingManager extends Model
             SELECT id_bedroom
             FROM bookings
             WHERE (
-                (date_begin <= :dateEnd AND date_end >= :dateEnd)
-                OR (date_begin <= :dateBegin AND date_end >= :dateBegin)
-                OR (date_begin >= :dateBegin AND date_end <= :dateEnd)
+                (booking_date_begin <= :dateEnd AND booking_date_end >= :dateEnd)
+                OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateBegin)
+                OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
             ))');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
