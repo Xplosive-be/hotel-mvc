@@ -38,6 +38,15 @@ class FrontManager extends Model
         $stmt->closeCursor();
         return $countrys;
     }
+    public function getCountryById($id)
+    {
+        $stmt = $this->getBdd()->prepare('SELECT country_fr FROM country  WHERE country_id = :idCountry');
+        $stmt->bindParam(':idCountry', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        $country = $stmt->fetchColumn();
+        $stmt->closeCursor();
+        return $country;
+    }
     public function getCategoryBedList(){
         $stmt = $this->getBdd()->prepare('SELECT * FROM category_bedroom');
         $stmt->execute();

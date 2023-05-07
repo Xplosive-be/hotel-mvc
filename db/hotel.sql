@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : sam. 22 avr. 2023 à 23:50
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Hôte : 127.0.0.1
+-- Généré le : dim. 07 mai 2023 à 19:43
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,26 +31,27 @@ CREATE TABLE `account` (
   `acc_id` int(11) NOT NULL,
   `acc_name` varchar(30) NOT NULL,
   `acc_surname` varchar(30) NOT NULL,
-  `acc_address` varchar(30) NOT NULL,
+  `acc_address` varchar(120) NOT NULL,
   `acc_addressbox` int(11) NOT NULL,
   `acc_city` varchar(20) NOT NULL,
   `acc_codepostal` mediumint(9) NOT NULL,
   `acc_id_country` int(11) NOT NULL,
   `acc_phone` varchar(20) NOT NULL,
-  `acc_email` varchar(30) NOT NULL,
+  `acc_email` varchar(255) NOT NULL,
   `acc_password` varchar(128) NOT NULL,
   `acc_code_activation` varchar(32) NOT NULL,
   `acc_admin` tinyint(1) NOT NULL,
   `acc_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `account`
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_addressbox`, `acc_city`, `acc_codepostal`, `acc_id_country`, `acc_phone`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`) VALUES
-(4, 'Smeyers', 'Samir', 'Rue du bourdon 75', 3, 'Bruxelles', 1180, 25, '+324695236', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'd0dc2a7b70bccd7302529ca9b7c46d0a', 1, 1),
-(5, 'Dorival', 'Sam', 'Rue du bourdon 74', 3, 'Bruxelles', 1180, 25, '+32 496359742', 'test@gmail.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '2efc278e7eca57527811ba5e3cbc8829', 1, 1);
+(6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 0, 1),
+(7, 'Cida', 'Liliana', '16 Rue Xavier de bue', 0, 'Uccle', 1180, 25, '+32492518260', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '017d262b2f95cdd20ad7bad419e4e25a', 0, 0),
+(8, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 1180, 25, '+32496359742', '2@2.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '55f3589fd3b542ecc69bbd08c06d55f4', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -65,17 +66,17 @@ CREATE TABLE `bedroom` (
   `bedroom_bed` enum('double','twin','single') NOT NULL,
   `bedroom_priceday` int(11) NOT NULL,
   `id_roomcategory` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `bedroom`
 --
 
 INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_priceday`, `id_roomcategory`) VALUES
-(1, 'Chambre Standard', 'Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> Café et thé équipements. </br> Superficie 20 m² </br> Dans votre salle de bains privative : </br> <ul> <li>Articles de toilette gratuits </li> <li>Peignoir</li> <li>Toilettes</li> <li>Baignoire ou douche</li> <li>Serviettes</li> <li>Chaussons</li> <li>Sèche-cheveux</li> <li>Papier toilette</li> <strong>Vue :</strong> <li>Vue sur la ville</li> <li>Vue sur une cour intérieure</li> </ul>', 'double', 120, 3),
-(2, 'Chambre Supérieure', 'Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\n\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\nSuperficie 30 m² </br>\nDans votre salle de bains privative :</br>\n\n<ul> \n    <li>Articles de toilette gratuits </li> \n    <li>Peignoir</li> <li>Toilettes</li> \n    <li>Baignoire ou douche</li> <li>Serviettes</li> \n    <li>Chaussons</li> \n    <li>Sèche-cheveux</li> \n    <li>Papier toilette</li>\n    <strong>Vue :</strong> \n    <li>Vue sur la ville</li> \n    <li>Vue sur une cour intérieure</li> \n </ul>', 'twin', 240, 2),
-(3, 'Suite Deluxe', 'Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'double', 1000, 3),
-(4, 'Suite Présidentielle', 'Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'twin', 3000, 4);
+(1, 'Chambre Standard', '                                                                                                                                                                        Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> Café et thé équipements. </br> Superficie 20 m² </br> Dans votre salle de bains privative : </br> <ul> <li>Articles de toilette gratuits </li> <li>Peignoir</li> <li>Toilettes</li> <li>Baignoire ou douche</li> <li>Serviettes</li> <li>Chaussons</li> <li>Sèche-cheveux</li> <li>Papier toilette</li> <strong>Vue :</strong> <li>Vue sur la ville</li> <li>Vue sur une cour intérieure</li> </ul>                                                                                                                                                                        ', 'double', 120, 1),
+(2, 'Chambre Sup&eacute;rieure', '                                                                                    Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>                                                                                    ', 'double', 240, 2),
+(3, 'Suite Deluxe', '                            Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                            ', 'double', 1000, 3),
+(4, 'Suite Paradis', '                                                        Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                                                        ', 'double', 3000, 4);
 
 -- --------------------------------------------------------
 
@@ -87,19 +88,23 @@ CREATE TABLE `bookings` (
   `booking_id` int(11) NOT NULL,
   `id_bedroom` int(11) NOT NULL,
   `id_acc` int(11) NOT NULL,
-  `date_begin` date NOT NULL,
-  `date_end` date NOT NULL,
-  `price_total` float NOT NULL,
-  `comments` text NOT NULL,
-  `cancelation` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Déchargement des données de la table `bookings`
---
-
-INSERT INTO `bookings` (`booking_id`, `id_bedroom`, `id_acc`, `date_begin`, `date_end`, `price_total`, `comments`, `cancelation`) VALUES
-(1, 1, 4, '2023-03-23', '2024-05-27', 450, '', 0);
+  `cus_gender` varchar(2) NOT NULL,
+  `booking_date_begin` date NOT NULL,
+  `booking_arrival_time` time NOT NULL,
+  `booking_date_end` date NOT NULL,
+  `booking_price_total` float NOT NULL,
+  `booking_comments` text NOT NULL,
+  `cus_name` varchar(30) NOT NULL,
+  `cus_surname` varchar(30) NOT NULL,
+  `cus_address` varchar(120) NOT NULL,
+  `cus_addressbox` int(11) NOT NULL,
+  `cus_city` varchar(20) NOT NULL,
+  `cus_codepostal` mediumint(9) NOT NULL,
+  `cus_id_country` int(11) NOT NULL,
+  `cus_phone` varchar(20) NOT NULL,
+  `cus_email` varchar(255) NOT NULL,
+  `booking_cancelation` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -110,7 +115,7 @@ INSERT INTO `bookings` (`booking_id`, `id_bedroom`, `id_acc`, `date_begin`, `dat
 CREATE TABLE `category_bedroom` (
   `roomcategory_id` int(11) NOT NULL,
   `roomcategory_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `category_bedroom`
@@ -131,7 +136,7 @@ INSERT INTO `category_bedroom` (`roomcategory_id`, `roomcategory_name`) VALUES
 CREATE TABLE `category_spa` (
   `spacategory_id` int(11) NOT NULL,
   `spacategory_name` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `category_spa`
@@ -152,9 +157,9 @@ INSERT INTO `category_spa` (`spacategory_id`, `spacategory_name`) VALUES
 
 CREATE TABLE `country` (
   `country_id` int(11) NOT NULL,
-  `country_code` varchar(2) DEFAULT NULL,
-  `country_fr` varchar(100) DEFAULT NULL,
-  `country_en` varchar(100) NOT NULL
+  `country_code` varchar(2) COLLATE utf8_bin DEFAULT NULL,
+  `country_fr` varchar(100) COLLATE utf8_bin DEFAULT NULL,
+  `country_en` varchar(100) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -409,7 +414,7 @@ INSERT INTO `country` (`country_id`, `country_code`, `country_fr`, `country_en`)
 CREATE TABLE `gallery` (
   `id_picture` int(11) NOT NULL,
   `id_bedroom` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `gallery`
@@ -446,7 +451,7 @@ CREATE TABLE `lnk_services_reservation` (
   `id_booking` int(11) NOT NULL,
   `id_service` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -459,7 +464,7 @@ CREATE TABLE `picture` (
   `picture_name` varchar(50) NOT NULL,
   `picture_url` varchar(100) NOT NULL,
   `picture_description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `picture`
@@ -498,16 +503,16 @@ CREATE TABLE `services_bedroom` (
   `service_price` int(11) NOT NULL,
   `service_active` tinyint(1) NOT NULL,
   `service_picture` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `services_bedroom`
 --
 
 INSERT INTO `services_bedroom` (`service_id`, `service_name`, `service_price`, `service_active`, `service_picture`) VALUES
-(1, 'Petit-déjeuner', 15, 1, 'public/assets/images/services/dejeuner.png'),
+(1, 'Petit-déjeuner', 35, 1, 'public/assets/images/services/dejeuner.png'),
 (2, 'Bouteille de champagne en Chambre', 50, 1, 'public/assets/images/services/champagne.png'),
-(3, 'Boite de chocolat Darcis', 15, 1, 'public/assets/images/services/chocolat.png'),
+(3, 'Boite de chocolat Darcis', 18, 1, 'public/assets/images/services/chocolat.png'),
 (4, 'Bouteille de Cava en Chambre', 25, 1, 'public/assets/images/services/champagne.png');
 
 -- --------------------------------------------------------
@@ -523,47 +528,47 @@ CREATE TABLE `spa` (
   `spa_time` int(11) DEFAULT NULL,
   `spa_price` decimal(10,2) DEFAULT NULL,
   `spa_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `spa`
 --
 
 INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_price`, `spa_active`) VALUES
-(1, 1, 'Massage relaxant', 30, 50.00, 1),
-(2, 1, 'Massage relaxant', 60, 85.00, 1),
-(3, 1, 'Massage relaxant', 90, 120.00, 1),
-(4, 1, 'Massage suédois', 60, 95.00, 1),
-(5, 1, 'Massage suédois', 90, 130.00, 1),
-(6, 1, 'Massage profond des tissus', 60, 100.00, 1),
-(7, 1, 'Massage profond des tissus', 90, 140.00, 1),
-(8, 1, 'Massage aux pierres chaudes', 60, 110.00, 1),
-(9, 1, 'Massage aux pierres chaudes', 90, 150.00, 1),
-(10, 1, 'Massage thaï', 60, 110.00, 1),
-(11, 1, 'Massage thaï', 90, 150.00, 1),
-(12, 1, 'Massage pour enfants', 30, 45.00, 1),
-(13, 2, 'Soin du visage hydratant', 60, 85.00, 1),
-(14, 2, 'Soin du visage anti-âge', 60, 95.00, 1),
-(15, 2, 'Soin du visage éclaircissant', 60, 90.00, 1),
-(16, 2, 'Soin du visage purifiant', 60, 85.00, 1),
-(17, 2, 'Soin du visage aux acides de fruits', 60, 95.00, 1),
-(18, 2, 'Soin du visage pour homme', 60, 80.00, 1),
-(19, 3, 'Soin du corps hydratant', 60, 100.00, 1),
-(20, 3, 'Soin du corps exfoliant', 60, 100.00, 1),
-(21, 3, 'Soin du corps minceur', 90, 140.00, 1),
-(22, 3, 'Enveloppement corporel à l\'argile', 60, 110.00, 1),
-(23, 3, 'Enveloppement corporel aux algues', 60, 110.00, 1),
-(24, 3, 'Enveloppement corporel au chocolat', 60, 120.00, 1),
-(25, 3, 'Gommage corporel à la noix de coco', 30, 60.00, 1),
-(26, 4, 'Manucure classique', 45, 50.00, 1),
-(27, 4, 'Manucure française', 60, 60.00, 1),
-(28, 4, 'Pédicure classique', 45, 60.00, 1),
-(29, 4, 'Pédicure française', 60, 70.00, 1),
-(30, 4, 'Pose de vernis simple', 15, 20.00, 1),
-(31, 4, 'Pose de vernis semi-permanent', 45, 50.00, 1),
-(32, 5, 'Réflexologie plantaire', 45, 70.00, 1),
-(33, 5, 'Séance de yoga privée', 60, 90.00, 1),
-(34, 5, 'Séance de méditation guidée', 30, 45.00, 1);
+(1, 1, 'Massage relaxant', 30, '50.00', 1),
+(2, 1, 'Massage relaxant', 60, '85.00', 1),
+(3, 1, 'Massage relaxant', 90, '120.00', 1),
+(4, 1, 'Massage suédois', 60, '95.00', 1),
+(5, 1, 'Massage suédois', 90, '130.00', 1),
+(6, 1, 'Massage profond des tissus', 60, '100.00', 1),
+(7, 1, 'Massage profond des tissus', 90, '140.00', 1),
+(8, 1, 'Massage aux pierres chaudes', 60, '110.00', 1),
+(9, 1, 'Massage aux pierres chaudes', 90, '150.00', 1),
+(10, 1, 'Massage thaï', 60, '110.00', 1),
+(11, 1, 'Massage thaï', 90, '150.00', 1),
+(12, 1, 'Massage pour enfants', 30, '45.00', 1),
+(13, 2, 'Soin du visage hydratant', 60, '85.00', 1),
+(14, 2, 'Soin du visage anti-âge', 60, '95.00', 1),
+(15, 2, 'Soin du visage éclaircissant', 60, '90.00', 1),
+(16, 2, 'Soin du visage purifiant', 60, '85.00', 1),
+(17, 2, 'Soin du visage aux acides de fruits', 60, '95.00', 1),
+(18, 2, 'Soin du visage pour homme', 60, '80.00', 1),
+(19, 3, 'Soin du corps hydratant', 60, '100.00', 1),
+(20, 3, 'Soin du corps exfoliant', 60, '100.00', 1),
+(21, 3, 'Soin du corps minceur', 90, '140.00', 1),
+(22, 3, 'Enveloppement corporel &agrave; l&#039;argile', 60, '110.00', 1),
+(23, 3, 'Enveloppement corporel aux algues', 60, '110.00', 1),
+(24, 3, 'Enveloppement corporel au chocolat', 60, '120.00', 1),
+(25, 3, 'Gommage corporel à la noix de coco', 30, '60.00', 1),
+(26, 4, 'Manucure classique', 45, '50.00', 1),
+(27, 4, 'Manucure française', 60, '60.00', 1),
+(28, 4, 'Pédicure classique', 45, '60.00', 1),
+(29, 4, 'Pédicure française', 60, '70.00', 1),
+(30, 4, 'Pose de vernis simple', 15, '20.00', 1),
+(31, 4, 'Pose de vernis semi-permanent', 45, '50.00', 1),
+(32, 5, 'Réflexologie plantaire', 45, '70.00', 1),
+(33, 5, 'Séance de yoga privée', 60, '90.00', 1),
+(34, 5, 'S&eacute;ance de m&eacute;ditation guid&eacute;e', 30, '45.00', 1);
 
 --
 -- Index pour les tables déchargées
@@ -573,8 +578,7 @@ INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_pri
 -- Index pour la table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`acc_id`),
-  ADD KEY `FK_Pays` (`acc_id_country`);
+  ADD PRIMARY KEY (`acc_id`);
 
 --
 -- Index pour la table `bedroom`
@@ -589,7 +593,8 @@ ALTER TABLE `bedroom`
 ALTER TABLE `bookings`
   ADD PRIMARY KEY (`booking_id`),
   ADD KEY `FK_account_bookings` (`id_acc`),
-  ADD KEY `FK_bedroom_bookings` (`id_bedroom`);
+  ADD KEY `FK_bedroom_bookings` (`id_bedroom`),
+  ADD KEY `cus_id_country` (`cus_id_country`);
 
 --
 -- Index pour la table `category_bedroom`
@@ -650,7 +655,7 @@ ALTER TABLE `spa`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `bedroom`
@@ -698,7 +703,7 @@ ALTER TABLE `services_bedroom`
 -- AUTO_INCREMENT pour la table `spa`
 --
 ALTER TABLE `spa`
-  MODIFY `spa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `spa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Contraintes pour les tables déchargées
@@ -708,7 +713,7 @@ ALTER TABLE `spa`
 -- Contraintes pour la table `account`
 --
 ALTER TABLE `account`
-  ADD CONSTRAINT `FK_Pays` FOREIGN KEY (`acc_id_country`) REFERENCES `country` (`country_id`);
+  ADD CONSTRAINT `FK_account_acc_country` FOREIGN KEY (`acc_id_country`) REFERENCES `country` (`country_id`);
 
 --
 -- Contraintes pour la table `bedroom`
@@ -721,7 +726,8 @@ ALTER TABLE `bedroom`
 --
 ALTER TABLE `bookings`
   ADD CONSTRAINT `FK_account_bookings` FOREIGN KEY (`id_acc`) REFERENCES `account` (`acc_id`),
-  ADD CONSTRAINT `FK_bedroom_bookings` FOREIGN KEY (`id_bedroom`) REFERENCES `bedroom` (`bedroom_id`);
+  ADD CONSTRAINT `FK_bedroom_bookings` FOREIGN KEY (`id_bedroom`) REFERENCES `bedroom` (`bedroom_id`),
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`cus_id_country`) REFERENCES `country` (`country_id`);
 
 --
 -- Contraintes pour la table `gallery`

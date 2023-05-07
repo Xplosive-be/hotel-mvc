@@ -151,7 +151,7 @@ class BackController{
             $country = Securite::secureHTML($_POST['country']);
             $city = Securite::secureHTML($_POST['city']);
             $box = Securite::secureHTML($_POST['box']);
-            $codePostal = Securite::secureHTML($_POST['$codePostal']);
+            $codePostal = Securite::secureHTML($_POST['codePostal']);
             $phone = Securite::secureHTML($_POST['phone']);
 
             // Vérification si les mots de passes ne sont pas les mêmes.
@@ -174,13 +174,11 @@ class BackController{
                     "type" => 'alert-success'
                 ];
                 header('refresh:0.5;url=accueil');
-                exit();
             } else {
                 $_SESSION['alert'] = [
                     "message" => "Votre adresse mail est déjà pris!",
                     "type" => 'alert-danger'
                 ];
-                exit();
             }
         }
         $countrys = $this->frontManager->getCountryList();

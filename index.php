@@ -111,6 +111,9 @@ try {
         case "bookingResume":
             $bookingController->bookingResume();
             break;
+        case "bookingValidate":
+            $bookingController->bookingValidate();
+            break;
         default :
             throw new Exception("La page n'existe pas");
     }

@@ -22,8 +22,8 @@
         </div>
     </div>
 </div>
-<?php  var_dump($_POST);?>
 <div class="container-fluid">
+    <form action="bookingResume" method="post">
     <div class="row">
         <div class="col-md-9">
             <div class="container shadow-lg p-3 mb-5 bg-body rounded">
@@ -31,12 +31,12 @@
                 <hr class="solid">
                 <div class="row mb-3">
                     <div class="col-md-3">
-                        <label for="civilite" class="form-label">Civilité :</label>
-                        <select class="form-select" id="civilite" name="civilite" required>
+                        <label for="gender" class="form-label">Civilité :</label>
+                        <select class="form-select" id="gender" name="gender" required>
                             <option value="" selected disabled>Sélectionnez votre civilité</option>
-                            <option value="Homme">Homme</option>
-                            <option value="Femme">Femme</option>
-                            <option value="Non-binaire">Non-binaire</option>
+                            <option value="H">Homme</option>
+                            <option value="F">Femme</option>
+                            <option value="NB">Non-binaire</option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -67,16 +67,16 @@
                 </div>
                 <div class="row mb-3 ">
                     <div class="col-md-4">
-                        <label for="boite" class="form-label">Boîte :</label>
-                        <input type="text" class="form-control" id="boite" name="boite">
+                        <label for="box" class="form-label">Boîte :</label>
+                        <input type="text" class="form-control" id="box" name="box">
                     </div>
                     <div class="col-md-4">
-                        <label for="ville" class="form-label">Ville :</label>
-                        <input type="text" class="form-control" id="ville" name="ville" required>
+                        <label for="city" class="form-label">Ville :</label>
+                        <input type="text" class="form-control" id="city" name="city" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="codePostal" class="form-label">Code postal :</label>
-                        <input type="text" class="form-control" id="codePostal" name="codePostal" required>
+                        <label for="postalCode" class="form-label">Code postal :</label>
+                        <input type="text" class="form-control" id="postalCode" name="postalCode" required>
                     </div>
                     <div class="row mb-3 mt-3">
                         <div class="col-md-6 mb-3">
@@ -104,10 +104,11 @@
                             <a href="bookingAvailable" class="btn  btn-dark rounded">Retour</a>
                         </div>
                         <div class="col-md-6 text-end">
-                            <a href="#next" class="btn btn-danger rounded fw-bold">Continuer la réservation</a>
+                            <button type="submit" class="btn btn-danger rounded fw-bold" name="btnCustomer">Continuer la réservation</button>
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <div class="col-md-3">
@@ -129,6 +130,13 @@
                 <hr class="solid">
                 <div class="text-center">
                     <p class="fw-bolder fst-italic">Services :</p>
+                    <?php if(empty($_SESSION['booking']['services'])) : ?>
+                        <p>Pas de service demandé</p>
+                    <?php else: ?>
+                        <?php foreach ($_SESSION['booking']['services'] as $service_name => $service) : ?>
+                            <p><?= $service['name'] ?> : <?= $service['price'] ?> €</p>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
                 <div class="text-center">
                     <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal"
@@ -138,3 +146,4 @@
                 </div>
             </div>
         </div>
+<?php require_once("views/booking/common/__modalCondition.php"); ?>

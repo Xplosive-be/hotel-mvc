@@ -27,8 +27,8 @@
         <div class="col-md-10">
             <div class="container shadow-lg p-3 mb-5 bg-body rounded">
                 <form action="bookingCustomers" method="post">
-                <h3>Profitez bien de votre séjour</h3>
-                <h4 class="mb-5">Suppléments optionnels</h4>
+                    <h3>Profitez bien de votre séjour</h3>
+                    <h4 class="mb-5">Suppléments optionnels</h4>
                     <?php foreach ($allServices as $service) :?>
                         <div class="row">
                             <h6 class="mb-3"><?= $service['service_name']?></h6>
@@ -44,7 +44,6 @@
                             <hr class="mt-3">
                         </div>
                     <?php endforeach; ?>
-                <form>
                     <div class="mb-5 row">
                         <h4 class="mb-3">Informations supplémentaires</h4>
                         <div class="col-md-4">
@@ -81,7 +80,7 @@
                         <a href="bookingAvailable" class="btn  btn-dark rounded">Retour</a>
                     </div>
                     <div class="col-md-6 text-end">
-                        <button class="btn btn-danger rounded fw-bold" type="submit">Continuer la réservation</button>
+                        <button class="btn btn-danger rounded fw-bold" type="submit" name="btnServices">Continuer la réservation</button>
                     </div>
                 </div>
                 </form>
@@ -115,31 +114,4 @@
     </div>
 </div>
 
-<div class="modal fade" id="condition" tabindex="-1" aria-labelledby="conditionModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="conditionModalLabel">Conditions de réservation</h5>
-            </div>
-            <div class="modal-body FontsModalReservation">
-                Les montants et pourcentages des conditions ci-dessous, sont à payer par les clients, en cas
-                d’annulation.
-                <br>
-                Conditions générales (réservations individuelles):
-                <br>
-                <ul>
-                    <li><small>De 7 à 0 jours avant date d’arrivée: 100%.</small></li>
-                    <li><small>Sans frais 7 jours avant la date d'arrivée.</small></li>
-                    <li><small>Réservation non-remboursable : perte du montant total.</small></li>
-                </ul>
-                Le bureau de la réception, accessible au <a href="tel:+32496156215">+32 496 15 62 15</a> est ouvert
-                de 8h à 18h.
-                <br>
-                Le check-in s'effectue à partir de 15 h jusque maximum 21h.
-                <br>
-                Si vous souhaitez une arrivée tardive, soit après 22h, il est impératif de contacter la réception
-                afin de prendre un arrangement au <a href="tel:+32496156215">+32 496 15 62 15</a>
-            </div>
-        </div>
-    </div>
-</div>
+<?php require_once("views/booking/common/__modalCondition.php"); ?>

@@ -56,4 +56,23 @@ class BookingManager extends Model
         return $bedroomAvailable;
 
     }
+    public function getServicesByIds($ids) {
+        // Préparez la requête SQL en utilisant des paramètres nommés
+        $inQuery = implode(',', array_fill(0, count($ids), '?'));
+        $sql = "SELECT `service_name`,`service_price`  FROM services_bedroom WHERE service_id IN ($inQuery)";
+        $stmt = $this->getBdd()->prepare($sql);
+
+        // Exécutez la requête en passant le tableau d'ID comme paramètres
+        $stmt->execute($ids);
+
+        return $stmt->fetchAll();
+    }
+
+    public function getServiceById($id){
+        $stmt = $this->getBdd()->prepare('SELECT service_id, service_name, service_price FROM services_bedroom WHERE service_id = :service_id');
+        $stmt->bindParam(':service_id', $id);
+        $stmt->execute();
+        $service = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $service;
+    }
 }

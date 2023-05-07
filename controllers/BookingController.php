@@ -22,6 +22,7 @@ class BookingController
 
     public  function bookingHome() {
         if (Securite::verifConnectSession()){
+            unset($_SESSION['booking']);
             $bedrooms = $this->frontManager->getAllBedrooms();
             $data_page = [
                 "page_description" => "Réservation",
@@ -43,6 +44,7 @@ class BookingController
     }
     public function bookingAvailable(){
         if(Securite::verifConnectSession()){
+            unset($_SESSION['booking']);
             $dateBegin = "";
             $dateEnd = "";
 
@@ -114,16 +116,14 @@ class BookingController
         if (Securite::verifConnectSession()) {
             $bedSelectedAvailable = $this->bookingManager->checkBedroomAvailableById($_SESSION['booking']['dateBegin'], $_SESSION['booking']['dateEnd'], Securite::secureHTML($_GET['idBedroom']));
             if (!empty($bedSelectedAvailable) && !empty($_SESSION['booking']["dateEnd"])) {
+                unset($_SESSION['booking']['services']);
                 $allServices = $this->bookingManager->getAllServicesBedroom();
                 $_SESSION['booking']['bedroom_name'] = $bedSelectedAvailable['bedroom_name'];
                 $_SESSION['booking']['price'] = $bedSelectedAvailable['bedroom_priceday'] * $_SESSION['booking']['nights'];
-                $json = json_encode($allServices);
                 $data_page = [
                     "allServices" => $allServices,
                     "page_description" => "Choix des bonus",
                     "page_title" => "Hôtel Belle-Nuit | Choix des bonus",
-                    "json" => $json,
-                    "page_javascript" => ["services.js"],
                     "view" => "views/booking/bookingServices.view.php",
                     "template" => "views/booking/common/__template_front.php",
                 ];
@@ -135,7 +135,6 @@ class BookingController
                 ];
                 header('Location: bookingAvailable');
             }
-
         } else {
             $_SESSION['alert'] = [
                 "message" => "Merci de bien vouloir vous connecter.",
@@ -146,10 +145,37 @@ class BookingController
         }
     }
     public function bookingCustomers(){
-            if(Securite::verifConnectSession()){
-                $countrys = $this->frontManager->getCountryList();
+            if(Securite::verifConnectSession() && !empty($_SESSION['booking']['price'])){
+                    if(isset($_POST['btnServices'])){
+                        $_SESSION['booking']['arrivalTime'] = Securite::secureHTML($_POST['arrivalTime']);
+                        $_SESSION['booking']['comments'] = $_POST['comments'];
+                    // Vérifier si des services ont été sélectionnés
+                        if (isset($_POST['services'])) {
+                            // Créer un tableau associatif pour stocker les services sélectionnés
+                            $services = array();
+                            $total_price = $_SESSION['booking']['price'];
+                            foreach ($_POST['services'] as $service_id) {
+                                // Récupérer les informations du service à partir de l'id
+                                $service = $this->bookingManager->getServiceById($service_id);
+                                // Ajouter le service au tableau associatif
+                                $services[$service['service_id']] = array(
+                                    'name' => $service['service_name'],
+                                    'price' => $service['service_price']
+                                );
+                                // Ajouter le prix du service au prix total
+                                $total_price += $service['service_price'];
+                            }
+                            // Stocker le tableau associatif dans la variable de session
+                            $_SESSION['booking']['services'] = $services;
+                            // Stocker le prix total dans la variable de session
+                            $_SESSION['booking']['priceTotal'] = $total_price;
+                        } else {
+                            // Si aucun service n'a été sélectionné, le prix total est égal au prix de la chambre
+                            $_SESSION['booking']['prixTotal'] = $_SESSION['booking']['price'];
+                        }
+                    }
                 $data_page = [
-                    "countrys" => $countrys,
+                    "countrys" => $this->frontManager->getCountryList(),
                     "page_description" => "Informations Réservations",
                     "page_title" => "Hôtel Belle-Nuit | Vos informations",
                     "view" => "views/booking/bookingCustomers.view.php",
@@ -158,16 +184,31 @@ class BookingController
                 $this->genererPage($data_page);
             } else {
                 $_SESSION['alert'] = [
-                    "message" => "Désolé, il n'y a pas de chambres disponibles pour la période sélectionnée. Veuillez choisir une autre date ou contacter l'hôtel pour obtenir de l'aide.",
+                    "message" => "Problème durant la sélection des services, Merci de recommencer la réservation",
                     "type" => 'alert-danger'
                 ];
-                header('Location: bookingAvailable');
+                header('Location: bookingServices');
             }
         }
     public function bookingResume(){
-        if(Securite::verifConnectSession()){
+        if(Securite::verifConnectSession() && isset($_POST) && !empty($_SESSION['booking'])){
+            if (isset($_POST['btnCustomer'])) {
+                // Verification et sécurisation des nouvelles données.
+                $_SESSION['booking']['customers']['gender'] = Securite::secureHTML($_POST['gender']);
+                $_SESSION['booking']['customers']['surname'] = Securite::secureHTML($_POST['surname']);
+                $_SESSION['booking']['customers']['name'] = Securite::secureHTML($_POST['name']);
+                $_SESSION['booking']['customers']['email'] = Securite::secureHTML($_POST['email']);
+                $_SESSION['booking']['customers']['address'] = Securite::secureHTML($_POST['address']);
+                $_SESSION['booking']['customers']['box'] = Securite::secureHTML($_POST['box']);
+                $_SESSION['booking']['customers']['country'] = Securite::secureHTML($_POST['country']);
+                $_SESSION['booking']['customers']['city'] = Securite::secureHTML($_POST['city']);
+                $_SESSION['booking']['customers']['postalCode'] = Securite::secureHTML($_POST['postalCode']);
+                $_SESSION['booking']['customers']['phone'] = Securite::secureHTML($_POST['phone']);
+                $_SESSION['booking']['ready'] = 1;
+            }
             $data_page = [
                 "page_description" => "Résumé de votre réservation",
+                "country" => $this->frontManager->getCountryById($_SESSION['booking']['customers']['country']),
                 "page_title" => "Hôtel Belle-Nuit | Résumé de votre réservation",
                 "view" => "views/booking/bookingResume.view.php",
                 "template" => "views/booking/common/__template_front.php",
@@ -175,10 +216,27 @@ class BookingController
             $this->genererPage($data_page);
         } else {
             $_SESSION['alert'] = [
-                "message" => "Désolé, il n'y a pas de chambres disponibles pour la période sélectionnée. Veuillez choisir une autre date ou contacter l'hôtel pour obtenir de l'aide.",
+                "message" => "Merci de recommencer votre réservation",
                 "type" => 'alert-danger'
             ];
-            header('Location: bookingAvailable');
+            header('Location: accueilBooking');
         }
     }
+    public function bookingValidate(){
+        if(Securite::verifConnectSession() && !empty($_SESSION['booking']['ready'] == 1 )){
+            $data_page = [
+                "page_description" => "Confirmation de la réservation",
+                "page_title" => "Hôtel Belle-Nuit | Confirmation ",
+                "view" => "views/booking/bookingValidate.view.php",
+                "template" => "views/booking/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Merci de recommencer votre réservation",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueilBooking');
+        }
+        }
 }
