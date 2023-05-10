@@ -47,8 +47,7 @@
         </div>
         <h4 class="text-center fw-bolder mt-3">Informations du client</h4>
         <div class="mt-3 ms-5">
-
-            <p><strong>Civilité:</strong>  <td><?= ($_SESSION['booking']['customers']['gender'] == 'H') ? 'Monsieur' : (($_SESSION['booking']['customers']['gender'] == 'F') ? 'Madame' : 'Non-binaire') ?></td></p>
+            <p><strong>Civilité:</strong><td><?= ($_SESSION['booking']['customers']['gender'] == 'H') ? 'Monsieur' : (($_SESSION['booking']['customers']['gender'] == 'F') ? 'Madame' : 'Non-binaire') ?></td></p>
             <p><strong>Nom:</strong> <?= $_SESSION['booking']['customers']['name'] ?></p>
             <p><strong>Prénom:</strong> <?= $_SESSION['booking']['customers']['surname'] ?></p>
             <p><strong>Email:</strong> <?= $_SESSION['booking']['customers']['email'] ?></p>
@@ -61,17 +60,17 @@
         </div>
         <h3 class="text-center tfw-bolder">Prix de la réservation</h3>
         <p class="text-center fw-bolder fs-1"><?= $_SESSION['booking']['priceTotal'] ?>€</p>
-        <div class="row mx-auto mb-2">
+        <form class="row mx-auto mb-2" method="post" action="bookingValidate">
             <div class="col-md-6">
                 <div class="text-center">
-                    <a href="accueilBooking" onclick="return confirm('Êtes-vous sûr de vouloir annuler votre réservation')" class="ms-3 btn btn-danger">Annuler la réservation </a>
+                    <button type="submit" name="cancelBooking" onclick="return confirm('Êtes-vous sûr de vouloir annuler votre réservation')" class="ms-3 btn btn-danger">Annuler la réservation</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="text-center">
-                    <a href="bookingValidate" onclick="return confirm('Êtes-vous sûr de vouloir valider votre réservation')" class="ms-3 btn btn-success">Valider la réservation </a>
+                    <button type="submit" name="validateBooking" onclick="return confirm('Êtes-vous sûr de vouloir valider votre réservation')" class="ms-3 btn btn-success">Valider la réservation</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>

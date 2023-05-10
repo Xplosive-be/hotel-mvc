@@ -75,4 +75,53 @@ class BookingManager extends Model
         $service = $stmt->fetch(PDO::FETCH_ASSOC);
         return $service;
     }
+    public function addBooking($booking)
+    {
+        $bdd = $this->getBdd();
+        $bdd->beginTransaction();
+        try {
+            // Insert the booking information
+            $stmt = $bdd->prepare('INSERT INTO bookings (id_bedroom, id_acc, cus_gender, booking_date_begin, booking_arrival_time, booking_date_end, booking_price_total, booking_comments, cus_name, cus_surname, cus_address, cus_addressbox, cus_city, cus_codepostal, cus_id_country, cus_phone, cus_email) VALUES (:id_bedroom, :id_acc, :cus_gender, :booking_date_begin, :booking_arrival_time, :booking_date_end, :booking_price_total, :booking_comments, :cus_name, :cus_surname, :cus_address, :cus_addressbox, :cus_city, :cus_codepostal, :cus_id_country, :cus_phone, :cus_email)');
+            $stmt->execute(array(
+                ':id_bedroom' => $booking['bedroom_id'],
+                ':id_acc' => $_SESSION['idAccount'],
+                ':cus_gender' => $booking['customers']['gender'],
+                ':booking_date_begin' => $booking['dateBegin'],
+                ':booking_arrival_time' => $booking['arrivalTime'],
+                ':booking_date_end' => $booking['dateEnd'],
+                ':booking_price_total' => $booking['priceTotal'],
+                ':booking_comments' => $booking['comments'],
+                ':cus_name' => $booking['customers']['name'],
+                ':cus_surname' => $booking['customers']['surname'],
+                ':cus_address' => $booking['customers']['address'],
+                ':cus_addressbox' => $booking['customers']['box'],
+                ':cus_city' => $booking['customers']['city'],
+                ':cus_codepostal' => $booking['customers']['postalCode'],
+                ':cus_id_country' => $booking['customers']['country'],
+                ':cus_phone' => $booking['customers']['phone'],
+                ':cus_email' => $booking['customers']['email'],
+            ));
+            $booking_id = $bdd->lastInsertId();
+
+            // Insert the linked services
+            if (!empty($booking['services'])) {
+                foreach ($booking['services'] as $service) {
+                    $stmt = $bdd->prepare('INSERT INTO lnk_services_reservation (id_booking, id_service, quantity) VALUES (:id_booking, :id_service, :quantity)');
+                    $stmt->execute(array(
+                        ':id_booking' => $booking_id,
+                        ':id_service' => $service['id'],
+                        ':quantity' => $service['quantity'],
+                    ));
+                }
+            }
+
+            $bdd->commit();
+
+            return true;
+        } catch (Exception $e) {
+            $bdd->rollback();
+            throw $e;
+        }
+    }
+
 }

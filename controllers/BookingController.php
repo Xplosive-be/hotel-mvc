@@ -119,6 +119,7 @@ class BookingController
                 unset($_SESSION['booking']['services']);
                 $allServices = $this->bookingManager->getAllServicesBedroom();
                 $_SESSION['booking']['bedroom_name'] = $bedSelectedAvailable['bedroom_name'];
+                $_SESSION['booking']['bedroom_id'] = $bedSelectedAvailable['bedroom_id'];
                 $_SESSION['booking']['price'] = $bedSelectedAvailable['bedroom_priceday'] * $_SESSION['booking']['nights'];
                 $data_page = [
                     "allServices" => $allServices,
@@ -224,6 +225,12 @@ class BookingController
     }
     public function bookingValidate(){
         if(Securite::verifConnectSession() && !empty($_SESSION['booking']['ready'] == 1 )){
+            if(isset($_POST['validateBooking'])){
+                $this->bookingManager->addBooking($_SESSION['booking']);
+            }
+            if(isset($_POST['cancelBooking'])){
+                header('Location: accueilBooking');
+            }
             $data_page = [
                 "page_description" => "Confirmation de la réservation",
                 "page_title" => "Hôtel Belle-Nuit | Confirmation ",
@@ -238,5 +245,5 @@ class BookingController
             ];
             header('Location: accueilBooking');
         }
-        }
+    }
 }
