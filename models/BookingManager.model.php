@@ -75,7 +75,7 @@ class BookingManager extends Model
         $service = $stmt->fetch(PDO::FETCH_ASSOC);
         return $service;
     }
-    public function addBooking($booking)
+    public function addBooking()
     {
         $bdd = $this->getBdd();
         $bdd->beginTransaction();
@@ -83,23 +83,23 @@ class BookingManager extends Model
             // Insert the booking information
             $stmt = $bdd->prepare('INSERT INTO bookings (id_bedroom, id_acc, cus_gender, booking_date_begin, booking_arrival_time, booking_date_end, booking_price_total, booking_comments, cus_name, cus_surname, cus_address, cus_addressbox, cus_city, cus_codepostal, cus_id_country, cus_phone, cus_email) VALUES (:id_bedroom, :id_acc, :cus_gender, :booking_date_begin, :booking_arrival_time, :booking_date_end, :booking_price_total, :booking_comments, :cus_name, :cus_surname, :cus_address, :cus_addressbox, :cus_city, :cus_codepostal, :cus_id_country, :cus_phone, :cus_email)');
             $stmt->execute(array(
-                ':id_bedroom' => $booking['bedroom_id'],
+                ':id_bedroom' => $_SESSION['booking']['bedroom_id'],
                 ':id_acc' => $_SESSION['idAccount'],
-                ':cus_gender' => $booking['customers']['gender'],
-                ':booking_date_begin' => $booking['dateBegin'],
-                ':booking_arrival_time' => $booking['arrivalTime'],
-                ':booking_date_end' => $booking['dateEnd'],
-                ':booking_price_total' => $booking['priceTotal'],
-                ':booking_comments' => $booking['comments'],
-                ':cus_name' => $booking['customers']['name'],
-                ':cus_surname' => $booking['customers']['surname'],
-                ':cus_address' => $booking['customers']['address'],
-                ':cus_addressbox' => $booking['customers']['box'],
-                ':cus_city' => $booking['customers']['city'],
-                ':cus_codepostal' => $booking['customers']['postalCode'],
-                ':cus_id_country' => $booking['customers']['country'],
-                ':cus_phone' => $booking['customers']['phone'],
-                ':cus_email' => $booking['customers']['email'],
+                ':cus_gender' => $_SESSION['booking']['customers']['gender'],
+                ':booking_date_begin' => $_SESSION['booking']['dateBegin'],
+                ':booking_arrival_time' => $_SESSION['booking']['arrivalTime'],
+                ':booking_date_end' => $_SESSION['booking']['dateEnd'],
+                ':booking_price_total' => $_SESSION['booking']['priceTotal'],
+                ':booking_comments' => $_SESSION['booking']['comments'],
+                ':cus_name' => $_SESSION['booking']['customers']['name'],
+                ':cus_surname' => $_SESSION['booking']['customers']['surname'],
+                ':cus_address' => $_SESSION['booking']['customers']['address'],
+                ':cus_addressbox' => !empty($_SESSION['booking']['customers']['box']) ? $_SESSION['booking']['customers']['box'] : null,
+                ':cus_city' => $_SESSION['booking']['customers']['city'],
+                ':cus_codepostal' => $_SESSION['booking']['customers']['postalCode'],
+                ':cus_id_country' => $_SESSION['booking']['customers']['country'],
+                ':cus_phone' => $_SESSION['booking']['customers']['phone'],
+                ':cus_email' => $_SESSION['booking']['customers']['email'],
             ));
             $booking_id = $bdd->lastInsertId();
 
@@ -117,11 +117,19 @@ class BookingManager extends Model
 
             $bdd->commit();
 
-            return true;
+            return $booking_id;
         } catch (Exception $e) {
             $bdd->rollback();
             throw $e;
         }
+    }
+
+    public function lastIdReservation($id) {
+        $stmt = $this->getBdd()->prepare('SELECT booking_id FROM `bookings`  WHERE `id_acc` = :id_acc ORDER BY `bookings`.`booking_id` ASC');
+        $stmt->bindParam(':id_acc', $id);
+        $stmt->execute();
+        $lastId = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $lastId['booking_id'];
     }
 
 }
