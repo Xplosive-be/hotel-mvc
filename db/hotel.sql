@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 07 mai 2023 à 19:43
+-- Généré le : mer. 10 mai 2023 à 15:08
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -49,7 +49,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_addressbox`, `acc_city`, `acc_codepostal`, `acc_id_country`, `acc_phone`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`) VALUES
-(6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 0, 1),
+(6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1),
 (7, 'Cida', 'Liliana', '16 Rue Xavier de bue', 0, 'Uccle', 1180, 25, '+32492518260', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '017d262b2f95cdd20ad7bad419e4e25a', 0, 0),
 (8, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 1180, 25, '+32496359742', '2@2.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '55f3589fd3b542ecc69bbd08c06d55f4', 0, 0);
 
