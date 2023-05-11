@@ -82,12 +82,13 @@ class BookingController
             $bedroomsAvailable = $this->bookingManager->getAllBedroomsByAvailable($dateBegin,$dateEnd);
             $bedroomsNotAvailable = $this->bookingManager->getAllBedroomsByNotAvailable($dateBegin,$dateEnd);
 
-            // Convertir les dates de réservation en formats lisibles par l'utilisateur
-            $dateBeginStamp = strtotime($dateBegin);
-            setlocale(LC_TIME, 'fr_FR.utf8');
-            $_SESSION['booking']['dateBeginTxt'] = strftime('%A, %e %B %Y', $dateBeginStamp);
-            $dateEndStamp= strtotime($dateEnd);
-            $_SESSION['booking']['dateEndTxt'] = strftime('%A, %e %B %Y', $dateEndStamp);
+// Convertir les dates de réservation en formats lisibles par l'utilisateur
+
+            $dateBeginObj = new DateTime($dateBegin);
+            $_SESSION['booking']['dateBeginTxt'] = $dateBeginObj->format('l, j F Y');
+            $dateEndObj = new DateTime($dateEnd);
+            $_SESSION['booking']['dateEndTxt'] = $dateEndObj->format('l, j F Y');
+
 
             $data_page = [
                 "page_description" => "Réservation",
@@ -226,12 +227,17 @@ class BookingController
     public function bookingValidate(){
         if(Securite::verifConnectSession() && !empty($_SESSION['booking']['ready'] == 1 )){
             if(isset($_POST['validateBooking'])){
-                $this->bookingManager->addBooking($_SESSION['booking']);
+                $this->bookingManager->addBooking();
             }
             if(isset($_POST['cancelBooking'])){
+                $_SESSION['alert'] = [
+                    "message" => 'En espèrant, vous revoir bientôt',
+                    "type" => 'alert-danger'
+                ];
                 header('Location: accueilBooking');
             }
             $data_page = [
+                "booking_id" => $this->bookingManager->lastIdReservation($_SESSION['idAccount']),
                 "page_description" => "Confirmation de la réservation",
                 "page_title" => "Hôtel Belle-Nuit | Confirmation ",
                 "view" => "views/booking/bookingValidate.view.php",

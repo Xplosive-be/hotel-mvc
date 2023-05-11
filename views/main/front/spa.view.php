@@ -24,57 +24,15 @@
     </div>
 </div>
 
-<div class="row mb-5 bg-grey">
-    <div class="col-md-6">
-        <h3 class="text-danger fw-bolder mb-3 mt-2"><?= $categorySpa[0]["spacategory_name"] ?></h3>
-        <?php foreach ($massages as $massage) { ?>
-            <p class="lh-1">
-                <?= $massage['spa_title'] ?> (<?= $massage['spa_time'] ?> minutes)<span class="float-end"><?= $massage['spa_price'] ?>€</span>
-            </p>
-        <?php } ?>
-    </div>
-    <div class="col-md-6 d-flex align-items-center">
-        <img src="<?= URL ?>public/assets/images/spa/spa5.jpg" alt="soin du visage" class="img-fluid rounded-5">
-    </div>
+<div class="row mb-5">
+    <?php foreach ($categorySpa as $category) { ?>
+        <div class="col-md-6">
+            <h3 class="text-danger fw-bolder mb-3 mt-2"><?= $category["spacategory_name"] ?></h3>
+            <?php foreach ($category["services"] as $service) { ?>
+                <p class="lh-1">
+                    <?= $service['spa_title'] ?> (<?= $service['spa_time'] ?> minutes)<span class="float-end"><?= $service['spa_price'] ?>€</span>
+                </p>
+            <?php } ?>
+        </div>
+    <?php } ?>
 </div>
-
-
-<div class="row">
-    <div class="col-md-6">
-        <h3 class="text-danger fw-bolder mb-3"><?= $categorySpa[1]["spacategory_name"] ?></h3>
-        <?php foreach ($facecares as $facecare) { ?>
-            <p class="lh-1">
-                <?php echo $facecare['spa_title']; ?>
-                (<?php echo $facecare['spa_time'] . ' minutes'; ?>)
-                <span class="float-end"><?php echo $facecare['spa_price'] . '€'; ?></span>
-            </p>
-        <?php } ?>
-        <h3 class="text-danger fw-bolder mb-3"><?= $categorySpa[2]["spacategory_name"] ?></h3>
-        <?php foreach ($bodycares as $bodycare) { ?>
-            <p class="lh-1">
-                <?php echo $bodycare['spa_title']; ?>
-                (<?php echo $bodycare['spa_time'] . ' minutes'; ?>)
-                <span class="float-end"><?php echo $bodycare['spa_price'] . '€'; ?></span>
-            </p>
-        <?php } ?>
-    </div>
-    <div class="col-md-6">
-        <h3 class="text-danger fw-bolder mb-3"><?= $categorySpa[3]["spacategory_name"] ?></h3>
-        <?php foreach ($handfootcares as $handfootcare) { ?>
-            <p class="lh-1">
-                <?php echo $handfootcare['spa_title']; ?>
-                (<?php echo $handfootcare['spa_time'] . ' minutes'; ?>)
-                <span class="float-end"><?php echo $handfootcare['spa_price'] . '€'; ?></span>
-            </p>
-        <?php } ?>
-        <h3 class="text-danger fw-bolder mb-3"><?= $categorySpa[4]["spacategory_name"] ?></h3>
-        <?php foreach ($othercares as $othercare) { ?>
-            <p class="lh-1">
-                <?php echo $othercare['spa_title']; ?>
-                (<?php echo $othercare['spa_time'] . ' minutes'; ?>)
-                <span class="float-end"><?php echo $othercare['spa_price'] . '€'; ?></span>
-            </p>
-        <?php } ?>
-    </div>
-</div>
-

@@ -2,11 +2,10 @@
     <div class="shadow-lg p-3 mb-5 bg-body rounded mx-auto">
         <h2 class="text-center text-danger fw-bolder">Confirmation de réservation</h2>
         <div class="mt-3">
-            <?= var_dump($_SESSION) ?>
             <p>Nous vous remercions d'avoir choisi notre établissement pour votre prochain séjour. Votre réservation a été enregistrée avec succès et nous vous attendons avec impatience.</p>
             <p>Voici les informations de votre réservation :</p>
             <ul>
-                <li><strong>Numéro de réservation :</strong> 514981</li>
+                <li><strong>Numéro de réservation :</strong> <?= $booking_id ?></li>
                 <li><strong>Date d'arrivée :</strong> <?= $_SESSION['booking']['dateBeginTxt'] ?></li>
                 <li><strong>Date de départ :</strong> <?= $_SESSION['booking']['dateEndTxt'] ?></li>
                 <li><strong>Durée du séjour :</strong> <?= $_SESSION['booking']['nights'] ?> nuit(s)</li>
@@ -28,6 +27,7 @@
         </div>
     </div>
 </div>
+<?php unset($_SESSION['booking']); ?>
 
 
 

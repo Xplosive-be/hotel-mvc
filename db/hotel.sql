@@ -1,11 +1,11 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
+ -- phpMyAdmin SQL Dump
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mer. 10 mai 2023 à 15:08
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 8.1.6
+-- Hôte : localhost
+-- Généré le : jeu. 11 mai 2023 à 13:12
+-- Version du serveur : 10.4.28-MariaDB
+-- Version de PHP : 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `account` (
   `acc_code_activation` varchar(32) NOT NULL,
   `acc_admin` tinyint(1) NOT NULL,
   `acc_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `account`
@@ -66,7 +66,7 @@ CREATE TABLE `bedroom` (
   `bedroom_bed` enum('double','twin','single') NOT NULL,
   `bedroom_priceday` int(11) NOT NULL,
   `id_roomcategory` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `bedroom`
@@ -97,14 +97,24 @@ CREATE TABLE `bookings` (
   `cus_name` varchar(30) NOT NULL,
   `cus_surname` varchar(30) NOT NULL,
   `cus_address` varchar(120) NOT NULL,
-  `cus_addressbox` int(11) NOT NULL,
+  `cus_addressbox` int(11) DEFAULT NULL,
   `cus_city` varchar(20) NOT NULL,
   `cus_codepostal` mediumint(9) NOT NULL,
   `cus_id_country` int(11) NOT NULL,
   `cus_phone` varchar(20) NOT NULL,
   `cus_email` varchar(255) NOT NULL,
   `booking_cancelation` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Déchargement des données de la table `bookings`
+--
+
+INSERT INTO `bookings` (`booking_id`, `id_bedroom`, `id_acc`, `cus_gender`, `booking_date_begin`, `booking_arrival_time`, `booking_date_end`, `booking_price_total`, `booking_comments`, `cus_name`, `cus_surname`, `cus_address`, `cus_addressbox`, `cus_city`, `cus_codepostal`, `cus_id_country`, `cus_phone`, `cus_email`, `booking_cancelation`) VALUES
+(10, 2, 6, 'H', '2023-05-10', '17:30:00', '2023-05-11', 275, '                            ', 'Smeyers', 'Samir', 'Rue du bourdon 74', NULL, 'Bruxelles', 1180, 25, '+32 49635972', 'smeyers.samir@gmail.com', 0),
+(11, 2, 6, 'H', '2023-05-10', '17:30:00', '2023-05-11', 275, '                            ', 'Smeyers', 'Samir', 'Rue du bourdon 74', NULL, 'Bruxelles', 1180, 25, '+32 49635972', 'smeyers.samir@gmail.com', 0),
+(12, 1, 6, 'H', '2023-05-10', '18:30:00', '2023-05-14', 515, '                            ', 'Smeyers', 'Samir', 'Rue du bourdon 74', NULL, 'Bruxelles', 1180, 25, '+32 496359742', 'smeyers.samir@gmail.com', 0),
+(13, 4, 6, 'H', '2023-05-10', '15:30:00', '2023-05-11', 3035, '                            ', 'Smeyers', 'Samir', 'Rue du bourdon 74', NULL, 'Bruxelles', 1180, 25, '+32 496359742', 'smeyers.samir@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -115,7 +125,7 @@ CREATE TABLE `bookings` (
 CREATE TABLE `category_bedroom` (
   `roomcategory_id` int(11) NOT NULL,
   `roomcategory_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `category_bedroom`
@@ -130,13 +140,37 @@ INSERT INTO `category_bedroom` (`roomcategory_id`, `roomcategory_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `category_restaurant`
+--
+
+CREATE TABLE `category_restaurant` (
+  `restocategory_id` int(11) NOT NULL,
+  `restocategory_name` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `category_restaurant`
+--
+
+INSERT INTO `category_restaurant` (`restocategory_id`, `restocategory_name`) VALUES
+(1, 'Entrées'),
+(2, 'Plats (Viandes)'),
+(3, 'Plats (Poissons)'),
+(4, 'Desserts'),
+(5, 'Boissons Alcoolisés'),
+(6, 'Boissons Chaudes'),
+(7, 'Boissons Froides');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `category_spa`
 --
 
 CREATE TABLE `category_spa` (
   `spacategory_id` int(11) NOT NULL,
   `spacategory_name` varchar(250) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `category_spa`
@@ -157,9 +191,9 @@ INSERT INTO `category_spa` (`spacategory_id`, `spacategory_name`) VALUES
 
 CREATE TABLE `country` (
   `country_id` int(11) NOT NULL,
-  `country_code` varchar(2) COLLATE utf8_bin DEFAULT NULL,
-  `country_fr` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `country_en` varchar(100) COLLATE utf8_bin NOT NULL
+  `country_code` varchar(2) DEFAULT NULL,
+  `country_fr` varchar(100) DEFAULT NULL,
+  `country_en` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -414,7 +448,7 @@ INSERT INTO `country` (`country_id`, `country_code`, `country_fr`, `country_en`)
 CREATE TABLE `gallery` (
   `id_picture` int(11) NOT NULL,
   `id_bedroom` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `gallery`
@@ -451,7 +485,7 @@ CREATE TABLE `lnk_services_reservation` (
   `id_booking` int(11) NOT NULL,
   `id_service` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -464,7 +498,7 @@ CREATE TABLE `picture` (
   `picture_name` varchar(50) NOT NULL,
   `picture_url` varchar(100) NOT NULL,
   `picture_description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `picture`
@@ -494,6 +528,50 @@ INSERT INTO `picture` (`picture_id`, `picture_name`, `picture_url`, `picture_des
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `restaurant`
+--
+
+CREATE TABLE `restaurant` (
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `id_restocategory` int(11) NOT NULL,
+  `product_price` float NOT NULL,
+  `product_active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `restaurant`
+--
+
+INSERT INTO `restaurant` (`product_id`, `product_name`, `id_restocategory`, `product_price`, `product_active`) VALUES
+(49, 'Salade d\'endives aux noix', 1, 9.5, 1),
+(50, 'Croquettes aux crevettes grises', 1, 12, 1),
+(51, 'Terrine de campagne maison', 1, 9, 1),
+(52, 'Tomates aux crevettes', 1, 10.5, 1),
+(53, 'Moules marinières', 1, 11.5, 1),
+(54, 'Carbonade flamande accompagnée de frites maison', 2, 16.5, 1),
+(55, 'Waterzooi de poulet aux légumes de saison', 2, 15, 1),
+(56, 'Boulettes à la liégeoise avec stoemp aux carottes', 2, 14, 1),
+(57, 'Filet de saumon bio grillé avec purée de céleri-rav', 3, 18, 1),
+(58, 'Truite meunière aux amandes et pommes de terre vapeu', 3, 17.5, 1),
+(59, 'Dame Blanche', 4, 9, 1),
+(60, 'Gaufre de Liège avec chantilly et fruits frais ', 4, 9, 1),
+(61, 'Crème brûlée à la vanille bourbon', 4, 9, 1),
+(62, 'Mousse au chocolat belge', 4, 7, 1),
+(63, 'Bières belges sélectionnées', 5, 7, 1),
+(64, 'Sélection de vins de la région (verre)', 5, 5, 1),
+(65, 'Sélection de vins de la région (Bouteille)\r\n', 5, 25, 1),
+(66, 'Café', 6, 2.5, 1),
+(67, 'Cappucinno', 6, 3, 1),
+(68, 'Thé', 6, 2.5, 1),
+(69, 'Chocolat chaud', 6, 3, 1),
+(70, 'Eau minérale plate ou gazeuse ', 7, 2.5, 1),
+(71, 'Jus de fruits bio', 7, 3.5, 1),
+(72, 'Limonade artisanale', 7, 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `services_bedroom`
 --
 
@@ -503,7 +581,7 @@ CREATE TABLE `services_bedroom` (
   `service_price` int(11) NOT NULL,
   `service_active` tinyint(1) NOT NULL,
   `service_picture` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `services_bedroom`
@@ -528,47 +606,47 @@ CREATE TABLE `spa` (
   `spa_time` int(11) DEFAULT NULL,
   `spa_price` decimal(10,2) DEFAULT NULL,
   `spa_active` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Déchargement des données de la table `spa`
 --
 
 INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_price`, `spa_active`) VALUES
-(1, 1, 'Massage relaxant', 30, '50.00', 1),
-(2, 1, 'Massage relaxant', 60, '85.00', 1),
-(3, 1, 'Massage relaxant', 90, '120.00', 1),
-(4, 1, 'Massage suédois', 60, '95.00', 1),
-(5, 1, 'Massage suédois', 90, '130.00', 1),
-(6, 1, 'Massage profond des tissus', 60, '100.00', 1),
-(7, 1, 'Massage profond des tissus', 90, '140.00', 1),
-(8, 1, 'Massage aux pierres chaudes', 60, '110.00', 1),
-(9, 1, 'Massage aux pierres chaudes', 90, '150.00', 1),
-(10, 1, 'Massage thaï', 60, '110.00', 1),
-(11, 1, 'Massage thaï', 90, '150.00', 1),
-(12, 1, 'Massage pour enfants', 30, '45.00', 1),
-(13, 2, 'Soin du visage hydratant', 60, '85.00', 1),
-(14, 2, 'Soin du visage anti-âge', 60, '95.00', 1),
-(15, 2, 'Soin du visage éclaircissant', 60, '90.00', 1),
-(16, 2, 'Soin du visage purifiant', 60, '85.00', 1),
-(17, 2, 'Soin du visage aux acides de fruits', 60, '95.00', 1),
-(18, 2, 'Soin du visage pour homme', 60, '80.00', 1),
-(19, 3, 'Soin du corps hydratant', 60, '100.00', 1),
-(20, 3, 'Soin du corps exfoliant', 60, '100.00', 1),
-(21, 3, 'Soin du corps minceur', 90, '140.00', 1),
-(22, 3, 'Enveloppement corporel &agrave; l&#039;argile', 60, '110.00', 1),
-(23, 3, 'Enveloppement corporel aux algues', 60, '110.00', 1),
-(24, 3, 'Enveloppement corporel au chocolat', 60, '120.00', 1),
-(25, 3, 'Gommage corporel à la noix de coco', 30, '60.00', 1),
-(26, 4, 'Manucure classique', 45, '50.00', 1),
-(27, 4, 'Manucure française', 60, '60.00', 1),
-(28, 4, 'Pédicure classique', 45, '60.00', 1),
-(29, 4, 'Pédicure française', 60, '70.00', 1),
-(30, 4, 'Pose de vernis simple', 15, '20.00', 1),
-(31, 4, 'Pose de vernis semi-permanent', 45, '50.00', 1),
-(32, 5, 'Réflexologie plantaire', 45, '70.00', 1),
-(33, 5, 'Séance de yoga privée', 60, '90.00', 1),
-(34, 5, 'S&eacute;ance de m&eacute;ditation guid&eacute;e', 30, '45.00', 1);
+(1, 1, 'Massage relaxant', 30, 50.00, 1),
+(2, 1, 'Massage relaxant', 60, 85.00, 1),
+(3, 1, 'Massage relaxant', 90, 120.00, 1),
+(4, 1, 'Massage suédois', 60, 95.00, 1),
+(5, 1, 'Massage suédois', 90, 130.00, 1),
+(6, 1, 'Massage profond des tissus', 60, 100.00, 1),
+(7, 1, 'Massage profond des tissus', 90, 140.00, 1),
+(8, 1, 'Massage aux pierres chaudes', 60, 110.00, 1),
+(9, 1, 'Massage aux pierres chaudes', 90, 150.00, 1),
+(10, 1, 'Massage thaï', 60, 110.00, 1),
+(11, 1, 'Massage thaï', 90, 150.00, 1),
+(12, 1, 'Massage pour enfants', 30, 45.00, 1),
+(13, 2, 'Soin du visage hydratant', 60, 85.00, 1),
+(14, 2, 'Soin du visage anti-âge', 60, 95.00, 1),
+(15, 2, 'Soin du visage éclaircissant', 60, 90.00, 1),
+(16, 2, 'Soin du visage purifiant', 60, 85.00, 1),
+(17, 2, 'Soin du visage aux acides de fruits', 60, 95.00, 1),
+(18, 2, 'Soin du visage pour homme', 60, 80.00, 1),
+(19, 3, 'Soin du corps hydratant', 60, 100.00, 1),
+(20, 3, 'Soin du corps exfoliant', 60, 100.00, 1),
+(21, 3, 'Soin du corps minceur', 90, 140.00, 1),
+(22, 3, 'Enveloppement corporel &agrave; l&#039;argile', 60, 110.00, 1),
+(23, 3, 'Enveloppement corporel aux algues', 60, 110.00, 1),
+(24, 3, 'Enveloppement corporel au chocolat', 60, 120.00, 1),
+(25, 3, 'Gommage corporel à la noix de coco', 30, 60.00, 1),
+(26, 4, 'Manucure classique', 45, 50.00, 1),
+(27, 4, 'Manucure française', 60, 60.00, 1),
+(28, 4, 'Pédicure classique', 45, 60.00, 1),
+(29, 4, 'Pédicure française', 60, 70.00, 1),
+(30, 4, 'Pose de vernis simple', 15, 20.00, 1),
+(31, 4, 'Pose de vernis semi-permanent', 45, 50.00, 1),
+(32, 5, 'Réflexologie plantaire', 45, 70.00, 1),
+(33, 5, 'Séance de yoga privée', 60, 90.00, 1),
+(34, 5, 'S&eacute;ance de m&eacute;ditation guid&eacute;e', 30, 45.00, 1);
 
 --
 -- Index pour les tables déchargées
@@ -578,7 +656,8 @@ INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_pri
 -- Index pour la table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`acc_id`);
+  ADD PRIMARY KEY (`acc_id`),
+  ADD KEY `FK_account_acc_country` (`acc_id_country`);
 
 --
 -- Index pour la table `bedroom`
@@ -601,6 +680,12 @@ ALTER TABLE `bookings`
 --
 ALTER TABLE `category_bedroom`
   ADD PRIMARY KEY (`roomcategory_id`);
+
+--
+-- Index pour la table `category_restaurant`
+--
+ALTER TABLE `category_restaurant`
+  ADD PRIMARY KEY (`restocategory_id`);
 
 --
 -- Index pour la table `category_spa`
@@ -635,6 +720,13 @@ ALTER TABLE `picture`
   ADD PRIMARY KEY (`picture_id`);
 
 --
+-- Index pour la table `restaurant`
+--
+ALTER TABLE `restaurant`
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `id_restocategory` (`id_restocategory`);
+
+--
 -- Index pour la table `services_bedroom`
 --
 ALTER TABLE `services_bedroom`
@@ -667,13 +759,19 @@ ALTER TABLE `bedroom`
 -- AUTO_INCREMENT pour la table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `category_bedroom`
 --
 ALTER TABLE `category_bedroom`
   MODIFY `roomcategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `category_restaurant`
+--
+ALTER TABLE `category_restaurant`
+  MODIFY `restocategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `category_spa`
@@ -692,6 +790,12 @@ ALTER TABLE `country`
 --
 ALTER TABLE `picture`
   MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT pour la table `restaurant`
+--
+ALTER TABLE `restaurant`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT pour la table `services_bedroom`
@@ -742,6 +846,12 @@ ALTER TABLE `gallery`
 ALTER TABLE `lnk_services_reservation`
   ADD CONSTRAINT `lnk_services_reservation_ibfk_1` FOREIGN KEY (`id_service`) REFERENCES `services_bedroom` (`service_id`),
   ADD CONSTRAINT `lnk_services_reservation_ibfk_2` FOREIGN KEY (`id_booking`) REFERENCES `bookings` (`booking_id`);
+
+--
+-- Contraintes pour la table `restaurant`
+--
+ALTER TABLE `restaurant`
+  ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`id_restocategory`) REFERENCES `category_restaurant` (`restocategory_id`);
 
 --
 -- Contraintes pour la table `spa`
