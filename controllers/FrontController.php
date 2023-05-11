@@ -18,7 +18,7 @@ class FrontController{
         $page_content = ob_get_clean();
         require_once($template);
     }
-    // Page_css : tableau permettant d'ajouter des fichiers css Spécifique
+    // Page_javascript : tableau permettant d'ajouter des fichiers Javascript spécifique
     // Page_javascript : tableau permettant d'ajouter des fichiers Javascript spécifique
     public function accueil(){
         $data_page = [
@@ -29,21 +29,25 @@ class FrontController{
         ];
         $this->genererPage($data_page);
     }
-    public function spa(){
+    public function spa()
+    {
+        $categorySpa = $this->frontManager->getCategorySpa();
+
+        foreach ($categorySpa as &$category) {
+            $category["services"] = $this->frontManager->getSpaByIdCategory($category["spacategory_id"]);
+        }
+
         $data_page = [
-            "massages" => $this->frontManager->getSpaByIdCategory(1),
-            "facecares" => $this->frontManager->getSpaByIdCategory(2),
-            "bodycares" => $this->frontManager->getSpaByIdCategory(3),
-            "handfootcares" => $this->frontManager->getSpaByIdCategory(4),
-            "othercares" => $this->frontManager->getSpaByIdCategory(5),
-            "categorySpa" => $this->frontManager->getCategorySpa(),
+            "categorySpa" => $categorySpa,
             "page_description" => "Description du Spa",
             "page_title" => "Hôtel Belle-Nuit | Spa",
             "view" => "views/main/front/spa.view.php",
             "template" => "views/main/common/__template_front.php"
         ];
+
         $this->genererPage($data_page);
     }
+
 
     public function restaurant(){
         $data_page = [
