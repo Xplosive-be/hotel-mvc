@@ -50,7 +50,15 @@ class FrontController{
 
 
     public function restaurant(){
+        $categoryRestaurant = $this->frontManager->getCategoryRestaurant();
+
+        foreach ($categoryRestaurant as &$category) {
+            $category["restaurant"] = $this->frontManager->getRestaurantByIdCategory($category["restocategory_id"]);
+        }
+
+
         $data_page = [
+            "categoryResto" => $categoryRestaurant,
             "page_description" => "Description du restaurant",
             "page_title" => "Hôtel Belle-Nuit | Restaurant",
             "view" => "views/main/front/restaurant.view.php",

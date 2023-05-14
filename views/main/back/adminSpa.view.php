@@ -1,4 +1,5 @@
 <h1 class='text-center my-3 text-danger fw-bolder mb-5'>Gestionnaire des Spa</h1>
+<a href="adminAddSpa"><button class="btn btn-danger btn-lg position-fixed top-1 end-0 me-2">+</button></a>
 <table class="table container bg-light p-5 rounded mb-5 border border-2 border-dark">
     <thead class="bg-light">
     <tr>
@@ -27,14 +28,14 @@
                 <p class="fw-bold mb-1"><?= $spa["spacategory_name"] ?></p>
             </td>
             <td>
-                <p class="fst-italic mb-1"><?= $spa["spa_price"] ?></p>
+                <p class="fst-italic mb-1  text-start"><?= $spa["spa_price"] ?> €</p>
             </td>
             <td><?= $statusBadge ?></td>
             <td>
-                <a href="editSpa&id=<?= $spa['spa_id'] ?>" class="text-warning">
+                <a href="adminEditSpa&id=<?= $spa['spa_id'] ?>" class="text-warning">
                     <i class="fa-solid fa-wrench fa-xl"></i>
                 </a>
-                <a href="delSpa&id=<?= $spa['spa_id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')" class="ms-3 text-danger">
+                <a href="adminDelSpa&id=<?= $spa['spa_id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?')" class="ms-3 text-danger">
                     <i class="fa-solid fa-xl fa-trash-can"></i>
                 </a>
             </td>

@@ -166,4 +166,27 @@ class AdminManager extends Model
         $stmt->bindParam(':spaId', $delIdSpa);
         $stmt->execute();
     }
+    public function setAdminEditResto($id, $name,$price, $category, $active) {
+        $stmt = $this->getBdd()->prepare('UPDATE restaurant SET product_title = :name, product_price = :price, id_restocategory = :category, product_active = :active WHERE product_id = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':price', $price, PDO::PARAM_STR);
+        $stmt->bindParam(':category', $category, PDO::PARAM_INT);
+        $stmt->bindParam(':active', $active, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    public function setAdminAddResto($name, $price, $category, $active) {
+        $stmt = $this->getBdd()->prepare('INSERT INTO restaurant (product_title, product_price, id_restocategory, product_active) VALUES (:name, :price, :category, :active)');
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':price', $price, PDO::PARAM_STR);
+        $stmt->bindParam(':category', $category, PDO::PARAM_INT);
+        $stmt->bindParam(':active', $active, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+    public function deleteResto($delIdResto){
+        $stmt = $this->getBdd()->prepare('DELETE FROM `restaurant` WHERE `product_id` = :productId');
+        $stmt->bindParam(':productId', $delIdResto);
+        $stmt->execute();
+    }
+
 }

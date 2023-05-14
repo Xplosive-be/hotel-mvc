@@ -457,6 +457,129 @@ class AdminController
         header('Location: adminSpa');
     }
 
+    public function adminRestaurant()
+    {
+        if (Securite::verifAccessSession()) {
+            $data_page = [
+                "page_description" => "Editer un produit du restaurant",
+                "page_title" => "Editer un produit du restaurant",
+                "restaurants" => $this->frontManager->getRestaurants(),
+                "view" => "views/main/back/adminRestaurant.view.php",
+                "template" => "views/main/common/__template_front.php"
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
+    public function adminEditRestaurant()
+    {
+        if (Securite::verifAccessSession() & isset($_GET['id'])) {
+            $id = Securite::secureHTML($_GET['id']);
+            $resto = $this->frontManager->getRestaurantById(Securite::secureHTML($id));
+            if (!$resto) {
+                header('Location: adminaccount');
+            }
+            if (isset($_POST['btnEditProduct'])) {
+                $name = Securite::secureHTML($_POST['name']);
+                $price = Securite::secureHTML($_POST['price']);
+                $category = Securite::secureHTML($_POST['category']);
+                if (!isset($_POST['active'])) {
+                    $active = 0;
+                } else {
+                    $active = Securite::secureHTML($_POST['active']);
+                }
+
+                $this->adminManager->setAdminEditResto($id, $name, $price, $category, $active);
+                $_SESSION['alert'] = [
+                    "message" => 'Les informations ont été modifiés avec succès.',
+                    "type" => 'alert-success'
+                ];
+                header('Location: adminEditResto&id=' . $id);
+                exit();
+            }
+            $data_page = [
+                "restoCategories" => $this->frontManager->getCategoryRestaurant(),
+                "resto" => $resto,
+                "page_description" => "Editer un produit",
+                "page_title" => "Hôtel Belle-Nuit | Editer un produit",
+                "view" => "views/main/back/adminEditRestaurant.view.php",
+                "template" => "views/main/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
+    public function adminAddResto()
+    {
+        if (Securite::verifAccessSession()) {
+            if (isset($_POST['btnAddProduct'])) {
+                $name = Securite::secureHTML($_POST['name']);
+                $time = Securite::secureHTML($_POST['time']);
+                $price = Securite::secureHTML($_POST['price']);
+                $category = Securite::secureHTML($_POST['category']);
+                if (!isset($_POST['active'])) {
+                    $active = 0;
+                } else {
+                    $active = Securite::secureHTML($_POST['active']);
+                }
+
+                $this->adminManager->setAdminAddResto($name,$price, $category, $active);
+                $_SESSION['alert'] = [
+                    "message" => 'Les informations ont été modifiés avec succès.',
+                    "type" => 'alert-success'
+                ];
+                header('Location: adminRestaurant' );
+                exit();
+            }
+
+            $data_page = [
+                "restoCategories" => $this->frontManager->getCategoryRestaurant(),
+                "page_description" => "Ajouter un produit restaurant",
+                "page_title" => "Hôtel Belle-Nuit | Ajouter un produit restaurant",
+                "view" => "views/main/back/adminAddRestaurant.view.php",
+                "template" => "views/main/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Accès non-autorisé",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
+    public function adminDelResto()
+    {
+        if (isset($_GET['id'])) {
+            $id = Securite::secureHTML($_GET['id']);
+            $delIdResto = $this->frontManager->getRestaurantById($id);
+            if (!$delIdResto) {
+                header('Location: adminaccount');
+            }
+            $this->adminManager->deleteResto($delIdResto['product_id']);
+            $_SESSION['alert'] = [
+
+                "message" => "Admin --- Le produit du restaurant a été supprimée avec succès.",
+                "type" => 'alert-success'
+            ];
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Admin --- Erreur informations manquant!",
+                "type" => 'alert-danger'
+            ];
+        }
+        header('Location: adminRestaurant');
+    }
 }
 
 

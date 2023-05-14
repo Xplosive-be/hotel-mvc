@@ -84,7 +84,15 @@ try {
         case "adminAddSpa":
             $adminController->adminAddSpa();
             break;
-
+        case "adminRestaurant":
+            $adminController->adminRestaurant();
+            break;
+        case "adminEditResto":
+            $adminController->adminEditRestaurant();
+            break;
+        case "adminAddResto":
+            $adminController->adminAddResto();
+            break;
         // Partie suppression
         case "deletePicture":
             $adminController->pictureDelete();
@@ -92,8 +100,11 @@ try {
         case "deleteBedroom":
             $adminController->bedroomDelete();
             break;
-        case "delSpa":
+        case "adminDelSpa":
             $adminController->adminDelSpa();
+            break;
+        case "adminDelResto":
+            $adminController->adminDelResto();
             break;
         // Partie Booking
         case "accueilBooking":
