@@ -44,6 +44,9 @@ try {
         case "profil" :
             $backController->profil();
             break;
+        case "dashboard":
+            $backController->dashboard();
+            break;
         case "disconnect":
             $frontController->disconnect();
             break;

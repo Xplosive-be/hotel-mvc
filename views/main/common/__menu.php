@@ -16,7 +16,7 @@
             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
                 echo '
                 <div class="col-md-3 text-end text-nowrap">
-                 <a href="profil"><button type="button" class="btn btn-warning text-dark">' . $_SESSION["surname"] . ' ' . $_SESSION["name"] .'</button></a>
+                 <a href="dashboard"><button type="button" class="btn btn-warning text-dark">' . $_SESSION["surname"] . ' ' . $_SESSION["name"] .'</button></a>
                  <a href="admin"><button type="button" class="btn btn-primary text-white"><i class="fa-solid fa-screwdriver-wrench"></i> Admin</button></a>
                  <a href="disconnect"><button type="button" class="btn btn-outline-danger me-2"><i class="fa-solid fa-xmark"></i></button></a>
                 </div>';
@@ -24,7 +24,7 @@
             } elseif(isset($_SESSION['admin'])){
                 echo '
                 <div class="col-md-3 text-end">
-                    <a href="profil"><button type="button" class="btn btn-warning text-dark">' . $_SESSION["surname"] . ' ' . $_SESSION["name"] .'</button></a>
+                    <a href="dashboard"><button type="button" class="btn btn-warning text-dark">' . $_SESSION["surname"] . ' ' . $_SESSION["name"] .'</button></a>
                     <a href="disconnect"><button type="button" class="btn btn-outline-danger me-2"><i class="fa-solid fa-xmark"></i></button></a>
                 </div>';
             }  else {

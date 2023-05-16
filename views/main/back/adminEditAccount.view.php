@@ -74,7 +74,10 @@
                             </div>
                             <!-- Bouton de Modification-->
                         </div>
-                    <button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center w-100" type=submit" name="btnEditAdmin">Modifier</button>
+                    <div class="d-flex justify-content-center">
+                        <button class="mt-3 btn btn-danger mx-2 fw-bolder text-center" type="submit" name="btnEditAdmin">Modifier</button>
+                        <a class="mt-3 btn btn-secondary mx-2 fw-bolder text-center" href="adminAccount">Retour vers Utilisateur</a>
+                    </div>
                 </form>
             </main>
         </div>

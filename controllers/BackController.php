@@ -99,7 +99,26 @@ class BackController{
         ];
         $this->genererPage($data_page);
     }
+    public function dashboard(){
+        if (isset($_SESSION['online'])) {
+
+        } else {
+            $_SESSION['alert'] = [
+                "message" => 'Vos informations ont été modifiés avec succès.',
+                "type" => 'alert-danger'
+            ];
+            header('Location: login');
+        }
+        $data_page = [
+            "page_description" => "Dashboard du Profil",
+            "page_title" => "Dashboard",
+            "view" => "views/main/back/dashboard.view.php",
+            "template" => "views/main/common/__template_front.php"
+        ];
+        $this->genererPage($data_page);
+    }
     public function profil(){
+        if(isset($_SESSION['online'])){
         if (isset( $_POST['btnEdit'])) {
             // Verification et sécurisation des nouvelles données.
             $surname = Securite::secureHTML($_POST['surname']);
@@ -127,14 +146,14 @@ class BackController{
                 "type" => 'alert-success'
             ];
         }
-
-        $profil = $this->adminManager->getProfil($_SESSION['idAccount']);
-        $countrys = $this->frontManager->getCountryList();
+        } else {
+            header('Location: login');
+        }
         $data_page = [
             "page_description" => " Page de Profil",
             "page_title" => "",
-            "countrys" => $countrys,
-            "profil" => $profil,
+            "countrys" => $this->frontManager->getCountryList(),
+            "profil" => $this->adminManager->getProfil($_SESSION['idAccount']),
             "view" => "views/main/back/profil.view.php",
             "template" => "views/main/common/__template_front.php"
         ];
