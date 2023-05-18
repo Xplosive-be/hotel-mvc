@@ -1,9 +1,8 @@
-<div class="container-fluid shadow-lg p-3 mb-5 bg-body rounded mx-auto">
-    <h1 class="text-center my-3 text-danger fw-bolder mt-5 mb-5">Gestion de vos réservations</h1>
-
+<div class="container-fluid shadow-lg p-3 mb-5 mt-5 bg-body rounded mx-auto">
+    <h1 class="text-center my-3 text-danger fw-bolder mb-5">Gestion de vos réservations</h1>
     <!-- Partie "Vos réservations prochaines" -->
     <div class="mb-5">
-        <h3>Vos prochaines réservation</h3>
+        <h3 class="mb-3">Vos prochaines réservation</h3>
 
         <div class="accordion" id="upcomingReservationsAccordion">
             <?php foreach ($upcomingReservations as $reservation) {
@@ -51,9 +50,9 @@
 
     <!-- Partie "Vos réservations passées" -->
     <div>
-        <h3>Vos réservations passées</h3>
+        <h3 class="mb-3">Vos réservations passées</h3>
 
-        <div class="accordion" id="pastReservationsAccordion">
+        <div class="accordion mb-5" id="pastReservationsAccordion">
             <?php foreach ($pastReservations as $reservation) { ?>
                 <div class="accordion-item">
                     <h3 class="accordion-header" id="reservationHeading<?= $reservation['booking_id'] ?>">
