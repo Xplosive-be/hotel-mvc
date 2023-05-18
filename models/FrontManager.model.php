@@ -157,7 +157,7 @@ class FrontManager extends Model
     {
         $stmt = $this->getBdd()->prepare('SELECT bookings.booking_id, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_arrival_time, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
         FROM bookings
-        INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
+        INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id
         WHERE bookings.id_acc = :accountId AND (bookings.booking_date_begin < CURDATE() OR bookings.booking_cancelation = 1)');
         $stmt->bindValue(':accountId', $accountId, PDO::PARAM_INT);
         $stmt->execute();

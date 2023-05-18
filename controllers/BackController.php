@@ -169,8 +169,8 @@ class BackController{
             $data_page = [
                 "upcomingReservations" => $upcomingReservations,
                 "pastReservations" => $pastReservations,
-                "page_description" => "Manage your reservations",
-                "page_title" => "Hotel Belle-Nuit | Manage Your Reservations",
+                "page_description" => "Gestion de votre reservations",
+                "page_title" => "Hotel Belle-Nuit | Gestion de votre Reservations",
                 "view" => "views/main/back/profilReservation.view.php",
                 "template" => "views/main/common/__template_front.php",
             ];
