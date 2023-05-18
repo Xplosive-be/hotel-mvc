@@ -6,19 +6,24 @@
     }
     ?>
     <h1 class="text-center my-3 text-danger fw-bolder mb-5">Gestionnaire des Réservations</h1>
-    <form action="" method="POST" class="mb-3">
+    <form action="" method="POST" class="mb-3" onsubmit="return compareDates()">
         <div class="row">
             <div class="col-md-4 mb-2">
-                <label for="date_begin" class="form-label">Date de début :</label>
-                <input type="date" class="form-control" id="date_begin" name="date_begin">
+                <label for="dateBegin" class="form-label">Date de début :</label>
+                <input type="date" class="form-control" id="dateBegin" name="dateBegin"
+                       value="<?= isset($_POST['dateBegin']) ? $_POST['dateBegin'] : '' ?>">
             </div>
             <div class="col-md-4 mb-2">
-                <label for="date_end" class="form-label">Date de fin :</label>
-                <input type="date" class="form-control" id="date_end" name="date_end">
+                <label for="dateEnd" class="form-label">Date de départ
+                    :</label>
+                <input type="date" class="form-control" id="dateEnd" name="dateEnd"
+                       value="<?= isset($_POST['dateEnd']) ?
+                           $_POST['dateEnd'] : '' ?>">
             </div>
             <div class="col-md-4 mb-2">
                 <label for="search_name" class="form-label">Recherche par nom :</label>
-                <input type="text" class="form-control" id="search_name" name="search_name">
+                <input type="text" class="form-control" id="search_name" name="search_name"
+                       value="<?= isset($_POST['search_name']) ? $_POST['search_name'] : '' ?>">
             </div>
         </div>
         <div class="row mt-3">
@@ -36,7 +41,8 @@
             </div>
         </div>
         <div class="row mt-3 mb-5">
-            <button type="submit" class="btn btn-danger">Rechercher</button>
+            <button type="submit" name="btnSearch" class="btn
+            btn-danger">Rechercher</button>
         </div>
 
     </form>

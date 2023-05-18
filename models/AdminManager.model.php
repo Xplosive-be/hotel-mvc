@@ -229,5 +229,12 @@ class AdminManager extends Model
 
         return $results;
     }
+    public function adminReservation(){
+        $stmt = $this->getBdd()->prepare('SELECT * FROM bookings');
+        $stmt->execute();
+        $reservation = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $reservation;
+    }
 
 }
