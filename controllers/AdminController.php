@@ -585,7 +585,17 @@ class AdminController
     public function adminReservation()
     {
         if(Securite::verifAccessSession()){
+
+            if(isset($_POST)){
+                $date_begin = $_POST['date_begin'];
+                $date_end = $_POST['date_end'];
+                $search_name = $_POST['search_name'];
+                $show_cancelled = $_POST['show_cancelled'];
+                $show_validated = $_POST['show_validated'];
+                $reservationFilter = $this->adminManager->filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated);
+            }
             $data_page = [
+                "reservation" => $reservationFilter,
                 "page_description" => "Manager les réservations",
                 "page_title" => "Hôtel Belle-Nuit | Manager les réservations",
                 "view" => "views/main/back/adminReservation.view.php",

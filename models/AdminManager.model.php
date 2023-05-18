@@ -188,5 +188,46 @@ class AdminManager extends Model
         $stmt->bindParam(':productId', $delIdResto);
         $stmt->execute();
     }
+    public function filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated) {
+        // Initialisation des conditions
+        $conditions = [];
+        $params = [];
+
+        // Ajout des conditions en fonction des paramètres
+        if ($date_begin) {
+            $conditions[] = 'booking_date_begin >= ?';
+            $params[] = $date_begin;
+        }
+        if ($date_end) {
+            $conditions[] = 'booking_date_end <= ?';
+            $params[] = $date_end;
+        }
+        if ($search_name) {
+            $conditions[] = '(cus_name LIKE ? OR cus_surname LIKE ?)';
+            $params[] = '%'.$search_name.'%';
+            $params[] = '%'.$search_name.'%';
+        }
+        if ($show_cancelled) {
+            $conditions[] = 'booking_cancelation = 1';
+        }
+        if ($show_validated) {
+            $conditions[] = 'booking_validation = 1';
+        }
+
+        // Construction de la requête SQL
+        $sql = 'SELECT * FROM bookings';
+        if ($conditions) {
+            $sql .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+
+        // Préparation et exécution de la requête
+        $stmt = $this->getBdd()->prepare($sql);
+        $stmt->execute($params);
+
+        // Récupération des résultats
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $results;
+    }
 
 }

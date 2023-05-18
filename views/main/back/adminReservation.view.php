@@ -1,4 +1,10 @@
 <div class="container-fluid shadow-lg p-3 mb-5 mt-5 bg-body rounded mx-auto">
+    <?php
+    if(isset($reservation))
+    {
+        echo var_dump($reservation);
+    }
+    ?>
     <h1 class="text-center my-3 text-danger fw-bolder mb-5">Gestionnaire des Réservations</h1>
     <form action="" method="POST" class="mb-3">
         <div class="row">
