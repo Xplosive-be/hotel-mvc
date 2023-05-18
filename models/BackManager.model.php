@@ -81,21 +81,9 @@ class BackManager extends Model
         $stmt->bindValue(':country', $country, PDO::PARAM_INT);
         $stmt->bindValue(':phone', $phone, PDO::PARAM_STR);
         $stmt->bindValue(':idAccount', $idAccount, PDO::PARAM_INT);
-
         $stmt->execute();
         $stmt->closeCursor();
-
         return true;
-    }
-    public function getReservationById($idAccount){
-        $stmt = $this->getBdd()->prepare('SELECT * FROM `bookings`
-         INNER JOIN bedroom ON  bookings.id_bedroom = bedroom.bedroom_id
-         WHERE `id_acc` = :idaccount');
-        $stmt->bindValue(':idaccount', $idAccount, PDO::PARAM_INT);
-        $stmt->execute();
-        $reservation = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $stmt->closeCursor();
-        return $reservation;
     }
 }
 

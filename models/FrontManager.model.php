@@ -140,5 +140,31 @@ class FrontManager extends Model
         $stmt->closeCursor();
         return $getProduct;
     }
+    public function getUpcomingReservations($accountId)
+    {
+        $stmt = $this->getBdd()->prepare('SELECT bookings.booking_id, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_arrival_time, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
+        FROM bookings
+        INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
+        WHERE bookings.id_acc = :accountId AND bookings.booking_date_begin > CURDATE() AND bookings.booking_cancelation = 0');
+        $stmt->bindValue(':accountId', $accountId, PDO::PARAM_INT);
+        $stmt->execute();
+        $upcomingReservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $upcomingReservations;
+    }
+
+    public function getPastReservations($accountId)
+    {
+        $stmt = $this->getBdd()->prepare('SELECT bookings.booking_id, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_arrival_time, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
+        FROM bookings
+        INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
+        WHERE bookings.id_acc = :accountId AND (bookings.booking_date_begin < CURDATE() OR bookings.booking_cancelation = 1)');
+        $stmt->bindValue(':accountId', $accountId, PDO::PARAM_INT);
+        $stmt->execute();
+        $pastReservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->closeCursor();
+        return $pastReservations;
+    }
+
 }
 

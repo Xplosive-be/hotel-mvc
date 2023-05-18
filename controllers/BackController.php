@@ -160,19 +160,24 @@ class BackController{
         $this->genererPage($data_page);
     }
 
-    public  function ReservationView(){
-        if(Securite::verifConnectSession()){
+    public function ReservationView()
+    {
+        if (Securite::verifConnectSession()) {
+            $upcomingReservations = $this->frontManager->getUpcomingReservations($_SESSION["idAccount"]);
+            $pastReservations = $this->frontManager->getPastReservations($_SESSION["idAccount"]);
 
             $data_page = [
-                "reservationById" => $this->backManager->getReservationById($_SESSION["idAccount"]),
-                "page_description" => "Gérer vos réservations",
-                "page_title" => "Hôtel Belle-Nuit | Gérer vos réservations",
+                "upcomingReservations" => $upcomingReservations,
+                "pastReservations" => $pastReservations,
+                "page_description" => "Manage your reservations",
+                "page_title" => "Hotel Belle-Nuit | Manage Your Reservations",
                 "view" => "views/main/back/profilReservation.view.php",
                 "template" => "views/main/common/__template_front.php",
             ];
             $this->genererPage($data_page);
         }
     }
+
     public function apply(){
         if( isset( $_POST['btnRegistration'])){
             $surname = Securite::secureHTML($_POST['surname']);
