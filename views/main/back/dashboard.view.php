@@ -9,7 +9,8 @@
         </div>
         <div class="col-12 col-md-auto mb-3">
             <div class="d-flex flex-column align-items-center p-5 bg-light border border rounded-3 border-3 sizeAdminIcons">
-                <a href="adminReservationView"> <i class="fa-solid fa-calendar-days big-icons mb-3"></i></a>
+                <a href="reservationView"> <i class="fa-solid
+                fa-calendar-days big-icons mb-3"></i></a>
                 <p class="lead">Gérer les réservations</p>
             </div>
         </div>

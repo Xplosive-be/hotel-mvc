@@ -100,7 +100,7 @@ class BackController{
         $this->genererPage($data_page);
     }
     public function dashboard(){
-        if (isset($_SESSION['online'])) {
+        if (Securite::verifConnectSession()) {
 
         } else {
             $_SESSION['alert'] = [
@@ -118,7 +118,7 @@ class BackController{
         $this->genererPage($data_page);
     }
     public function profil(){
-        if(isset($_SESSION['online'])){
+        if(Securite::verifConnectSession()){
         if (isset( $_POST['btnEdit'])) {
             // Verification et sécurisation des nouvelles données.
             $surname = Securite::secureHTML($_POST['surname']);
@@ -158,6 +158,20 @@ class BackController{
             "template" => "views/main/common/__template_front.php"
         ];
         $this->genererPage($data_page);
+    }
+
+    public  function ReservationView(){
+        if(Securite::verifConnectSession()){
+
+            $data_page = [
+                "reservationById" => $this->backManager->getReservationById($_SESSION["idAccount"]),
+                "page_description" => "Gérer vos réservations",
+                "page_title" => "Hôtel Belle-Nuit | Gérer vos réservations",
+                "view" => "views/main/back/profilReservation.view.php",
+                "template" => "views/main/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        }
     }
     public function apply(){
         if( isset( $_POST['btnRegistration'])){
@@ -210,6 +224,8 @@ class BackController{
         ];
         $this->genererPage($data_page);
     }
+
+    // Gestion Activation par mail.
     public function activation() {
         // Exemple d'url:  activation&id=&codeActivation= .
         if(isset($_GET['id']) && isset($_GET['codeActivation'])){

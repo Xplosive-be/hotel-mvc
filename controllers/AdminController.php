@@ -329,6 +329,7 @@ class AdminController
             header('Location: accueil');
         }
     }
+    // Administration Spa
     public function adminSpa()
     {
         if (Securite::verifAccessSession()) {
@@ -348,8 +349,6 @@ class AdminController
             header('Location: accueil');
         }
     }
-
-
     public function adminEditSpa()
     {
         if (Securite::verifAccessSession() & isset($_GET['id'])) {
@@ -456,7 +455,7 @@ class AdminController
         }
         header('Location: adminSpa');
     }
-
+// Administration Restaurant
     public function adminRestaurant()
     {
         if (Securite::verifAccessSession()) {
@@ -580,6 +579,28 @@ class AdminController
         }
         header('Location: adminRestaurant');
     }
+
+    // Administration Réservation
+
+    public function adminReservation()
+    {
+        if(Securite::verifAccessSession()){
+            $data_page = [
+                "page_description" => "Manager les réservations",
+                "page_title" => "Hôtel Belle-Nuit | Manager les réservations",
+                "view" => "views/main/back/adminReservation.view.php",
+                "template" => "views/main/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        } else {
+            $_SESSION['alert'] = [
+                "message" =>"Désolé,mais nous n'avez pas accès à cette page",
+                "type" => 'alert-danger'
+            ];
+            header('Location: accueil');
+        }
+    }
+
 }
 
 

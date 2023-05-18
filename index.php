@@ -41,11 +41,14 @@ try {
         case "login" :
             $backController->login();
             break;
+        case "dashboard":
+            $backController->dashboard();
+            break;
         case "profil" :
             $backController->profil();
             break;
-        case "dashboard":
-            $backController->dashboard();
+        case "reservationView" :
+            $backController->ReservationView();
             break;
         case "disconnect":
             $frontController->disconnect();
@@ -95,6 +98,9 @@ try {
             break;
         case "adminAddResto":
             $adminController->adminAddResto();
+            break;
+        case "adminReservation":
+            $adminController->adminReservation();
             break;
         // Partie suppression
         case "deletePicture":
