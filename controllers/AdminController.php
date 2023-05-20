@@ -523,7 +523,6 @@ class AdminController
         if (Securite::verifAccessSession()) {
             if (isset($_POST['btnAddProduct'])) {
                 $name = Securite::secureHTML($_POST['name']);
-                $time = Securite::secureHTML($_POST['time']);
                 $price = Securite::secureHTML($_POST['price']);
                 $category = Securite::secureHTML($_POST['category']);
                 if (!isset($_POST['active'])) {

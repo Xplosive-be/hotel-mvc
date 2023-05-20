@@ -3,10 +3,16 @@
 require_once("Model.class.php");
 class BookingManager extends Model
 {
-    public function getAllBedroomsByAvailable($dateBegin,$dateEnd)
+    public function getAllBedroomsByAvailable($dateBegin, $dateEnd)
     {
         $stmt = $this->getBdd()->prepare('
-        SELECT * FROM bedroom WHERE bedroom_id NOT IN ( SELECT id_bedroom FROM bookings WHERE booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd )');
+    SELECT * FROM bedroom WHERE bedroom_id NOT IN (
+        SELECT id_bedroom FROM bookings WHERE (
+            (booking_date_begin <= :dateEnd AND booking_date_end >= :dateBegin)
+            OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd)
+            OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
+        )
+    )');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
         $stmt->execute();
@@ -14,10 +20,17 @@ class BookingManager extends Model
         $stmt->closeCursor();
         return $bedroomsAvailable;
     }
-    public function getAllBedroomsByNotAvailable($dateBegin,$dateEnd)
+
+    public function getAllBedroomsByNotAvailable($dateBegin, $dateEnd)
     {
         $stmt = $this->getBdd()->prepare('
-        SELECT * FROM bedroom WHERE bedroom_id IN ( SELECT id_bedroom FROM bookings WHERE booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd )');
+    SELECT * FROM bedroom WHERE bedroom_id IN (
+        SELECT id_bedroom FROM bookings WHERE (
+            (booking_date_begin <= :dateEnd AND booking_date_end >= :dateBegin)
+            OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd)
+            OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
+        )
+    )');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
         $stmt->execute();
@@ -25,7 +38,6 @@ class BookingManager extends Model
         $stmt->closeCursor();
         return $bedroomsNotAvailable;
     }
-
     public function getAllServicesBedroom()
     {
         $stmt = $this->getBdd()->prepare('SELECT * FROM `services_bedroom` ORDER BY `services_bedroom`.`service_id` ASC');

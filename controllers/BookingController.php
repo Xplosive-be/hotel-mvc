@@ -42,31 +42,33 @@ class BookingController
             header('Location: login');
         }
     }
-    public function bookingAvailable(){
-        if(Securite::verifConnectSession()){
+    public function bookingAvailable()
+    {
+        if (Securite::verifConnectSession()) {
             unset($_SESSION['booking']);
             $dateBegin = "";
             $dateEnd = "";
 
             // Vérifier si les clés existent dans le tableau $_POST
-            if(isset($_POST['dateBegin']) && isset($_POST['dateEnd'])) {
+            if (isset($_POST['dateBegin']) && isset($_POST['dateEnd'])) {
                 $dateBegin = Securite::secureHTML($_POST['dateBegin']);
                 $dateEnd = Securite::secureHTML($_POST['dateEnd']);
             } else {
                 // Si les clés n'existent pas, récupérer les valeurs des variables de session
-                if(isset($_SESSION['booking']['dateBegin']) && isset($_SESSION['booking']['dateEnd'])) {
+                if (isset($_SESSION['booking']['dateBegin']) && isset($_SESSION['booking']['dateEnd'])) {
                     $dateBegin = $_SESSION['booking']['dateBegin'];
                     $dateEnd = $_SESSION['booking']['dateEnd'];
                 }
             }
 
-            // Vérifier si les dates de réservation sont définies
-            if(empty($dateBegin) || empty($dateEnd)){
+            // Vérifier si les dates de réservation sont définies et valides
+            if (empty($dateBegin) || empty($dateEnd) || strtotime($dateEnd) <= strtotime($dateBegin)) {
                 $_SESSION['alert'] = [
-                    "message" => "Merci de choisir une date",
+                    "message" => "Merci de choisir des dates de réservation valides.",
                     "type" => "alert-danger"
                 ];
                 header('Location: accueilBooking');
+                exit;
             }
 
             // Enregistrer les dates de réservation dans les variables de session
@@ -75,20 +77,18 @@ class BookingController
 
             // Calculer le nombre de nuits pour la réservation
             $totalDay = strtotime($dateEnd) - strtotime($dateBegin);
-            $totalNight = round($totalDay /(60 * 60 *24));
+            $totalNight = round($totalDay / (60 * 60 * 24));
             $_SESSION['booking']['nights'] = $totalNight;
 
             // Récupérer les chambres disponibles et non disponibles pour les dates de réservation
-            $bedroomsAvailable = $this->bookingManager->getAllBedroomsByAvailable($dateBegin,$dateEnd);
-            $bedroomsNotAvailable = $this->bookingManager->getAllBedroomsByNotAvailable($dateBegin,$dateEnd);
+            $bedroomsAvailable = $this->bookingManager->getAllBedroomsByAvailable($dateBegin, $dateEnd);
+            $bedroomsNotAvailable = $this->bookingManager->getAllBedroomsByNotAvailable($dateBegin, $dateEnd);
 
-// Convertir les dates de réservation en formats lisibles par l'utilisateur
-
+            // Convertir les dates de réservation en formats lisibles par l'utilisateur
             $dateBeginObj = new DateTime($dateBegin);
             $_SESSION['booking']['dateBeginTxt'] = $dateBeginObj->format('l, j F Y');
             $dateEndObj = new DateTime($dateEnd);
             $_SESSION['booking']['dateEndTxt'] = $dateEndObj->format('l, j F Y');
-
 
             $data_page = [
                 "page_description" => "Réservation",
@@ -109,7 +109,7 @@ class BookingController
             ];
             $_SESSION['loginBooking'] = 1;
             header('Location: login');
-
+            exit;
         }
     }
     public function bookingServices()
