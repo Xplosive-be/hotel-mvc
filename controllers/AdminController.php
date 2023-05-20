@@ -587,9 +587,10 @@ class AdminController
         if(Securite::verifAccessSession()){
 
             if(isset($_POST['btnSearch']) ){
-                $date_begin = $_POST['dateBegin'];
-                $date_end = $_POST['dateEnd'];
+                $date_begin = $_POST['date_begin'];
+                $date_end = $_POST['date_end'];
                 $search_name = $_POST['search_name'];
+
                 $show_cancelled = isset($_POST['show_cancelled']) ? 1 : 0;
                 $show_validated = isset($_POST['show_validated']) ? 1 : 0;
                 $reservation = $this->adminManager->filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated);

@@ -6,7 +6,7 @@
     }
     ?>
     <h1 class="text-center my-3 text-danger fw-bolder mb-5">Gestionnaire des Réservations</h1>
-    <form action="" method="POST" class="mb-3" onsubmit="return compareDates()">
+    <form action="" method="POST" class="mb-3">
         <div class="row">
             <div class="col-md-4 mb-2">
                 <label for="dateBegin" class="form-label">Date de début :</label>
@@ -57,11 +57,12 @@
             <th>Date de départ</th>
             <th>Prix Total</th>
             <th>Confirmation</th>
-            <th>Payé</th>
+            <th>Annulée</th>
             <th>Détails</th>
         </tr>
         </thead>
         <tbody>
+
         </tbody>
     </table>
 </div>
