@@ -71,8 +71,7 @@
                     <div class="mb-5 row">
                         <h4 class="mb-3">Commentaires</h4>
                         <div class="col-md-12">
-                            <textarea id="comments" name="comments" placeholder="Saisissez vos commentaires ici" class="inputServices">
-                            </textarea>
+                            <textarea id="comments" name="comments" placeholder="Saisissez vos commentaires ici" class="inputServices"></textarea>
                         </div>
                     </div>
                 <div class="mb-5 row">

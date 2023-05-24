@@ -1,7 +1,6 @@
-<div class="container my-5">
-    <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+<div class="container-fluid shadow-lg p-3 mb-5 mt-5 bg-body rounded mx-auto">
         <div class="text-start ">
-            <main class="w-75 mx-auto pb-5" style="max-width: 80%;">
+            <main class="w-75 mx-auto mt-4 pb-5" style="max-width: 80%;">
                 <form method="post">
                     <h1 class="h3 mb-5 fw-normal text-center text-danger fw-bolder">Admin - Modification - <?= $resto['product_title'] ?></h1>
                     <div class="row g-3">
@@ -40,4 +39,3 @@
             </main>
         </div>
     </div>
-</div>

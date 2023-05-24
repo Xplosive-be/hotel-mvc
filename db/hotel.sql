@@ -72,6 +72,7 @@ CREATE TABLE `bedroom` (
 -- Déchargement des données de la table `bedroom`
 --
 
+
 INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_priceday`, `id_roomcategory`) VALUES
 (1, 'Chambre Standard', '                                                                                                                                                                        Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> Café et thé équipements. </br> Superficie 20 m² </br> Dans votre salle de bains privative : </br> <ul> <li>Articles de toilette gratuits </li> <li>Peignoir</li> <li>Toilettes</li> <li>Baignoire ou douche</li> <li>Serviettes</li> <li>Chaussons</li> <li>Sèche-cheveux</li> <li>Papier toilette</li> <strong>Vue :</strong> <li>Vue sur la ville</li> <li>Vue sur une cour intérieure</li> </ul>                                                                                                                                                                        ', 'double', 120, 1),
 (2, 'Chambre Sup&eacute;rieure', '                                                                                    Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>                                                                                    ', 'double', 240, 2),
@@ -477,14 +478,7 @@ CREATE TABLE `lnk_services_reservation` (
   `id_service` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `lnk_services_reservation`
---
 
-INSERT INTO `lnk_services_reservation` (`id_booking`, `id_service`) VALUES
-(19, 1),
-(20, 1),
-(20, 3);
 
 -- --------------------------------------------------------
 

@@ -1,3 +1,4 @@
+<div class="container-fluid shadow-lg p-3 mb-5 mt-5 bg-body rounded mx-auto">
 <h1 class='text-center my-3 text-danger fw-bolder mb-5'>Gestionnaire d'Utilisateur</h1>
 <table class="table container bg-light p-5 rounded mb-5 border border-2 border-dark">
     <thead class="bg-light">
@@ -45,3 +46,4 @@
 
     </tbody>
 </table>
+</div>
