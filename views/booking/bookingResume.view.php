@@ -1,4 +1,4 @@
-
+<?php var_dump($_SESSION['booking']);?>
 <div class="shadow-lg p-3 mb-5 bg-body rounded">
     <div class="progress">
         <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>

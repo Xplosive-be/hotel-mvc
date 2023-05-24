@@ -102,6 +102,9 @@ try {
         case "adminReservation":
             $adminController->adminReservation();
             break;
+        case "adminReservationDetail":
+            $adminController->adminReservationDetail();
+            break;
         // Partie suppression
         case "deletePicture":
             $adminController->pictureDelete();

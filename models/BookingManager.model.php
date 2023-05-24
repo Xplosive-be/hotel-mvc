@@ -76,7 +76,6 @@ class BookingManager extends Model
 
         // Exécutez la requête en passant le tableau d'ID comme paramètres
         $stmt->execute($ids);
-
         return $stmt->fetchAll();
     }
 
@@ -84,8 +83,7 @@ class BookingManager extends Model
         $stmt = $this->getBdd()->prepare('SELECT service_id, service_name, service_price FROM services_bedroom WHERE service_id = :service_id');
         $stmt->bindParam(':service_id', $id);
         $stmt->execute();
-        $service = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $service;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function addBooking()
     {
@@ -116,13 +114,12 @@ class BookingManager extends Model
             $booking_id = $bdd->lastInsertId();
 
             // Insert the linked services
-            if (!empty($booking['services'])) {
-                foreach ($booking['services'] as $service) {
-                    $stmt = $bdd->prepare('INSERT INTO lnk_services_reservation (id_booking, id_service, quantity) VALUES (:id_booking, :id_service, :quantity)');
+            if (!empty($_SESSION['booking'])) {
+                foreach ($_SESSION['booking']['services'] as $service) {
+                    $stmt = $bdd->prepare('INSERT INTO lnk_services_reservation (id_booking, id_service) VALUES (:id_booking, :id_service )');
                     $stmt->execute(array(
                         ':id_booking' => $booking_id,
                         ':id_service' => $service['id'],
-                        ':quantity' => $service['quantity'],
                     ));
                 }
             }

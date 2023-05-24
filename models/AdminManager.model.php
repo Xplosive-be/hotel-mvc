@@ -195,11 +195,11 @@ class AdminManager extends Model
 
         // Ajout des conditions en fonction des paramètres
         if ($date_begin) {
-            $conditions[] = 'booking_date_begin >= ?';
+            $conditions[] = 'booking_date_end >= ?';
             $params[] = $date_begin;
         }
         if ($date_end) {
-            $conditions[] = 'booking_date_end <= ?';
+            $conditions[] = 'booking_date_begin <= ?';
             $params[] = $date_end;
         }
         if ($search_name) {
@@ -215,7 +215,10 @@ class AdminManager extends Model
         }
 
         // Construction de la requête SQL
-        $sql = 'SELECT * FROM bookings';
+        $sql = 'SELECT bookings.booking_id, account.acc_name, account.acc_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
+        FROM bookings 
+        INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
+        INNER JOIN account ON bookings.id_acc = account.acc_id';
         if ($conditions) {
             $sql .= ' WHERE ' . implode(' AND ', $conditions);
         }
@@ -229,12 +232,55 @@ class AdminManager extends Model
 
         return $results;
     }
+
     public function adminReservation(){
-        $stmt = $this->getBdd()->prepare('SELECT * FROM bookings');
+        $stmt = $this->getBdd()->prepare('SELECT bookings.booking_id, account.acc_name, account.acc_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
+    FROM bookings 
+    INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
+    INNER JOIN account ON bookings.id_acc = account.acc_id;');
         $stmt->execute();
         $reservation = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $reservation;
+    }
+    public function getReservationById($id)
+    {
+        $stmt = $this->getBdd()->prepare('
+        SELECT bookings.*, bedroom.bedroom_name, services_bedroom.service_name 
+        FROM bookings 
+        LEFT JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
+        LEFT JOIN lnk_services_reservation ON bookings.booking_id = lnk_services_reservation.id_booking 
+        LEFT JOIN services_bedroom ON lnk_services_reservation.id_service = services_bedroom.service_id 
+        WHERE bookings.booking_id = :booking_id');
+
+        // Lier l'ID de réservation à la requête
+        $stmt->bindValue(':booking_id', $id);
+
+        // Exécuter la requête
+        $stmt->execute();
+
+        // Récupérer les détails de réservation
+        $reservationDetails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Fermer le curseur
+        $stmt->closeCursor();
+
+        // Construire un tableau pour stocker les services
+        $services = array();
+
+        // Parcourir les résultats et ajouter les services au tableau
+        foreach ($reservationDetails as $reservation) {
+            $service = array(
+                'service_name' => $reservation['service_name']
+            );
+            $services[] = $service;
+        }
+
+        // Ajouter le tableau des services à l'ensemble des détails de réservation
+        $reservationDetails[0]['services'] = $services;
+
+        // Retourner les détails de réservation mis à jour
+        return $reservationDetails[0];
     }
 
 }

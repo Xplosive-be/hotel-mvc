@@ -161,6 +161,7 @@ class BookingController
                                 $service = $this->bookingManager->getServiceById($service_id);
                                 // Ajouter le service au tableau associatif
                                 $services[$service['service_id']] = array(
+                                    'id' => $service['service_id'],
                                     'name' => $service['service_name'],
                                     'price' => $service['service_price']
                                 );

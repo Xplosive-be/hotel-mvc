@@ -163,12 +163,9 @@ class BackController{
     public function ReservationView()
     {
         if (Securite::verifConnectSession()) {
-            $upcomingReservations = $this->frontManager->getUpcomingReservations($_SESSION["idAccount"]);
-            $pastReservations = $this->frontManager->getPastReservations($_SESSION["idAccount"]);
-
             $data_page = [
-                "upcomingReservations" => $upcomingReservations,
-                "pastReservations" => $pastReservations,
+                "upcomingReservations" =>$this->frontManager->getUpcomingReservations($_SESSION["idAccount"]),
+                "pastReservations" => $this->frontManager->getPastReservations($_SESSION["idAccount"]),
                 "page_description" => "Gestion de votre reservations",
                 "page_title" => "Hotel Belle-Nuit | Gestion de votre Reservations",
                 "view" => "views/main/back/profilReservation.view.php",

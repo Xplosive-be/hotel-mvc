@@ -583,21 +583,21 @@ class AdminController
 
     public function adminReservation()
     {
-        if(Securite::verifAccessSession()){
+        if (Securite::verifAccessSession()) {
+            $date_begin = isset($_POST['dateBegin']) ? $_POST['dateBegin'] : null;
+            $date_end = isset($_POST['dateEnd']) ? $_POST['dateEnd'] : null;
+            $search_name = isset($_POST['search_name']) ? $_POST['search_name'] : '';
+            $show_cancelled = isset($_POST['show_cancelled']) ? 1 : 0;
+            $show_validated = isset($_POST['show_validated']) ? 1 : 0;
 
-            if(isset($_POST['btnSearch']) ){
-                $date_begin = $_POST['date_begin'];
-                $date_end = $_POST['date_end'];
-                $search_name = $_POST['search_name'];
-
-                $show_cancelled = isset($_POST['show_cancelled']) ? 1 : 0;
-                $show_validated = isset($_POST['show_validated']) ? 1 : 0;
-                $reservation = $this->adminManager->filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated);
+            if (isset($_POST['btnSearch'])) {
+                $reservations = $this->adminManager->filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated);
             } else {
-                $reservation = $this->adminManager->adminReservation();
+                $reservations = $this->adminManager->adminReservation();
             }
+
             $data_page = [
-                "reservation" => $reservation,
+                "reservations" => $reservations,
                 "page_description" => "Manager les réservations",
                 "page_title" => "Hôtel Belle-Nuit | Manager les réservations",
                 "view" => "views/main/back/adminReservation.view.php",
@@ -606,13 +606,31 @@ class AdminController
             $this->genererPage($data_page);
         } else {
             $_SESSION['alert'] = [
-                "message" =>"Désolé,mais nous n'avez pas accès à cette page",
+                "message" => "Désolé, mais vous n'avez pas accès à cette page",
                 "type" => 'alert-danger'
             ];
             header('Location: accueil');
         }
     }
-
+    public  function adminReservationDetail()
+    {
+        if(Securite::verifAccessSession()){
+            $reservation = $this->adminManager->getReservationById(Securite::secureHTML($_GET['id']));
+            $validationBadge = ($reservation['booking_validation'] == 1) ? '<i class="fa-solid fa-check text-center" style="color: #2da800;"></i>' : '<i class="fa-solid fa-xmark" style="color: #db0000;"></i>';
+            $cancelationBadge = ($reservation['booking_cancelation'] == 1) ? '<i class="fa-solid fa-check text-center" style="color: #2da800;"></i>' : '<i class="fa-solid fa-xmark" style="color: #db0000;"></i>';
+            $data_page = [
+                "validationBadge" => $validationBadge,
+                "cancelationBadge" => $cancelationBadge,
+                "reservation" => $this->adminManager->getReservationById(Securite::secureHTML($_GET['id'])),
+                "pays" => $this->frontManager->getCountryById($reservation['cus_id_country']),
+                "page_description" => "Manager les réservations",
+                "page_title" => "Hôtel Belle-Nuit | Manager les réservations",
+                "view" => "views/main/back/adminReservationDetail.view.php",
+                "template" => "views/main/common/__template_front.php",
+            ];
+            $this->genererPage($data_page);
+        }
+    }
 }
 
 

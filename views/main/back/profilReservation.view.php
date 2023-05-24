@@ -3,7 +3,6 @@
     <!-- Partie "Vos réservations prochaines" -->
     <div class="mb-5">
         <h3 class="mb-3">Vos prochaines réservation</h3>
-
         <div class="accordion" id="upcomingReservationsAccordion">
             <?php foreach ($upcomingReservations as $reservation) {
                 // Permets de calculer le nombre de jours entre le début et la fin

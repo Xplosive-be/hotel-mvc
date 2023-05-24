@@ -8,9 +8,11 @@
             </div>
         </div>
         <div class="col-12 col-md-auto mb-3">
-            <div class="d-flex flex-column  align-items-center p-5 bg-light border border rounded-3 border-3 sizeAdminIcons">
-                <a href="adminBedrooms"><i class="fa-solid fa-bed big-icons mb-3" ></i></a>
-                <p class="lead">Gérer les chambres</p>
+            <div class="col-12 col-md-auto mb-3">
+                <div class="d-flex flex-column align-items-center p-5 bg-light border border rounded-3 border-3 sizeAdminIcons">
+                    <a href="adminReservation"> <i class="fa-solid fa-calendar-days big-icons mb-3"></i></a>
+                    <p class="lead">Gérer les réservations</p>
+                </div>
             </div>
         </div>
     </div>
@@ -29,11 +31,9 @@
         </div>
     </div>
     <div class="row align-items-md-stretch justify-content-center">
-        <div class="col-12 col-md-auto mb-3">
-            <div class="d-flex flex-column align-items-center p-5 bg-light border border rounded-3 border-3 sizeAdminIcons">
-                <a href="adminReservation"> <i class="fa-solid fa-calendar-days big-icons mb-3"></i></a>
-                <p class="lead">Gérer les réservations</p>
-            </div>
+        <div class="d-flex flex-column  align-items-center p-5 bg-light border border rounded-3 border-3 sizeAdminIcons">
+            <a href="adminBedrooms"><i class="fa-solid fa-bed big-icons mb-3" ></i></a>
+            <p class="lead">Gérer les chambres</p>
         </div>
     </div>
 </div>
