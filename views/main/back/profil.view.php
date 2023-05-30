@@ -58,8 +58,8 @@
                             <input type="tel" class="form-control" name="phone" id="phone" value="<?= $profil['acc_phone'] ?>" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[0-9]{4,}$" required>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <button class="mt-3 btn btn-danger mx-2 fw-bolder text-center" type="submit" name="btnEdit">Modifier</button>
                             <a class="mt-3 btn btn-secondary mx-2 fw-bolder text-center" href="dashboard">Retour au tableau de bord</a>
+                            <button class="mt-3 btn btn-danger mx-2 fw-bolder text-center" type="submit" name="btnEdit">Modifier</button>
                         </div>
                 </form>
         </div>

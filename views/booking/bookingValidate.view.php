@@ -25,6 +25,9 @@
             <p>Notre équipe reste disponible pour toute information ou assistance supplémentaire. Nous espérons que votre séjour parmi nous sera des plus agréables.</p>
             <p>Veuillez noter que toute annulation doit être effectuée au moins 48 heures avant la date d'arrivée prévue. Passé ce délai, des frais d'annulation pourront être appliqués. Merci de consulter nos conditions de réservation pour plus d'informations.</p>
         </div>
+        <div class="mt-3">
+            <a href="accueil" class="btn btn-outline-dark">Retour Accueil</a>
+        </div>
     </div>
 </div>
 <?php unset($_SESSION['booking']); ?>

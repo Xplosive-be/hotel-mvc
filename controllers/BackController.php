@@ -32,7 +32,6 @@ class BackController{
             $login = Securite::secureHTML($_POST['login']);
             $account = $this->backManager->getLoginAccount($login);
             $password = Securite::EncryptPassword(Securite::secureHTML($_POST['password']));
-            var_dump($password);
             // Connection
             if(!empty($account)) {
                 if ($password == $account["acc_password"]  && $account["acc_active"] != 0 ){

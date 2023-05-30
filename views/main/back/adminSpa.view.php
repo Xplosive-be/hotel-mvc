@@ -45,4 +45,7 @@
 
     </tbody>
 </table>
+    <div class="text-center">
+        <a href="admin" class="btn btn-danger">Retour Menu</a>
+    </div>
 </div>

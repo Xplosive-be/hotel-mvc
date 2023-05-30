@@ -1,5 +1,5 @@
 <h1 class='text-center my-3 text-danger fw-bolder'>Administration</h1>
-<div class="container py-4 ">
+<div class="container py-4">
     <div class="row align-items-md-stretch justify-content-center">
         <div class="col-12 col-md-auto mb-3">
             <div class="d-flex flex-column align-items-center p-5 bg-light border border rounded-3 border-3 sizeAdminIcons">

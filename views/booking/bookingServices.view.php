@@ -21,7 +21,6 @@
         </div>
     </div>
 </div>
-<?php // var_dump($_SESSION['booking']);?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10">

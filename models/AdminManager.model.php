@@ -214,6 +214,7 @@ class AdminManager extends Model
             $conditions[] = 'booking_validation = 1';
         }
 
+
         // Construction de la requête SQL
         $sql = 'SELECT bookings.booking_id, account.acc_name, account.acc_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
         FROM bookings 
@@ -222,6 +223,8 @@ class AdminManager extends Model
         if ($conditions) {
             $sql .= ' WHERE ' . implode(' AND ', $conditions);
         }
+        $sql .= ' ORDER BY 
+    bookings.booking_id ASC';
 
         // Préparation et exécution de la requête
         $stmt = $this->getBdd()->prepare($sql);
@@ -237,7 +240,10 @@ class AdminManager extends Model
         $stmt = $this->getBdd()->prepare('SELECT bookings.booking_id, account.acc_name, account.acc_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
     FROM bookings 
     INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
-    INNER JOIN account ON bookings.id_acc = account.acc_id;');
+    INNER JOIN account ON bookings.id_acc = account.acc_id
+    WHERE  `bookings`.`booking_validation` = \'0\' and `bookings`.`booking_cancelation` = \'0\' 
+    ORDER BY 
+    bookings.booking_id ASC');
         $stmt->execute();
         $reservation = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
@@ -282,5 +288,20 @@ class AdminManager extends Model
         // Retourner les détails de réservation mis à jour
         return $reservationDetails[0];
     }
+    public function validateReservation($booking_id)
+    {
+        $stmt = $this->getBdd()->prepare('UPDATE `bookings` SET `booking_validation` = \'1\' WHERE `bookings`.`booking_id` = :booking_id');
+        $stmt->bindValue(':booking_id', $booking_id, PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
 
+
+
+    public  function cancelReservation($booking_id){
+        $stmt = $this->getBdd()->prepare('UPDATE `bookings` SET `booking_cancelation` = \'1\' WHERE `bookings`.`booking_id` = :booking_id');
+        $stmt->bindValue(':booking_id', $booking_id, PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->closeCursor();
+    }
 }

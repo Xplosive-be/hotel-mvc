@@ -6,13 +6,15 @@ class BookingManager extends Model
     public function getAllBedroomsByAvailable($dateBegin, $dateEnd)
     {
         $stmt = $this->getBdd()->prepare('
-    SELECT * FROM bedroom WHERE bedroom_id NOT IN (
-        SELECT id_bedroom FROM bookings WHERE (
-            (booking_date_begin <= :dateEnd AND booking_date_end >= :dateBegin)
-            OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd)
-            OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
-        )
-    )');
+SELECT * FROM bedroom WHERE bedroom_id NOT IN (
+    SELECT id_bedroom FROM bookings WHERE (
+        (booking_date_begin <= :dateEnd AND booking_date_end >= :dateBegin)
+        OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd)
+        OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
+    ) AND booking_cancelation = 0
+) OR bedroom_id IN (
+    SELECT id_bedroom FROM bookings WHERE booking_cancelation = 1
+)');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
         $stmt->execute();
@@ -23,14 +25,15 @@ class BookingManager extends Model
 
     public function getAllBedroomsByNotAvailable($dateBegin, $dateEnd)
     {
-        $stmt = $this->getBdd()->prepare('
-    SELECT * FROM bedroom WHERE bedroom_id IN (
-        SELECT id_bedroom FROM bookings WHERE (
-            (booking_date_begin <= :dateEnd AND booking_date_end >= :dateBegin)
-            OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd)
-            OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
-        )
-    )');
+        $stmt = $this->getBdd()->prepare('SELECT * FROM bedroom WHERE bedroom_id IN (
+    SELECT id_bedroom FROM bookings WHERE (
+        (booking_date_begin <= :dateEnd AND booking_date_end >= :dateBegin)
+        OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd)
+        OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
+    ) AND booking_cancelation = 0
+) AND bedroom_id NOT IN (
+    SELECT id_bedroom FROM bookings WHERE booking_cancelation = 1
+)');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
         $stmt->execute();
@@ -47,18 +50,24 @@ class BookingManager extends Model
         return $bedroomServices;
     }
 
-    public function checkBedroomAvailableById($dateBegin , $dateEnd, $idBedroom){
-        $stmt = $this->getBdd()->prepare('SELECT *
-        FROM bedroom
-        WHERE bedroom_id = :bedroomId
-        AND bedroom_id NOT IN (
-            SELECT id_bedroom
-            FROM bookings
+    public function checkBedroomAvailableById($dateBegin , $dateEnd, $idBedroom)
+    {
+        $stmt = $this->getBdd()->prepare('
+    SELECT * FROM bedroom
+    WHERE bedroom_id = :bedroomId
+    AND (
+        bedroom_id NOT IN (
+            SELECT id_bedroom FROM bookings
             WHERE (
-                (booking_date_begin <= :dateEnd AND booking_date_end >= :dateEnd)
-                OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateBegin)
+                (booking_date_begin <= :dateEnd AND booking_date_end >= :dateBegin)
+                OR (booking_date_begin <= :dateBegin AND booking_date_end >= :dateEnd)
                 OR (booking_date_begin >= :dateBegin AND booking_date_end <= :dateEnd)
-            ))');
+            ) AND booking_cancelation = 0
+        ) OR bedroom_id IN (
+            SELECT id_bedroom FROM bookings
+            WHERE booking_cancelation = 1
+        )
+    )');
         $stmt->bindValue(':dateBegin', $dateBegin);
         $stmt->bindValue(':dateEnd', $dateEnd);
         $stmt->bindValue(':bedroomId', $idBedroom);
@@ -66,8 +75,8 @@ class BookingManager extends Model
         $bedroomAvailable = $stmt->fetch(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
         return $bedroomAvailable;
-
     }
+
     public function getServicesByIds($ids) {
         // Préparez la requête SQL en utilisant des paramètres nommés
         $inQuery = implode(',', array_fill(0, count($ids), '?'));

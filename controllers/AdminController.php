@@ -615,6 +615,21 @@ class AdminController
     public  function adminReservationDetail()
     {
         if(Securite::verifAccessSession()){
+
+            if (isset($_POST['cancelReservation'])) {
+                // Traitement de l'annulation de la réservation
+                // Code pour annuler la réservation en fonction de son ID, par exemple :
+                $bookingId = $_POST['bookingId'];
+                $this->adminManager->cancelReservation($bookingId);
+            }
+
+            if (isset($_POST['validateValidation'])) {
+                // Traitement de la validation de la réservation
+                // Code pour valider la réservation en fonction de son ID, par exemple :
+                $bookingId = $_POST['bookingId'];
+                $this->adminManager->validateReservation($bookingId);
+            }
+
             $reservation = $this->adminManager->getReservationById(Securite::secureHTML($_GET['id']));
             $validationBadge = ($reservation['booking_validation'] == 1) ? '<i class="fa-solid fa-check text-center" style="color: #2da800;"></i>' : '<i class="fa-solid fa-xmark" style="color: #db0000;"></i>';
             $cancelationBadge = ($reservation['booking_cancelation'] == 1) ? '<i class="fa-solid fa-check text-center" style="color: #2da800;"></i>' : '<i class="fa-solid fa-xmark" style="color: #db0000;"></i>';

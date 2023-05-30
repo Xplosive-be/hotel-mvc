@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 23 mai 2023 à 14:52
+-- Généré le : mar. 30 mai 2023 à 14:50
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `hotel`
 --
+CREATE DATABASE IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `hotel`;
 
 -- --------------------------------------------------------
 
@@ -28,20 +30,20 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `account` (
-  `acc_id` int(11) NOT NULL,
-  `acc_name` varchar(30) NOT NULL,
-  `acc_surname` varchar(30) NOT NULL,
-  `acc_address` varchar(120) NOT NULL,
-  `acc_addressbox` int(11) NOT NULL,
-  `acc_city` varchar(20) NOT NULL,
-  `acc_codepostal` mediumint(9) NOT NULL,
-  `acc_id_country` int(11) NOT NULL,
-  `acc_phone` varchar(20) NOT NULL,
-  `acc_email` varchar(255) NOT NULL,
-  `acc_password` varchar(128) NOT NULL,
-  `acc_code_activation` varchar(32) NOT NULL,
-  `acc_admin` tinyint(1) NOT NULL,
-  `acc_active` tinyint(1) NOT NULL
+                           `acc_id` int(11) NOT NULL,
+                           `acc_name` varchar(30) NOT NULL,
+                           `acc_surname` varchar(30) NOT NULL,
+                           `acc_address` varchar(120) NOT NULL,
+                           `acc_addressbox` int(11) NOT NULL,
+                           `acc_city` varchar(20) NOT NULL,
+                           `acc_codepostal` mediumint(9) NOT NULL,
+                           `acc_id_country` int(11) NOT NULL,
+                           `acc_phone` varchar(20) NOT NULL,
+                           `acc_email` varchar(255) NOT NULL,
+                           `acc_password` varchar(128) NOT NULL,
+                           `acc_code_activation` varchar(32) NOT NULL,
+                           `acc_admin` tinyint(1) NOT NULL,
+                           `acc_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -49,9 +51,9 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_addressbox`, `acc_city`, `acc_codepostal`, `acc_id_country`, `acc_phone`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`) VALUES
-(6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1),
-(7, 'Cida', 'Liliana', '16 Rue Xavier de bue', 0, 'Uccle', 1180, 25, '+32492518260', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '017d262b2f95cdd20ad7bad419e4e25a', 0, 1),
-(8, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 1180, 25, '+32496359742', '2@2.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '55f3589fd3b542ecc69bbd08c06d55f4', 0, 0);
+                                                                                                                                                                                                                                             (6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1),
+                                                                                                                                                                                                                                             (7, 'Cida', 'Liliana', '16 Rue Xavier de bue', 0, 'Uccle', 1180, 25, '+32492518260', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '017d262b2f95cdd20ad7bad419e4e25a', 0, 1),
+                                                                                                                                                                                                                                             (8, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 1180, 25, '+32496359742', '2@2.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '55f3589fd3b542ecc69bbd08c06d55f4', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -60,24 +62,23 @@ INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_
 --
 
 CREATE TABLE `bedroom` (
-  `bedroom_id` int(11) NOT NULL,
-  `bedroom_name` varchar(30) NOT NULL,
-  `bedroom_description` text NOT NULL,
-  `bedroom_bed` enum('double','twin','single') NOT NULL,
-  `bedroom_priceday` int(11) NOT NULL,
-  `id_roomcategory` int(11) NOT NULL
+                           `bedroom_id` int(11) NOT NULL,
+                           `bedroom_name` varchar(30) NOT NULL,
+                           `bedroom_description` text NOT NULL,
+                           `bedroom_bed` enum('double','twin','single') NOT NULL,
+                           `bedroom_priceday` int(11) NOT NULL,
+                           `id_roomcategory` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `bedroom`
 --
 
-
 INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_priceday`, `id_roomcategory`) VALUES
-(1, 'Chambre Standard', '                                                                                                                                                                        Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> Café et thé équipements. </br> Superficie 20 m² </br> Dans votre salle de bains privative : </br> <ul> <li>Articles de toilette gratuits </li> <li>Peignoir</li> <li>Toilettes</li> <li>Baignoire ou douche</li> <li>Serviettes</li> <li>Chaussons</li> <li>Sèche-cheveux</li> <li>Papier toilette</li> <strong>Vue :</strong> <li>Vue sur la ville</li> <li>Vue sur une cour intérieure</li> </ul>                                                                                                                                                                        ', 'double', 120, 1),
-(2, 'Chambre Sup&eacute;rieure', '                                                                                    Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>                                                                                    ', 'double', 240, 2),
-(3, 'Suite Deluxe', '                            Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                            ', 'double', 1000, 3),
-(4, 'Suite Paradis', '                                                        Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                                                        ', 'double', 3000, 4);
+                                                                                                                                      (1, 'Chambre Standard', '                                                                                                                                                                        Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> Café et thé équipements. </br> Superficie 20 m² </br> Dans votre salle de bains privative : </br> <ul> <li>Articles de toilette gratuits </li> <li>Peignoir</li> <li>Toilettes</li> <li>Baignoire ou douche</li> <li>Serviettes</li> <li>Chaussons</li> <li>Sèche-cheveux</li> <li>Papier toilette</li> <strong>Vue :</strong> <li>Vue sur la ville</li> <li>Vue sur une cour intérieure</li> </ul>                                                                                                                                                                        ', 'double', 120, 1),
+                                                                                                                                      (2, 'Chambre Sup&eacute;rieure', '                                                                                    Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\r\n\r\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\r\nSuperficie 30 m² </br>\r\nDans votre salle de bains privative :</br>\r\n\r\n<ul> \r\n    <li>Articles de toilette gratuits </li> \r\n    <li>Peignoir</li> <li>Toilettes</li> \r\n    <li>Baignoire ou douche</li> <li>Serviettes</li> \r\n    <li>Chaussons</li> \r\n    <li>Sèche-cheveux</li> \r\n    <li>Papier toilette</li>\r\n    <strong>Vue :</strong> \r\n    <li>Vue sur la ville</li> \r\n    <li>Vue sur une cour intérieure</li> \r\n </ul>                                                                                    ', 'double', 240, 2),
+                                                                                                                                      (3, 'Suite Deluxe', '                            Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                            ', 'double', 1000, 3),
+                                                                                                                                      (4, 'Suite Paradis', '                                                        Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>                                                        ', 'double', 3000, 4);
 
 -- --------------------------------------------------------
 
@@ -438,8 +439,8 @@ INSERT INTO `country` (`country_id`, `country_code`, `country_fr`, `country_en`)
 --
 
 CREATE TABLE `gallery` (
-  `id_picture` int(11) NOT NULL,
-  `id_bedroom` int(11) NOT NULL
+                           `id_picture` int(11) NOT NULL,
+                           `id_bedroom` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -447,25 +448,25 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`id_picture`, `id_bedroom`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 2),
-(6, 2),
-(7, 2),
-(8, 2),
-(9, 2),
-(10, 3),
-(11, 3),
-(12, 3),
-(13, 3),
-(14, 3),
-(15, 4),
-(16, 4),
-(17, 4),
-(18, 4),
-(19, 4);
+                                                       (1, 1),
+                                                       (2, 1),
+                                                       (3, 1),
+                                                       (4, 1),
+                                                       (5, 2),
+                                                       (6, 2),
+                                                       (7, 2),
+                                                       (8, 2),
+                                                       (9, 2),
+                                                       (10, 3),
+                                                       (11, 3),
+                                                       (12, 3),
+                                                       (13, 3),
+                                                       (14, 3),
+                                                       (15, 4),
+                                                       (16, 4),
+                                                       (17, 4),
+                                                       (18, 4),
+                                                       (19, 4);
 
 -- --------------------------------------------------------
 
@@ -474,11 +475,9 @@ INSERT INTO `gallery` (`id_picture`, `id_bedroom`) VALUES
 --
 
 CREATE TABLE `lnk_services_reservation` (
-  `id_booking` int(11) NOT NULL,
-  `id_service` int(11) NOT NULL
+                                            `id_booking` int(11) NOT NULL,
+                                            `id_service` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 -- --------------------------------------------------------
 
@@ -487,10 +486,10 @@ CREATE TABLE `lnk_services_reservation` (
 --
 
 CREATE TABLE `picture` (
-  `picture_id` int(11) NOT NULL,
-  `picture_name` varchar(50) NOT NULL,
-  `picture_url` varchar(100) NOT NULL,
-  `picture_description` text NOT NULL
+                           `picture_id` int(11) NOT NULL,
+                           `picture_name` varchar(50) NOT NULL,
+                           `picture_url` varchar(100) NOT NULL,
+                           `picture_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -498,25 +497,25 @@ CREATE TABLE `picture` (
 --
 
 INSERT INTO `picture` (`picture_id`, `picture_name`, `picture_url`, `picture_description`) VALUES
-(1, 'Chambre Standard 1 ', 'public/assets/images/chambres/standard/standard_1.jpg', 'Photo Chambre Standard'),
-(2, 'Chambre Standard 2', 'public/assets/images/chambres/standard/standard_2.jpg', 'Photo Chambre Standard'),
-(3, 'Chambre Standard 3', 'public/assets/images/chambres/standard/standard_3.jpg', 'Photo Chambre Standard'),
-(4, 'Chambre Standard 4', 'public/assets/images/chambres/standard/standard_4.jpg', 'Photo Chambre Standard'),
-(5, 'Chambre Supérieure 1', 'public/assets/images/chambres/superieure/superieure_1.jpg', 'Photo de la chambre Supérieure'),
-(6, 'Chambre Supérieure 2', 'public/assets/images/chambres/superieure/superieure_2.jpg', 'Photo de la chambre Supérieure'),
-(7, 'Chambre Supérieure 3', 'public/assets/images/chambres/superieure/superieure_3.jpg', 'Photo de la chambre Supérieure'),
-(8, 'Chambre Supérieure 4', 'public/assets/images/chambres/superieure/superieure_4.jpg', 'Photo de la chambre Supérieure'),
-(9, 'Chambre Supérieure 5', 'public/assets/images/chambres/superieure/superieure_5.jpg', 'Photo de la chambre Supérieure'),
-(10, 'Suite Deluxe 1 ', 'public/assets/images/chambres/deluxe/deluxe_1.jpg', 'Photo de la Suite Deluxe.'),
-(11, 'Suite Deluxe 2', 'public/assets/images/chambres/deluxe/deluxe_2.jpg', 'Photo de la Suite Deluxe.'),
-(12, 'Suite Deluxe 3', 'public/assets/images/chambres/deluxe/deluxe_3.jpg', 'Photo de la Suite Deluxe.'),
-(13, 'Suite Deluxe 4', 'public/assets/images/chambres/deluxe/deluxe_4.jpg', 'Photo de la Suite Deluxe.'),
-(14, 'Suite Deluxe 5', 'public/assets/images/chambres/deluxe/deluxe_5.jpg', 'Photo de la Suite Deluxe.'),
-(15, 'Suite Présidentielle 1', 'public/assets/images/chambres/presidentielle/presidentielle_1.jpg', 'Photo de la suite présidentielle'),
-(16, 'Suite Présidentielle 2', 'public/assets/images/chambres/presidentielle/presidentielle_2.jpg', 'Photo de la suite présidentielle'),
-(17, 'Suite Présidentielle 3', 'public/assets/images/chambres/presidentielle/presidentielle_3.jpg', 'Photo de la suite présidentielle'),
-(18, 'Suite Présidentielle 4', 'public/assets/images/chambres/presidentielle/presidentielle_4.jpg', 'Photo de la suite présidentielle'),
-(19, 'Suite Présidentielle 5', 'public/assets/images/chambres/presidentielle/presidentielle_5.jpg', 'Photo de la suite présidentielle');
+                                                                                               (1, 'Chambre Standard 1 ', 'public/assets/images/chambres/standard/standard_1.jpg', 'Photo Chambre Standard'),
+                                                                                               (2, 'Chambre Standard 2', 'public/assets/images/chambres/standard/standard_2.jpg', 'Photo Chambre Standard'),
+                                                                                               (3, 'Chambre Standard 3', 'public/assets/images/chambres/standard/standard_3.jpg', 'Photo Chambre Standard'),
+                                                                                               (4, 'Chambre Standard 4', 'public/assets/images/chambres/standard/standard_4.jpg', 'Photo Chambre Standard'),
+                                                                                               (5, 'Chambre Supérieure 1', 'public/assets/images/chambres/superieure/superieure_1.jpg', 'Photo de la chambre Supérieure'),
+                                                                                               (6, 'Chambre Supérieure 2', 'public/assets/images/chambres/superieure/superieure_2.jpg', 'Photo de la chambre Supérieure'),
+                                                                                               (7, 'Chambre Supérieure 3', 'public/assets/images/chambres/superieure/superieure_3.jpg', 'Photo de la chambre Supérieure'),
+                                                                                               (8, 'Chambre Supérieure 4', 'public/assets/images/chambres/superieure/superieure_4.jpg', 'Photo de la chambre Supérieure'),
+                                                                                               (9, 'Chambre Supérieure 5', 'public/assets/images/chambres/superieure/superieure_5.jpg', 'Photo de la chambre Supérieure'),
+                                                                                               (10, 'Suite Deluxe 1 ', 'public/assets/images/chambres/deluxe/deluxe_1.jpg', 'Photo de la Suite Deluxe.'),
+                                                                                               (11, 'Suite Deluxe 2', 'public/assets/images/chambres/deluxe/deluxe_2.jpg', 'Photo de la Suite Deluxe.'),
+                                                                                               (12, 'Suite Deluxe 3', 'public/assets/images/chambres/deluxe/deluxe_3.jpg', 'Photo de la Suite Deluxe.'),
+                                                                                               (13, 'Suite Deluxe 4', 'public/assets/images/chambres/deluxe/deluxe_4.jpg', 'Photo de la Suite Deluxe.'),
+                                                                                               (14, 'Suite Deluxe 5', 'public/assets/images/chambres/deluxe/deluxe_5.jpg', 'Photo de la Suite Deluxe.'),
+                                                                                               (15, 'Suite Présidentielle 1', 'public/assets/images/chambres/presidentielle/presidentielle_1.jpg', 'Photo de la suite présidentielle'),
+                                                                                               (16, 'Suite Présidentielle 2', 'public/assets/images/chambres/presidentielle/presidentielle_2.jpg', 'Photo de la suite présidentielle'),
+                                                                                               (17, 'Suite Présidentielle 3', 'public/assets/images/chambres/presidentielle/presidentielle_3.jpg', 'Photo de la suite présidentielle'),
+                                                                                               (18, 'Suite Présidentielle 4', 'public/assets/images/chambres/presidentielle/presidentielle_4.jpg', 'Photo de la suite présidentielle'),
+                                                                                               (19, 'Suite Présidentielle 5', 'public/assets/images/chambres/presidentielle/presidentielle_5.jpg', 'Photo de la suite présidentielle');
 
 -- --------------------------------------------------------
 
@@ -525,11 +524,11 @@ INSERT INTO `picture` (`picture_id`, `picture_name`, `picture_url`, `picture_des
 --
 
 CREATE TABLE `restaurant` (
-  `product_id` int(11) NOT NULL,
-  `product_title` varchar(255) NOT NULL,
-  `id_restocategory` int(11) NOT NULL,
-  `product_price` float NOT NULL,
-  `product_active` tinyint(1) NOT NULL DEFAULT 1
+                              `product_id` int(11) NOT NULL,
+                              `product_title` varchar(255) NOT NULL,
+                              `id_restocategory` int(11) NOT NULL,
+                              `product_price` float NOT NULL,
+                              `product_active` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -537,30 +536,30 @@ CREATE TABLE `restaurant` (
 --
 
 INSERT INTO `restaurant` (`product_id`, `product_title`, `id_restocategory`, `product_price`, `product_active`) VALUES
-(1, 'Salade d&#039;endives aux noix', 1, 10, 1),
-(2, 'Croquettes aux crevettes grises', 1, 12, 1),
-(3, 'Terrine de campagne maison', 1, 9, 1),
-(4, 'Tomates aux crevettes', 1, 10.5, 1),
-(5, 'Moules marinières', 1, 11.5, 1),
-(6, 'Carbonade flamande accompagnée de frites maison', 2, 16.5, 1),
-(7, 'Waterzooi de poulet aux légumes de saison', 2, 15, 1),
-(8, 'Boulettes à la liégeoise avec stoemp aux carottes', 2, 14, 1),
-(9, 'Filet de saumon bio grillé avec purée de céleri-rav', 3, 18, 1),
-(10, 'Truite meunière aux amandes et pommes de terre vapeu', 3, 17.5, 1),
-(11, 'Dame Blanche', 4, 9, 1),
-(12, 'Gaufre de Liège avec chantilly et fruits frais ', 4, 9, 1),
-(13, 'Crème brûlée à la vanille bourbon', 4, 9, 1),
-(14, 'Mousse au chocolat belge', 4, 7, 1),
-(15, 'Bières belges sélectionnées', 5, 7, 1),
-(16, 'Sélection de vins de la région (verre)', 5, 5, 1),
-(17, 'Sélection de vins de la région (Bouteille)\r\n', 5, 25, 1),
-(18, 'Café', 6, 2.5, 1),
-(19, 'Cappucinno', 6, 3, 1),
-(20, 'Thé', 6, 2.5, 1),
-(21, 'Chocolat chaud', 6, 3, 1),
-(22, 'Eau minérale plate ou gazeuse ', 7, 2.5, 1),
-(23, 'Jus de fruits bio', 7, 3.5, 1),
-(24, 'Limonade artisanale', 7, 3, 1);
+                                                                                                                    (1, 'Salade d&#039;endives aux noix', 1, 10, 1),
+                                                                                                                    (2, 'Croquettes aux crevettes grises', 1, 12, 1),
+                                                                                                                    (3, 'Terrine de campagne maison', 1, 9, 1),
+                                                                                                                    (4, 'Tomates aux crevettes', 1, 10.5, 1),
+                                                                                                                    (5, 'Moules marinières', 1, 11.5, 1),
+                                                                                                                    (6, 'Carbonade flamande accompagnée de frites maison', 2, 16.5, 1),
+                                                                                                                    (7, 'Waterzooi de poulet aux légumes de saison', 2, 15, 1),
+                                                                                                                    (8, 'Boulettes à la liégeoise avec stoemp aux carottes', 2, 14, 1),
+                                                                                                                    (9, 'Filet de saumon bio grillé avec purée de céleri-rav', 3, 18, 1),
+                                                                                                                    (10, 'Truite meunière aux amandes et pommes de terre vapeu', 3, 17.5, 1),
+                                                                                                                    (11, 'Dame Blanche', 4, 9, 1),
+                                                                                                                    (12, 'Gaufre de Liège avec chantilly et fruits frais ', 4, 9, 1),
+                                                                                                                    (13, 'Crème brûlée à la vanille bourbon', 4, 9, 1),
+                                                                                                                    (14, 'Mousse au chocolat belge', 4, 7, 1),
+                                                                                                                    (15, 'Bières belges sélectionnées', 5, 7, 1),
+                                                                                                                    (16, 'Sélection de vins de la région (verre)', 5, 5, 1),
+                                                                                                                    (17, 'Sélection de vins de la région (Bouteille)\r\n', 5, 25, 1),
+                                                                                                                    (18, 'Café', 6, 2.5, 1),
+                                                                                                                    (19, 'Cappucinno', 6, 3, 1),
+                                                                                                                    (20, 'Thé', 6, 2.5, 1),
+                                                                                                                    (21, 'Chocolat chaud', 6, 3, 1),
+                                                                                                                    (22, 'Eau minérale plate ou gazeuse ', 7, 2.5, 1),
+                                                                                                                    (23, 'Jus de fruits bio', 7, 3.5, 1),
+                                                                                                                    (24, 'Limonade artisanale', 7, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -569,11 +568,11 @@ INSERT INTO `restaurant` (`product_id`, `product_title`, `id_restocategory`, `pr
 --
 
 CREATE TABLE `services_bedroom` (
-  `service_id` int(11) NOT NULL,
-  `service_name` varchar(200) NOT NULL,
-  `service_price` int(11) NOT NULL,
-  `service_active` tinyint(1) NOT NULL,
-  `service_picture` varchar(150) NOT NULL
+                                    `service_id` int(11) NOT NULL,
+                                    `service_name` varchar(200) NOT NULL,
+                                    `service_price` int(11) NOT NULL,
+                                    `service_active` tinyint(1) NOT NULL,
+                                    `service_picture` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -581,10 +580,10 @@ CREATE TABLE `services_bedroom` (
 --
 
 INSERT INTO `services_bedroom` (`service_id`, `service_name`, `service_price`, `service_active`, `service_picture`) VALUES
-(1, 'Petit-déjeuner', 35, 1, 'public/assets/images/services/dejeuner.png'),
-(2, 'Bouteille de champagne en Chambre', 50, 1, 'public/assets/images/services/champagne.png'),
-(3, 'Boite de chocolat Darcis', 18, 1, 'public/assets/images/services/chocolat.png'),
-(4, 'Bouteille de Cava en Chambre', 25, 1, 'public/assets/images/services/champagne.png');
+                                                                                                                        (1, 'Petit-déjeuner', 35, 1, 'public/assets/images/services/dejeuner.png'),
+                                                                                                                        (2, 'Bouteille de champagne en Chambre', 50, 1, 'public/assets/images/services/champagne.png'),
+                                                                                                                        (3, 'Boite de chocolat Darcis', 18, 1, 'public/assets/images/services/chocolat.png'),
+                                                                                                                        (4, 'Bouteille de Cava en Chambre', 25, 1, 'public/assets/images/services/champagne.png');
 
 -- --------------------------------------------------------
 
@@ -593,12 +592,12 @@ INSERT INTO `services_bedroom` (`service_id`, `service_name`, `service_price`, `
 --
 
 CREATE TABLE `spa` (
-  `spa_id` int(11) NOT NULL,
-  `id_spacategory` int(11) NOT NULL,
-  `spa_title` varchar(255) DEFAULT NULL,
-  `spa_time` int(11) DEFAULT NULL,
-  `spa_price` decimal(10,2) DEFAULT NULL,
-  `spa_active` tinyint(1) NOT NULL
+                       `spa_id` int(11) NOT NULL,
+                       `id_spacategory` int(11) NOT NULL,
+                       `spa_title` varchar(255) DEFAULT NULL,
+                       `spa_time` int(11) DEFAULT NULL,
+                       `spa_price` decimal(10,2) DEFAULT NULL,
+                       `spa_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -606,40 +605,40 @@ CREATE TABLE `spa` (
 --
 
 INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_price`, `spa_active`) VALUES
-(1, 1, 'Massage relaxant', 30, '50.00', 1),
-(2, 1, 'Massage relaxant', 60, '85.00', 1),
-(3, 1, 'Massage relaxant', 90, '120.00', 1),
-(4, 1, 'Massage suédois', 60, '95.00', 1),
-(5, 1, 'Massage suédois', 90, '130.00', 1),
-(6, 1, 'Massage profond des tissus', 60, '100.00', 1),
-(7, 1, 'Massage profond des tissus', 90, '140.00', 1),
-(8, 1, 'Massage aux pierres chaudes', 60, '110.00', 1),
-(9, 1, 'Massage aux pierres chaudes', 90, '150.00', 1),
-(10, 1, 'Massage thaï', 60, '110.00', 1),
-(11, 1, 'Massage thaï', 90, '150.00', 1),
-(12, 1, 'Massage pour enfants', 30, '45.00', 1),
-(13, 2, 'Soin du visage hydratant', 60, '85.00', 1),
-(14, 2, 'Soin du visage anti-âge', 60, '95.00', 1),
-(15, 2, 'Soin du visage éclaircissant', 60, '90.00', 1),
-(16, 2, 'Soin du visage purifiant', 60, '85.00', 1),
-(17, 2, 'Soin du visage aux acides de fruits', 60, '95.00', 1),
-(18, 2, 'Soin du visage pour homme', 60, '80.00', 1),
-(19, 3, 'Soin du corps hydratant', 60, '100.00', 1),
-(20, 3, 'Soin du corps exfoliant', 60, '100.00', 1),
-(21, 3, 'Soin du corps minceur', 90, '140.00', 1),
-(22, 3, 'Enveloppement corporel &agrave; l&#039;argile', 60, '110.00', 1),
-(23, 3, 'Enveloppement corporel aux algues', 60, '110.00', 1),
-(24, 3, 'Enveloppement corporel au chocolat', 60, '120.00', 1),
-(25, 3, 'Gommage corporel à la noix de coco', 30, '60.00', 1),
-(26, 4, 'Manucure classique', 45, '50.00', 1),
-(27, 4, 'Manucure française', 60, '60.00', 1),
-(28, 4, 'Pédicure classique', 45, '60.00', 1),
-(29, 4, 'Pédicure française', 60, '70.00', 1),
-(30, 4, 'Pose de vernis simple', 15, '20.00', 1),
-(31, 4, 'Pose de vernis semi-permanent', 45, '50.00', 1),
-(32, 5, 'Réflexologie plantaire', 45, '70.00', 1),
-(33, 5, 'Séance de yoga privée', 60, '90.00', 1),
-(34, 5, 'S&eacute;ance de m&eacute;ditation guid&eacute;e', 30, '45.00', 1);
+                                                                                                       (1, 1, 'Massage relaxant', 30, '50.00', 1),
+                                                                                                       (2, 1, 'Massage relaxant', 60, '85.00', 1),
+                                                                                                       (3, 1, 'Massage relaxant', 90, '120.00', 1),
+                                                                                                       (4, 1, 'Massage suédois', 60, '95.00', 1),
+                                                                                                       (5, 1, 'Massage suédois', 90, '130.00', 1),
+                                                                                                       (6, 1, 'Massage profond des tissus', 60, '100.00', 1),
+                                                                                                       (7, 1, 'Massage profond des tissus', 90, '140.00', 1),
+                                                                                                       (8, 1, 'Massage aux pierres chaudes', 60, '110.00', 1),
+                                                                                                       (9, 1, 'Massage aux pierres chaudes', 90, '150.00', 1),
+                                                                                                       (10, 1, 'Massage thaï', 60, '110.00', 1),
+                                                                                                       (11, 1, 'Massage thaï', 90, '150.00', 1),
+                                                                                                       (12, 1, 'Massage pour enfants', 30, '45.00', 1),
+                                                                                                       (13, 2, 'Soin du visage hydratant', 60, '85.00', 1),
+                                                                                                       (14, 2, 'Soin du visage anti-âge', 60, '95.00', 1),
+                                                                                                       (15, 2, 'Soin du visage éclaircissant', 60, '90.00', 1),
+                                                                                                       (16, 2, 'Soin du visage purifiant', 60, '85.00', 1),
+                                                                                                       (17, 2, 'Soin du visage aux acides de fruits', 60, '95.00', 1),
+                                                                                                       (18, 2, 'Soin du visage pour homme', 60, '80.00', 1),
+                                                                                                       (19, 3, 'Soin du corps hydratant', 60, '100.00', 1),
+                                                                                                       (20, 3, 'Soin du corps exfoliant', 60, '100.00', 1),
+                                                                                                       (21, 3, 'Soin du corps minceur', 90, '140.00', 1),
+                                                                                                       (22, 3, 'Enveloppement corporel &agrave; l&#039;argile', 60, '110.00', 1),
+                                                                                                       (23, 3, 'Enveloppement corporel aux algues', 60, '110.00', 1),
+                                                                                                       (24, 3, 'Enveloppement corporel au chocolat', 60, '120.00', 1),
+                                                                                                       (25, 3, 'Gommage corporel à la noix de coco', 30, '60.00', 1),
+                                                                                                       (26, 4, 'Manucure classique', 45, '50.00', 1),
+                                                                                                       (27, 4, 'Manucure française', 60, '60.00', 1),
+                                                                                                       (28, 4, 'Pédicure classique', 45, '60.00', 1),
+                                                                                                       (29, 4, 'Pédicure française', 60, '70.00', 1),
+                                                                                                       (30, 4, 'Pose de vernis simple', 15, '20.00', 1),
+                                                                                                       (31, 4, 'Pose de vernis semi-permanent', 45, '50.00', 1),
+                                                                                                       (32, 5, 'Réflexologie plantaire', 45, '70.00', 1),
+                                                                                                       (33, 5, 'Séance de yoga privée', 60, '90.00', 1),
+                                                                                                       (34, 5, 'S&eacute;ance de m&eacute;ditation guid&eacute;e', 30, '45.00', 1);
 
 --
 -- Index pour les tables déchargées
@@ -649,21 +648,21 @@ INSERT INTO `spa` (`spa_id`, `id_spacategory`, `spa_title`, `spa_time`, `spa_pri
 -- Index pour la table `account`
 --
 ALTER TABLE `account`
-  ADD PRIMARY KEY (`acc_id`),
+    ADD PRIMARY KEY (`acc_id`),
   ADD KEY `FK_account_acc_country` (`acc_id_country`);
 
 --
 -- Index pour la table `bedroom`
 --
 ALTER TABLE `bedroom`
-  ADD PRIMARY KEY (`bedroom_id`),
+    ADD PRIMARY KEY (`bedroom_id`),
   ADD KEY `FK_category_beedroom` (`id_roomcategory`);
 
 --
 -- Index pour la table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD PRIMARY KEY (`booking_id`),
+    ADD PRIMARY KEY (`booking_id`),
   ADD KEY `FK_account_bookings` (`id_acc`),
   ADD KEY `FK_bedroom_bookings` (`id_bedroom`),
   ADD KEY `cus_id_country` (`cus_id_country`);
@@ -672,64 +671,64 @@ ALTER TABLE `bookings`
 -- Index pour la table `category_bedroom`
 --
 ALTER TABLE `category_bedroom`
-  ADD PRIMARY KEY (`roomcategory_id`);
+    ADD PRIMARY KEY (`roomcategory_id`);
 
 --
 -- Index pour la table `category_restaurant`
 --
 ALTER TABLE `category_restaurant`
-  ADD PRIMARY KEY (`restocategory_id`);
+    ADD PRIMARY KEY (`restocategory_id`);
 
 --
 -- Index pour la table `category_spa`
 --
 ALTER TABLE `category_spa`
-  ADD PRIMARY KEY (`spacategory_id`);
+    ADD PRIMARY KEY (`spacategory_id`);
 
 --
 -- Index pour la table `country`
 --
 ALTER TABLE `country`
-  ADD PRIMARY KEY (`country_id`);
+    ADD PRIMARY KEY (`country_id`);
 
 --
 -- Index pour la table `gallery`
 --
 ALTER TABLE `gallery`
-  ADD KEY `FK_Picture_bedroom` (`id_bedroom`),
+    ADD KEY `FK_Picture_bedroom` (`id_bedroom`),
   ADD KEY `FK_Picture_id` (`id_picture`);
 
 --
 -- Index pour la table `lnk_services_reservation`
 --
 ALTER TABLE `lnk_services_reservation`
-  ADD PRIMARY KEY (`id_booking`,`id_service`),
+    ADD PRIMARY KEY (`id_booking`,`id_service`),
   ADD KEY `id_service` (`id_service`);
 
 --
 -- Index pour la table `picture`
 --
 ALTER TABLE `picture`
-  ADD PRIMARY KEY (`picture_id`);
+    ADD PRIMARY KEY (`picture_id`);
 
 --
 -- Index pour la table `restaurant`
 --
 ALTER TABLE `restaurant`
-  ADD PRIMARY KEY (`product_id`),
+    ADD PRIMARY KEY (`product_id`),
   ADD KEY `id_restocategory` (`id_restocategory`);
 
 --
 -- Index pour la table `services_bedroom`
 --
 ALTER TABLE `services_bedroom`
-  ADD PRIMARY KEY (`service_id`);
+    ADD PRIMARY KEY (`service_id`);
 
 --
 -- Index pour la table `spa`
 --
 ALTER TABLE `spa`
-  ADD PRIMARY KEY (`spa_id`),
+    ADD PRIMARY KEY (`spa_id`),
   ADD KEY `index_category` (`id_spacategory`);
 
 --
@@ -740,67 +739,67 @@ ALTER TABLE `spa`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+    MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT pour la table `bedroom`
 --
 ALTER TABLE `bedroom`
-  MODIFY `bedroom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `bedroom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT;
+    MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `category_bedroom`
 --
 ALTER TABLE `category_bedroom`
-  MODIFY `roomcategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+    MODIFY `roomcategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `category_restaurant`
 --
 ALTER TABLE `category_restaurant`
-  MODIFY `restocategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+    MODIFY `restocategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT pour la table `category_spa`
 --
 ALTER TABLE `category_spa`
-  MODIFY `spacategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+    MODIFY `spacategory_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `country`
 --
 ALTER TABLE `country`
-  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
+    MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
 
 --
 -- AUTO_INCREMENT pour la table `picture`
 --
 ALTER TABLE `picture`
-  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+    MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `restaurant`
 --
 ALTER TABLE `restaurant`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+    MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT pour la table `services_bedroom`
 --
 ALTER TABLE `services_bedroom`
-  MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+    MODIFY `service_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `spa`
 --
 ALTER TABLE `spa`
-  MODIFY `spa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+    MODIFY `spa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Contraintes pour les tables déchargées
@@ -810,19 +809,19 @@ ALTER TABLE `spa`
 -- Contraintes pour la table `account`
 --
 ALTER TABLE `account`
-  ADD CONSTRAINT `FK_account_acc_country` FOREIGN KEY (`acc_id_country`) REFERENCES `country` (`country_id`);
+    ADD CONSTRAINT `FK_account_acc_country` FOREIGN KEY (`acc_id_country`) REFERENCES `country` (`country_id`);
 
 --
 -- Contraintes pour la table `bedroom`
 --
 ALTER TABLE `bedroom`
-  ADD CONSTRAINT `FK_category_beedroom` FOREIGN KEY (`id_roomcategory`) REFERENCES `category_bedroom` (`roomcategory_id`);
+    ADD CONSTRAINT `FK_category_beedroom` FOREIGN KEY (`id_roomcategory`) REFERENCES `category_bedroom` (`roomcategory_id`);
 
 --
 -- Contraintes pour la table `bookings`
 --
 ALTER TABLE `bookings`
-  ADD CONSTRAINT `FK_account_bookings` FOREIGN KEY (`id_acc`) REFERENCES `account` (`acc_id`),
+    ADD CONSTRAINT `FK_account_bookings` FOREIGN KEY (`id_acc`) REFERENCES `account` (`acc_id`),
   ADD CONSTRAINT `FK_bedroom_bookings` FOREIGN KEY (`id_bedroom`) REFERENCES `bedroom` (`bedroom_id`),
   ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`cus_id_country`) REFERENCES `country` (`country_id`);
 
@@ -830,27 +829,27 @@ ALTER TABLE `bookings`
 -- Contraintes pour la table `gallery`
 --
 ALTER TABLE `gallery`
-  ADD CONSTRAINT `FK_Picture_bedroom` FOREIGN KEY (`id_bedroom`) REFERENCES `bedroom` (`bedroom_id`),
+    ADD CONSTRAINT `FK_Picture_bedroom` FOREIGN KEY (`id_bedroom`) REFERENCES `bedroom` (`bedroom_id`),
   ADD CONSTRAINT `FK_Picture_id` FOREIGN KEY (`id_picture`) REFERENCES `picture` (`picture_id`);
 
 --
 -- Contraintes pour la table `lnk_services_reservation`
 --
 ALTER TABLE `lnk_services_reservation`
-  ADD CONSTRAINT `lnk_services_reservation_ibfk_1` FOREIGN KEY (`id_service`) REFERENCES `services_bedroom` (`service_id`),
+    ADD CONSTRAINT `lnk_services_reservation_ibfk_1` FOREIGN KEY (`id_service`) REFERENCES `services_bedroom` (`service_id`),
   ADD CONSTRAINT `lnk_services_reservation_ibfk_2` FOREIGN KEY (`id_booking`) REFERENCES `bookings` (`booking_id`);
 
 --
 -- Contraintes pour la table `restaurant`
 --
 ALTER TABLE `restaurant`
-  ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`id_restocategory`) REFERENCES `category_restaurant` (`restocategory_id`);
+    ADD CONSTRAINT `restaurant_ibfk_1` FOREIGN KEY (`id_restocategory`) REFERENCES `category_restaurant` (`restocategory_id`);
 
 --
 -- Contraintes pour la table `spa`
 --
 ALTER TABLE `spa`
-  ADD CONSTRAINT `spa_ibfk_1` FOREIGN KEY (`id_spacategory`) REFERENCES `category_spa` (`spacategory_id`);
+    ADD CONSTRAINT `spa_ibfk_1` FOREIGN KEY (`id_spacategory`) REFERENCES `category_spa` (`spacategory_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

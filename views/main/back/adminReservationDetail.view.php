@@ -1,5 +1,4 @@
 <div class="container-fluid shadow-lg p-3 mb-5 mt-5 bg-body rounded mx-auto">
-    <?php var_dump($_POST); ?>
     <div class="w-75 mx-auto">
         <h2 class="mt-3">Descriptif de la réservation</h2>
         <div class="row mt-4">
@@ -9,7 +8,7 @@
                     <p>ID de réservation : <strong><?php echo $reservation['booking_id']; ?></strong></p>
                     <p>Date de début : <strong><?php echo $reservation['booking_date_begin']; ?></strong></p>
                     <p>Heure d'arrivée : <strong><?php echo $reservation['booking_arrival_time']; ?></strong></p>
-                    <?php if (!empty($reservation['services']) && !is_null($reservation['services'])) : ?>
+                    <?php if (is_null($reservation['services'])) : ?>
                         <div class="card-text-column">
                             <p>Services :</p>
                             <ul>
@@ -68,14 +67,21 @@
             </div>
         </div>
         <div class="row mt-3">
+            <h5 class="mb-3">Actions</h5>
             <div class="col-md-6">
-                <h5>Actions</h5>
+                <a href="adminReservation" class="btn btn-outline-dark">Retour Réservation</a>
+            </div>
+            <div class="col-md-6">
                 <form action="" method="POST">
-                    <button type="button" class="btn btn-danger"
-                            name="cancelReservation"
+                    <input type="hidden" name="bookingId" value="<?php echo $reservation['booking_id']; ?>">
+                    <?php if ($reservation['booking_validation'] == 0) : ?>
+                        <button type="submit" class="btn btn-success" name="validateValidation"
+                                onclick="return confirm('Êtes-vous sûr de vouloir confirmer votre réservation')">Valider</button>
+                    <?php endif; ?>
+                    <?php if ($reservation['booking_cancelation'] == 0) : ?>
+                    <button type="submit" class="btn btn-danger" name="cancelReservation"
                             onclick="return confirm('Êtes-vous sûr de vouloir annuler votre réservation')">Annuler</button>
-                    <button type="button" class="btn btn-success" name="validateValidation"
-                            onclick="return confirm('Êtes-vous sûr de vouloir confirmer votre réservation')">Valider</button>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>

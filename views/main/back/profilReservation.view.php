@@ -5,6 +5,7 @@
         <h3 class="mb-3">Vos prochaines réservation</h3>
         <div class="accordion" id="upcomingReservationsAccordion">
             <?php foreach ($upcomingReservations as $reservation) {
+
                 // Permets de calculer le nombre de jours entre le début et la fin
                 $dateBegin = date_create($reservation['booking_date_begin']);
                 $dateEnd = date_create($reservation['booking_date_end']);
@@ -52,7 +53,12 @@
         <h3 class="mb-3">Vos réservations passées</h3>
 
         <div class="accordion mb-5" id="pastReservationsAccordion">
-            <?php foreach ($pastReservations as $reservation) { ?>
+            <?php foreach ($pastReservations as $reservation) {
+                $dateBegin = date_create($reservation['booking_date_begin']);
+                $dateEnd = date_create($reservation['booking_date_end']);
+                $diff = date_diff($dateBegin, $dateEnd);
+                $numberOfNights = $diff->format('%a');
+                ?>
                 <div class="accordion-item">
                     <h3 class="accordion-header" id="reservationHeading<?= $reservation['booking_id'] ?>">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $reservation['booking_id'] ?>" aria-expanded="true" aria-controls="collapse<?= $reservation['booking_id'] ?>" data-bs-parent="#pastReservationsAccordion">
@@ -75,11 +81,19 @@
                                         <p><strong>Prix :</strong> <?= $reservation['booking_price_total'] ?> €</p>
                                     </div>
                                 </div>
+                                <?php if ($reservation['booking_validation'] == 0): ?>
+                                    <p><strong>Réservation: <span class="text-danger">Annulé</span></strong></p>
+                                    <p>Votre réservation doit être validée par notre équipe avant de recevoir les modalités de paiement. Si vous souhaitez annuler votre réservation, veuillez nous contacter par e-mail ou par téléphone en précisant votre numéro de réservation. Merci. </p>
+                                <?php endif; ?>
+
                             </div>
                         </div>
                     </div>
                 </div>
             <?php } ?>
         </div>
+    </div>
+    <div class="text-center">
+        <a href="dashboard" class="btn btn-danger">Retour Menu</a>
     </div>
 </div>
