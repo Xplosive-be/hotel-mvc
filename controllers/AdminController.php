@@ -250,8 +250,7 @@ class AdminController
 
     public function adminManagerBedPicture()
     {
-
-        if (Securite::verifAccessSession() & isset($_GET['idEditBed'])) {
+        if (Securite::verifAccessSession() && isset($_GET['idEditBed'])) {
             $_SESSION['idEditBed'] = Securite::secureHTML($_GET['idEditBed']);
             if (isset($_POST['btnAddPic'])) {
                 if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
@@ -268,7 +267,7 @@ class AdminController
                             move_uploaded_file($_FILES['image']['tmp_name'], 'public/assets/images/chambres/uploads/' . $uniqueName);
                             // On renomme notre image avec une clé unique suivie du nom du fichier
                             // Rajouter la photo dans la table picture
-                            $this->adminManager->addBedPicture($uniqueName);
+                            $this->adminManager->addBedPicture($uniqueName, $_SESSION['idEditBed']);
                             $_SESSION['alert'] = [
                                 "message" => "Admin - La photo a été rajoutée avec succès.",
                                 "type" => 'alert-success'
@@ -589,9 +588,10 @@ class AdminController
             $search_name = isset($_POST['search_name']) ? $_POST['search_name'] : '';
             $show_cancelled = isset($_POST['show_cancelled']) ? 1 : 0;
             $show_validated = isset($_POST['show_validated']) ? 1 : 0;
+            $booking_id = isset($_POST['booking_id']) ? $_POST['booking_id'] : null;
 
             if (isset($_POST['btnSearch'])) {
-                $reservations = $this->adminManager->filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated);
+                $reservations = $this->adminManager->filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated, $booking_id);
             } else {
                 $reservations = $this->adminManager->adminReservation();
             }

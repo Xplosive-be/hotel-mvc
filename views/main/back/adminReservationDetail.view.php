@@ -8,6 +8,7 @@
                     <p>ID de réservation : <strong><?php echo $reservation['booking_id']; ?></strong></p>
                     <p>Date de début : <strong><?php echo $reservation['booking_date_begin']; ?></strong></p>
                     <p>Heure d'arrivée : <strong><?php echo $reservation['booking_arrival_time']; ?></strong></p>
+                    <p>Réservation par <strong><?php echo $reservation['acc_surname'] . ' ' . $reservation['acc_name'] .' [ID : ' . $reservation['acc_id']. '] ' ?></strong></p>
                     <?php if (is_null($reservation['services'])) : ?>
                         <div class="card-text-column">
                             <p>Services :</p>

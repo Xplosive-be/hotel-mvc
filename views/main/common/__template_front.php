@@ -24,7 +24,7 @@
     <?php require_once("views/main/common/__menu.php"); ?>
     <?php if (!empty($_SESSION['alert'])) : ?>
         <div class="alert font-weight-bold text-center <?= $_SESSION['alert']['type']; ?>" role="alert">
-            <?php $_SESSION['alert']['message']; ?>
+            <?php echo $_SESSION['alert']['message']; ?>
         </div>
         <?php
         unset($_SESSION['alert']);

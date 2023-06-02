@@ -1,22 +1,27 @@
 <div class="container-fluid shadow-lg p-3 mb-5 mt-5 bg-body rounded mx-auto">
     <div class="ms-3 me-3">
         <h1 class="text-center my-3 text-danger fw-bolder mb-5">Gestionnaire des Réservations</h1>
-        <form action="" method="POST" class="mb-3">
+        <form action="adminReservation" method="POST" class="mb-3">
             <div class="row">
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <label for="dateBegin" class="form-label">Date de début :</label>
                     <input type="date" class="form-control" id="dateBegin" name="dateBegin"
                            value="<?= isset($_POST['dateBegin']) ? $_POST['dateBegin'] : '' ?>">
                 </div>
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <label for="dateEnd" class="form-label">Date de départ
                         :</label>
                     <input type="date" class="form-control" id="dateEnd" name="dateEnd"
                            value="<?= isset($_POST['dateEnd']) ?
                                $_POST['dateEnd'] : '' ?>">
                 </div>
-                <div class="col-md-4 mb-2">
-                    <label for="search_name" class="form-label">Recherche par nom :</label>
+                <div class="col-md-3 mb-2">
+                    <label for="booking_id" class="form-label">Numéro de réservation :</label>
+                    <input type="text" class="form-control" id="booking_id" name="booking_id"
+                           value="<?= isset($_POST['booking_id']) ? $_POST['booking_id'] : '' ?>">
+                </div>
+                <div class="col-md-3 mb-2">
+                    <label for="search_name" class="form-label">Nom ou Prénom :</label>
                     <input type="text" class="form-control" id="search_name" name="search_name"
                            value="<?= isset($_POST['search_name']) ? $_POST['search_name'] : '' ?>">
                 </div>
@@ -68,7 +73,7 @@
                         <p class="fw-bold mb-1"><?= $reservation["booking_id"] ?></p>
                     </td>
                     <td>
-                        <p class="fw-bold mb-1"><?= $reservation["acc_name"] . " " .$reservation["acc_surname"]  ?></p>
+                        <p class="fw-bold mb-1"><?= $reservation["cus_name"] . " " .$reservation["cus_surname"]  ?></p>
                     </td>
                     <td>
                         <p class="fw-bold mb-1"><?= $reservation["bedroom_name"] ?></p>

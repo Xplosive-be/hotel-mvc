@@ -73,7 +73,7 @@ class AdminManager extends Model
         $stmt->closeCursor();
     }
 
-    public function addBedPicture($uniqueName)
+    public function addBedPicture($uniqueName, $idEditBed)
     {
         $pictureUrl = 'public/assets/images/chambres/uploads/' . $uniqueName;
         $stmt = $this->getBdd()->prepare('INSERT INTO `picture` (`picture_name`, `picture_url`, `picture_description`) VALUES (:picture_name, :picture_url, :picture_description)');
@@ -90,10 +90,12 @@ class AdminManager extends Model
         // la requête pour lier la photo avec l'id de la chambre dans la gallery
         $stmt = $this->getBdd()->prepare('INSERT INTO `gallery` (`id_picture`, `id_bedroom`) VALUES (:id_picture, :id_bedroom)');
         $stmt->bindParam(':id_picture', $idpicture[0]['picture_id']);
-        $stmt->bindParam(':id_bedroom', $_SESSION['idEditPic']);
+        $stmt->bindParam(':id_bedroom', $idEditBed);
         $stmt->execute();
     }
-    public function verificationPicture($idPicture, $idBedroom){
+
+    public function verificationPicture($idPicture, $idBedroom)
+    {
         $stmt = $this->getBdd()->prepare('SELECT * FROM `gallery` WHERE `id_picture` = :idPicture AND `id_bedroom` = :idBedroom');
         $stmt->bindParam(':idPicture', $idPicture);
         $stmt->bindParam(':idBedroom', $idBedroom);
@@ -101,6 +103,7 @@ class AdminManager extends Model
         $verificationPicture = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $verificationPicture;
     }
+
     public function deleteIDPicture($idPicture, $idBedroom)
     {
         $stmt = $this->getBdd()->prepare('SELECT `picture_url` FROM `picture` WHERE `picture_id` = :idPicture');
@@ -188,7 +191,7 @@ class AdminManager extends Model
         $stmt->bindParam(':productId', $delIdResto);
         $stmt->execute();
     }
-    public function filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated) {
+    public function filterBookings($date_begin, $date_end, $search_name, $show_cancelled, $show_validated, $booking_id) {
         // Initialisation des conditions
         $conditions = [];
         $params = [];
@@ -204,8 +207,8 @@ class AdminManager extends Model
         }
         if ($search_name) {
             $conditions[] = '(cus_name LIKE ? OR cus_surname LIKE ?)';
-            $params[] = '%'.$search_name.'%';
-            $params[] = '%'.$search_name.'%';
+            $params[] = '%' . $search_name . '%';
+            $params[] = '%' . $search_name . '%';
         }
         if ($show_cancelled) {
             $conditions[] = 'booking_cancelation = 1';
@@ -213,18 +216,20 @@ class AdminManager extends Model
         if ($show_validated) {
             $conditions[] = 'booking_validation = 1';
         }
-
+        if ($booking_id) {
+            $conditions[] = 'bookings.booking_id = ?';
+            $params[] = $booking_id;
+        }
 
         // Construction de la requête SQL
-        $sql = 'SELECT bookings.booking_id, account.acc_name, account.acc_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
-        FROM bookings 
-        INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
-        INNER JOIN account ON bookings.id_acc = account.acc_id';
+        $sql = 'SELECT bookings.booking_id, bookings.cus_name, bookings.cus_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
+    FROM bookings 
+    INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
+    INNER JOIN account ON bookings.id_acc = account.acc_id';
         if ($conditions) {
             $sql .= ' WHERE ' . implode(' AND ', $conditions);
         }
-        $sql .= ' ORDER BY 
-    bookings.booking_id ASC';
+        $sql .= ' ORDER BY bookings.booking_id ASC';
 
         // Préparation et exécution de la requête
         $stmt = $this->getBdd()->prepare($sql);
@@ -235,9 +240,8 @@ class AdminManager extends Model
 
         return $results;
     }
-
     public function adminReservation(){
-        $stmt = $this->getBdd()->prepare('SELECT bookings.booking_id, account.acc_name, account.acc_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
+        $stmt = $this->getBdd()->prepare('SELECT bookings.booking_id, bookings.cus_name, bookings.cus_surname, bedroom.bedroom_name, bookings.booking_date_begin, bookings.booking_date_end, bookings.booking_price_total, bookings.booking_validation, bookings.booking_cancelation 
     FROM bookings 
     INNER JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
     INNER JOIN account ON bookings.id_acc = account.acc_id
@@ -252,11 +256,12 @@ class AdminManager extends Model
     public function getReservationById($id)
     {
         $stmt = $this->getBdd()->prepare('
-        SELECT bookings.*, bedroom.bedroom_name, services_bedroom.service_name 
+        SELECT bookings.*, bedroom.bedroom_name, services_bedroom.service_name , account.acc_surname , account.acc_name , account.acc_id
         FROM bookings 
         LEFT JOIN bedroom ON bookings.id_bedroom = bedroom.bedroom_id 
         LEFT JOIN lnk_services_reservation ON bookings.booking_id = lnk_services_reservation.id_booking 
         LEFT JOIN services_bedroom ON lnk_services_reservation.id_service = services_bedroom.service_id 
+        INNER JOIN account ON bookings.id_acc = account.acc_id
         WHERE bookings.booking_id = :booking_id');
 
         // Lier l'ID de réservation à la requête
