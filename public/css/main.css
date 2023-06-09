@@ -132,9 +132,9 @@
 }
 
 .carousel-img {
-  width: 578px; /* Remplacez 500px par la taille souhaitée */
+  width: 650px; /* Remplacez 500px par la taille souhaitée */
   height: 500px; /* Remplacez 300px par la taille souhaitée */
-  object-fit: contain;
+  object-fit: fill;
 }
 
   /*Réservation*/

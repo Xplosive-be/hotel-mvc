@@ -11,12 +11,11 @@
                         </div>
                         <div class="mb-3 col-12">
                             <label for="description" class="form-label">Description (code en html)</label>
-                            <textarea class="form-control" id="description" rows="12" name="description">
-                            </textarea>
+                            <textarea class="form-control" id="description" rows="12" name="description"></textarea>
                         </div>
-                        <div class="col-sm-3 mb-1">
-                            <label for="typeBed">Type de lit : </label></br>
-                            <select name="typeBed">
+                        <div class="col-sm mb-1">
+                            <label for="typeBed" class="form-label">Type de lit : </label></br>
+                            <select name="typeBed"class="form-select">
                                 <option value="double">Double</option>
                                 <option value="twin"> Jumelle</option>
                                 <option value="single">Simple</option>

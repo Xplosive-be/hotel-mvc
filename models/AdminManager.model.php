@@ -33,7 +33,7 @@ class AdminManager extends Model
     function getBedroomFromId($idBedroom)
     {
         $stmt = $this->getBdd()->prepare('
-        SELECT bedroom_id,bedroom_name,bedroom_description,bedroom_bed,bedroom_priceday, category_bedroom.roomcategory_name FROM bedroom
+        SELECT bedroom_id,bedroom_name,bedroom_description,bedroom_bed,bedroom_priceday, bedroom.id_roomcategory, category_bedroom.roomcategory_name FROM bedroom
         INNER JOIN category_bedroom ON  bedroom.id_roomcategory = category_bedroom.roomcategory_id
         WHERE bedroom_id = :idBedroom');
         $stmt->bindValue(":idBedroom", $idBedroom);

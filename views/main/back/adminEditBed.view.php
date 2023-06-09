@@ -11,9 +11,7 @@
                         </div>
                         <div class="mb-3 col-12">
                             <label for="description" class="form-label">Description (code en html)</label>
-                            <textarea class="form-control" id="description" rows="12" name="description">
-                            <?php echo $bedroomById['bedroom_description'] ?>
-                            </textarea>
+                            <textarea class="form-control" id="description" rows="12" name="description"><?php echo $bedroomById['bedroom_description'] ?></textarea>
                         </div>
                         <div class="col-sm mb-1">
                             <label for="typeBed" class="form-label">Type de lit : </label></br>
@@ -28,7 +26,8 @@
                             <select class="form-select" id="category" name="category" required>
                                 <?php
                                 foreach ($CategoryBedList as $category) {
-                                    echo '<option value="' . $category['roomcategory_id'] . '"' . (($bedroomById['id_roomcategory'] == $category['roomcategory_id']) ? ' selected' : '') . '>' . $category['roomcategory_name'] . '</option>';
+                                    $selected = ($bedroomById['id_roomcategory'] == $category['roomcategory_id']) ? 'selected' : '';
+                                    echo '<option value="' . $category['roomcategory_id'] . '" ' . $selected . '>' . $category['roomcategory_name'] . '</option>';
                                 }
                                 ?>
                             </select>
