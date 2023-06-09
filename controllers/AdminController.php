@@ -41,7 +41,7 @@ class AdminController
                 "message" => "Accès non-autorisé",
                 "type" => 'alert-danger'
             ];
-            header('Location: accueil');
+            header('Location: login');
         }
     }
 
