@@ -30,7 +30,6 @@ class BookingController
                 "bedrooms" => $bedrooms,
                 "view" => "views/booking/bookingHome.view.php",
                 "template" => "views/booking/common/__template_front.php",
-                "page_javascript" => ["general.js"],
             ];
             $this->genererPage($data_page);
         } else {
@@ -107,7 +106,6 @@ class BookingController
                 "bedroomsNotAvailable" => $bedroomsNotAvailable,
                 "bedroomsAvailable" => $bedroomsAvailable,
                 "totalNight" => $totalNight,
-                "page_javascript" => ["general.js"],
                 "view" => "views/booking/bookingAvailable.view.php",
                 "template" => "views/booking/common/__template_front.php",
             ];

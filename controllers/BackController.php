@@ -180,7 +180,7 @@ class BackController{
             $name = Securite::secureHTML($_POST['name']);
             $email = Securite::secureHTML($_POST['email']);
             $password = Securite::secureHTML($_POST['password']);
-            $password_two = Securite::secureHTML($_POST['password_two']);
+            $password_two = Securite::secureHTML($_POST['password_confirmation']);
             $address = Securite::secureHTML($_POST['address']);
             $country = Securite::secureHTML($_POST['country']);
             $city = Securite::secureHTML($_POST['city']);
@@ -201,7 +201,8 @@ class BackController{
             // Code généré pour permettre d'avoir un code unique pour valider son compte.
             $codeactivation = hash('md2', 'Hello'. rand(5000, 10000) . 'Inscription');
 
-            $apply = $this->backManager->setApplyAccount($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$email,$password,$codeactivation);
+//           $apply = $this->backManager->setApplyAccount($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$email,$password,$codeactivation);
+            $apply = false;
             if($apply === true) {
                 $_SESSION['alert'] = [
                     "message" => "Votre compte a été créé. Vérifier votre boîte mail pour valider votre compte.",
@@ -220,6 +221,7 @@ class BackController{
             "page_description" => " Page d'inscription",
             "page_title" => "",
             "countrys" => $countrys,
+            "page_javascript" => ["verifpassword.js"],
             "view" => "views/main/back/apply.view.php",
             "template" => "views/main/common/__template_front.php"
         ];

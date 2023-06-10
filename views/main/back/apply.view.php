@@ -1,7 +1,7 @@
 <div class="container">
     <main>
         <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src="<?= URL ?>public/assets/images/logo.png" alt="Logo Hotel Belle nuit" width="100" height="100">
+            <img class="d-block mx-auto mb-4" src="<?= URL ?>public/assets/images/logo.png" alt="Logo Hotel Belle nuit" width="300" height="70">
             <h2 class="text-danger fw-bold">Inscription</h2>
             <p class="lead fst-italic">Vous désirez réserver une chambre dans notre hôtel ? Alors inscrivez-vous.</p>
         </div>
@@ -29,12 +29,14 @@
                         <!-- mot de passe -->
                         <div class="col-6">
                             <label for="password" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <small class="text-muted">Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.</small>
                         </div>
                         <!--  répéter mot de passe -->
                         <div class="col-6">
                             <label for="password" class="form-label">Répéter mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password_two">
+                            <input type="password" class="form-control" id="passwordConfirmation" name="password_confirmation" required>
+                            <small class="text-muted">Répétez le mot de passe exactement comme vous l'avez saisi ci-dessus.</small>
                         </div>
                         <!-- Adresse -->
                         <div class="col-6">
@@ -70,7 +72,7 @@
                         </div>
                         <div class="col-6">
                             <label for="tel" class="form-label">Numéro de téléphone :</label>
-                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[0-9]{4,}$" required>
+                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[\s][0-9]{4,}$" required>
                         </div>
                     </div>
                     <hr class="my-4">
@@ -80,3 +82,35 @@
         </div>
     </main>
 </div>
+
+<script>
+
+    // Fonction de validation du mot de passe
+    function validatePassword() {
+        const password = document.getElementById("password").value;
+        const passwordConfirmation = document.getElementById("passwordConfirmation").value;
+
+        // Expression régulière pour la vérification du mot de passe
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordRegex.test(password)) {
+            alert("Le mot de passe doit contenir au moins 8 caractères, dont au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.");
+            return false;
+        }
+
+        if (password !== passwordConfirmation) {
+            alert("Les mots de passe ne correspondent pas.");
+            return false;
+        }
+
+        return true;
+    }
+
+    // Validation du formulaire lors de la soumission
+    const form = document.forms["formulaire"];
+    form.addEventListener("submit", function(event) {
+        if (!validatePassword()) {
+            event.preventDefault();
+        }
+    });
+</script>

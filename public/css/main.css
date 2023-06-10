@@ -10,7 +10,10 @@
 .navbar-nav .nav-link:hover {
   font-weight: 600;
 }
-
+.password-hint {
+  font-size: 12px;
+  color: #777;
+}
 
 .footer-links li a {
   text-decoration: none;
@@ -43,6 +46,15 @@
       font-size: 3.5rem;
     }
   }
+
+.valid {
+  background-color: lightgreen;
+}
+
+.invalid {
+  background-color: salmon;
+}
+
 
 .sizeTeam{
   height: 250px;

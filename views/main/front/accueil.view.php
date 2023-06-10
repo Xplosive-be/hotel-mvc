@@ -35,7 +35,7 @@
     <!-- 2ème Restaurant -->
     <div class="row featurette mt-5">
         <div class="col-md-7">
-            <h2 class="display-4 font-weight-light text-danger">Notre restaurant</h2>
+            <h2 class="display-6 font-weight-light text-danger">Notre restaurant</h2>
             <p class=" mt-3 text-justify">
                 Notre menu propose une sélection variée de plats belges traditionnels, préparés avec soin par notre équipe de chefs talentueux. Vous pourrez déguster des entrées savoureuses et des plats principaux mettant en avant les saveurs locales. Notre menu offre des options pour tous les goûts, que vous préfériez la viande ou le poisson.
                 Accompagnez votre repas avec notre carte de bières belges renommées et une sélection de vins choisis avec soin. Terminez en beauté avec nos délicieux desserts, préparés avec passion et créativité.
@@ -53,7 +53,7 @@
             <img src="<?= URL ?>public/assets/images/spa/spa4.jpg" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded-5" alt="">
         </div>
         <div class="col-md-7">
-            <h2 class="display-4 font-weight-light text-danger">Notre espace détente</h2>
+            <h2 class="display-6 font-weight-light text-danger">Notre espace détente</h2>
             <p class="mt-3 text-justify">Le spa de Belle-nuit possède une piscine intérieure chauffée équipée de jets de massage pour se détendre. Il possède également un sauna sec et un hammam pour offrir différentes options de chaleur et d'humidité aux clients. <br><br>
                 En ce qui concerne les soins du corps, le spa de Belle-nuit propose une variété de massages, tels que des massages suédois, des massages aux pierres chaudes, des massages ayurvédiques, des massages thaïlandais et des massages shiatsu. Les clients peuvent également profiter de soins du visage tels que des nettoyages de peau, des traitements anti-âge et des soins hydratants. <br><br>
             </p>
@@ -64,7 +64,7 @@
     <div class="container mt-">
         <div class="row mb-4">
             <div class="col-lg-5">
-                <h2 class="display-2 font-weight-light text-danger">Notre équipe</h2>
+                <h2 class="display-6 font-weight-light text-danger">Notre équipe</h2>
                 <p class="font-italic text-muted">Nous sommes là pour vous servir et rendre votre séjour inoubliable.</p>
             </div>
         </div>
