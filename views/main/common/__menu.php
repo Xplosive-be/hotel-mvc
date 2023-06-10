@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg justify-content-around bg-white mb-3 navbar-dark">
+<nav class="navbar navbar-expand-lg justify-content-around bg-white mb-3">
     <a href="accueil">
         <img class="logo-menu" src="<?= URL ?>/public/assets/images/logo.png" alt="Logo du site " >
     </a>
@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mx-auto mb-lg-0 fs-5 text-uppercase">
             <li class="nav-item"><a href="accueil" class="nav-link px-6 text-danger">Accueil</a></li>
-            <li class="nav-item"><a href="restaurant" class="nav-link px-6 text-danger ">Restaurant</a></li>
+            <li class="nav-item"><a href="restaurant" class="nav-link px-6 text-danger">Restaurant</a></li>
             <li class="nav-item"><a href="spa" class="nav-link px-6 text-danger ">Spa &amp; Bien-être</a></li>
             <li class="nav-item"><a href="bedrooms" class="nav-link px-6 text-danger ">Chambres</a></li>
             <li class="nav-item"><a href="contact" class="nav-link px-6 text-danger ">Contact</a></li>

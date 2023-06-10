@@ -64,6 +64,16 @@ class AdminManager extends Model
         $stmt->closeCursor();
     }
 
+    public function disableAccount($id) {
+        $stmt = $this->getBdd()->prepare('UPDATE `account` SET `acc_active` = 0 WHERE `account`.`acc_id` = :idAccount');
+        $stmt->bindParam(':idAccount', $id);
+        $stmt->execute();
+    }
+    public function activeAccount($id) {
+        $stmt = $this->getBdd()->prepare('UPDATE `account` SET `acc_active` = 1 WHERE `account`.`acc_id` = :idAccount');
+        $stmt->bindParam(':idAccount', $id);
+        $stmt->execute();
+    }
     public function setAdminEditBed($name, $description, $typeBed, $category, $price, $idEditBed)
     {
         $stmt = $this->getBdd()->prepare('

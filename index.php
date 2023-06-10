@@ -118,6 +118,13 @@ try {
         case "adminDelResto":
             $adminController->adminDelResto();
             break;
+        // Activation & Désactivation
+        case "disableAccount":
+            $adminController->adminDisableAccount();
+            break;
+        case "activeAccount":
+            $adminController->adminActiveAccount();
+            break;
         // Partie Booking
         case "accueilBooking":
             $bookingController->bookingHome();

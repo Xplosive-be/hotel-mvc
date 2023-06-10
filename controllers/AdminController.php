@@ -124,6 +124,53 @@ class AdminController
         }
     }
 
+    public function adminDisableAccount()
+    {
+        if (Securite::verifAccessSession() & isset($_GET['id'])) {
+            $id = Securite::secureHTML($_GET['id']);
+            $profil = $this->adminManager->getProfil($id);
+            if (!$profil) {
+                header('Location: adminaccount');
+            }
+            $this->adminManager->disableAccount($profil['acc_id']);
+            $_SESSION['alert'] = [
+
+                "message" => "Admin --- L'utilisateur a été désactivé avec succès.",
+                "type" => 'alert-success'
+            ];
+            header('Location: adminAccount');
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Admin --- Erreur informations manquant!",
+                "type" => 'alert-danger'
+            ];
+        }
+        header('Location: adminAccount');
+    }
+
+    public function adminActiveAccount()
+    {
+        if (Securite::verifAccessSession() & isset($_GET['id'])) {
+            $id = Securite::secureHTML($_GET['id']);
+            $profil = $this->adminManager->getProfil($id);
+            if (!$profil) {
+                header('Location: adminaccount');
+            }
+            $this->adminManager->activeAccount($profil['acc_id']);
+            $_SESSION['alert'] = [
+
+                "message" => "Admin --- L'utilisateur a été activé avec succès.",
+                "type" => 'alert-success'
+            ];
+            header('Location: adminAccount');
+        } else {
+            $_SESSION['alert'] = [
+                "message" => "Admin --- Erreur informations manquant!",
+                "type" => 'alert-danger'
+            ];
+        }
+        header('Location: adminAccount');
+    }
     public function adminBedrooms()
     {
         if (Securite::verifAccessSession()) {
