@@ -2,17 +2,32 @@
 <div class="container">
     <div class="row flex-lg-row-reverse align-items-center g-5 pt-5">
         <div class="col-10 col-sm-8 col-lg-6">
-            <img src="<?= URL ?>public/assets/images/83071739.jpg" class="d-block mx-lg-auto img-fluid rounded"
-                 alt="Photos de l'hôtel" width="700" height="500" loading="lazy">
+            <img src="<?= URL ?>public/assets/images/83071739.jpg"
+                 class="d-block mx-lg-auto img-fluid rounded-5"
+                 alt="Photos de l'hôtel" width="800" height="600"
+                 loading="lazy">
         </div>
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold lh-1 mb-3">Hotel Belle-Nuit</h1>
-            <p class="lead">Notre petit hôtel chaleureux en centre-ville propose des chambres confortables et bien
-                équipées, ainsi qu'un petit déjeuner buffet chaque matin. Nous avons une équipe accueillante et notre
-                salon confortable est idéal pour se détendre. Nous espérons vous accueillir bientôt !</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                <button type="button" class="btn btn-danger btn-lg px-4 me-md-2">Primary</button>
-                <button type="button" class="btn btn-outline-danger btn-lg px-4">Default</button>
+            <h1 class="display-4 fw-bold lh-1 mb-4 text-danger">Belle-Nuit,
+                Hôtel des Ardennes</h1>
+            <p class="lead mb-4 text-justify">
+                Nous vous offrons un hébergement confortable et accueillant dans un environnement paisible et charmant.
+                Nous avons une variété de chambres joliment décorées, toutes
+                dotées de lits confortables.
+                Vous pourrez également profiter de notre jardin et de notre
+                terrasse pour vous détendre après une journée de découverte
+                mais aussi notre spa et pour terminer un succulent repas dans
+                notre restaurant.
+                Notre petit déjeuner est servi chaque matin et offre une
+                sélection de produits locaux frais pour bien commencer la
+                journée.
+                Nous sommes situés dans une région magnifique, riche en histoire et en culture, nous serions ravis de vous aider à planifier votre séjour pour en profiter au mieux.
+                Rejoignez-nous à Belle Nuit pour un séjour mémorable et pour vivre une expérience de voyage authentique. N'hésitez pas à nous contacter pour plus d'informations ou pour réserver votre séjour.
+
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="bedrooms" class="btn btn-danger btn-lg px-4 
+                me-md-2">Réserver une chambre</a>
             </div>
         </div>
     </div>
