@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 09 juin 2023 à 23:05
+-- Généré le : sam. 10 juin 2023 à 21:49
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -49,9 +49,7 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_addressbox`, `acc_city`, `acc_codepostal`, `acc_id_country`, `acc_phone`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`) VALUES
-(6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1),
-(7, 'Cida', 'Liliana', '16 Rue Xavier de bue', 0, 'Uccle', 1180, 25, '+32492518260', 'test@test.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '017d262b2f95cdd20ad7bad419e4e25a', 0, 1),
-(8, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 1180, 25, '+32496359742', '2@2.com', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '55f3589fd3b542ecc69bbd08c06d55f4', 0, 0);
+(6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -113,7 +111,9 @@ CREATE TABLE `bookings` (
 --
 
 INSERT INTO `bookings` (`booking_id`, `id_bedroom`, `id_acc`, `cus_gender`, `booking_date_begin`, `booking_arrival_time`, `booking_date_end`, `booking_price_total`, `booking_comments`, `cus_name`, `cus_surname`, `cus_address`, `cus_addressbox`, `cus_city`, `cus_codepostal`, `cus_id_country`, `cus_phone`, `cus_email`, `booking_cancelation`, `booking_validation`) VALUES
-(22, 1, 6, 'H', '2023-06-01', '15:00:00', '2023-06-03', 300, 'Test', 'Cida', 'Liliana', 'Rue du bourdon 74', '3', 'Bruxelles', 1180, 182, '+32 496359742', 'test@test.com', 0, 1);
+(22, 1, 6, 'H', '2023-06-01', '15:00:00', '2023-06-03', 300, 'Test', 'Cida', 'Liliana', 'Rue du bourdon 74', '3', 'Bruxelles', 1180, 182, '+32 496359742', 'test@test.com', 0, 1),
+(23, 1, 6, 'F', '2023-06-10', '19:00:00', '2023-06-13', 215, 'test', 'Cida', 'Liliana', 'Rue du bourdon 74', '7', 'Bruxelles', 1180, 25, '+32 496359742', 'test@test.com', 0, 1),
+(24, 4, 6, 'F', '2023-06-12', '15:30:00', '2023-06-18', 1850, '', 'Admin', 'Liliana', 'Rue de l&#039;Admin 74', '1', 'Bruxelles', 1000, 177, '+32 149653597', 'test@test.com', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -504,7 +504,9 @@ CREATE TABLE `lnk_services_reservation` (
 
 INSERT INTO `lnk_services_reservation` (`id_booking`, `id_service`) VALUES
 (22, 1),
-(22, 4);
+(22, 4),
+(23, 1),
+(24, 2);
 
 -- --------------------------------------------------------
 
@@ -779,7 +781,7 @@ ALTER TABLE `spa`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `bedroom`
@@ -791,7 +793,7 @@ ALTER TABLE `bedroom`
 -- AUTO_INCREMENT pour la table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `category_bedroom`
