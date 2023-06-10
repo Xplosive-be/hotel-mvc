@@ -1,5 +1,4 @@
 <div class="container">
-
     <footer class="footer py-4">
         <hr class="mb-3 bg-danger">
         <div class="container text-center">
