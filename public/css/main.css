@@ -1,4 +1,15 @@
 
+.team-img {
+  width: 100px;
+  height: 120px;
+  object-fit: cover;
+}
+.bg-danger-footer {
+  background-color: rgba(220, 53, 69, 0.15);
+}
+.footer-links li a {
+  text-decoration: none;
+}
 
 .logo-menu {
     height: 80px;
@@ -132,9 +143,10 @@
 }
 
 .carousel-img {
-  width: 650px; /* Remplacez 500px par la taille souhaitée */
-  height: 500px; /* Remplacez 300px par la taille souhaitée */
-  object-fit: fill;
+  width: 600px; /* Remplacez 500px par la taille souhaitée */
+  height: 400px; /* Remplacez 300px par la taille souhaitée */
+  object-fit: cover;
+
 }
 
   /*Réservation*/

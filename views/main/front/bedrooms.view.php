@@ -3,11 +3,11 @@
     <?php $carousel = 'carousel'.$bedroom['bedroom_id']?>
     <main class="container bg-light p-5 border border-danger rounded mb-5">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-8 col-lg-6">
                 <h2 class="text-danger fst-italic fw-bolder "><?= $bedroom['bedroom_name'] ?></h2>
                 <p class="lead text-justify mt-3"><?= $bedroom['bedroom_description'] ?></p>
             </div>
-            <div id="<?= $carousel ?>" class="carousel slide col-6" data-bs-ride="carousel" data-bs-interval="3000">
+            <div id="<?= $carousel ?>" class="carousel slide col-md-4 col-lg-6" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner ">
                     <?php
                     // Récupére les images via l'id BedRoom
@@ -21,7 +21,7 @@
                             $active = ($key == 0) ? 'active' : '';
                             echo '<div class="carousel-item ' . $active . '">';
                             // Si la Key est 0 alors on mets active pour le carrousel sinon
-                            echo '<img src="' . $bedroomImages["picture_url"] . '" class="d-block carousel-img" alt="">
+                            echo '<img src="' . $bedroomImages["picture_url"] . '" class="d-block carousel-img "alt="">
                         </div>';
                             $key++;
                             echo '<button class="carousel-control-prev" type="button" data-bs-target="#'. $carousel . '" data-bs-slide="prev">

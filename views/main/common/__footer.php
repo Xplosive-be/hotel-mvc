@@ -1,39 +1,21 @@
 <div class="container">
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-        <div class="col-12 col-md">
-        <img src="<?= URL; ?>public/assets/images/logo-mini.png" width="40" alt="logo du site" />
-            <small class="d-block mb-3 text-muted">&copy; 2017–2021</small>
-        </div>
-        <div class="col-6 col-md">
-            <h5>Features</h5>
-            <ul class="list-unstyled text-small">
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+
+    <footer class="footer py-4">
+        <hr class="mb-3 bg-danger">
+        <div class="container text-center">
+            <ul class="list-inline mb-0 footer-links">
+                <li class="list-inline-item"><a href="accueil" class="fw-bold text-danger">Accueil</a></li>
+                <li class="list-inline-item"><a href="restaurant" class="fw-bold text-danger">Restaurant</a></li>
+                <li class="list-inline-item"><a href="spa" class="fw-bold text-danger">Spa</a></li>
+                <li class="list-inline-item"><a href="chambres" class="fw-bold text-danger">Chambres</a></li>
+                <li class="list-inline-item"><a href="reservation" class="fw-bold text-danger">Réservation</a></li>
+                <li class="list-inline-item"><a href="contact" class="fw-bold text-danger">Contact</a></li>
             </ul>
         </div>
-        <div class="col-6 col-md">
-            <h5>Resources</h5>
-            <ul class="list-unstyled text-small">
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
-            </ul>
-        </div>
-        <div class="col-6 col-md">
-            <h5>About</h5>
-            <ul class="list-unstyled text-small">
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-            <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
-            </ul>
-        </div>
+        <div class="container text-center mt-2">
+            <span class="text-muted">© 2023 Belle-Nuit. Tous droits réservés.</span>
         </div>
     </footer>
 </div>
+
+
