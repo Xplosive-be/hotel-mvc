@@ -29,6 +29,7 @@
         ?>
         <?= $page_content; ?>
     </div>
+    <?php require_once("views/booking/common/__footer.php"); ?>
 </body>
 
 </html>

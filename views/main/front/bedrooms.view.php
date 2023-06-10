@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-lg-6">
                 <h2 class="text-danger fst-italic fw-bolder "><?= $bedroom['bedroom_name'] ?></h2>
-                <p class="lead text-justify mt-3"><?= $bedroom['bedroom_description'] ?></p>
+                <p class="text-justify mt-3"><?= $bedroom['bedroom_description'] ?></p>
             </div>
             <div id="<?= $carousel ?>" class="carousel slide col-md-4 col-lg-6" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner ">
