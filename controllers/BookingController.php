@@ -84,11 +84,22 @@ class BookingController
             $bedroomsAvailable = $this->bookingManager->getAllBedroomsByAvailable($dateBegin, $dateEnd);
             $bedroomsNotAvailable = $this->bookingManager->getAllBedroomsByNotAvailable($dateBegin, $dateEnd);
 
-            // Convertir les dates de réservation en formats lisibles par l'utilisateur
             $dateBeginObj = new DateTime($dateBegin);
-            $_SESSION['booking']['dateBeginTxt'] = $dateBeginObj->format('l, j F Y');
             $dateEndObj = new DateTime($dateEnd);
-            $_SESSION['booking']['dateEndTxt'] = $dateEndObj->format('l, j F Y');
+
+            // Tableaux de traduction des jours de la semaine et des mois en français
+            $daysOfWeek = array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
+            $months = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+
+            $dayOfWeekBeginIndex = (int)$dateBeginObj->format('w');
+            $monthBeginIndex = (int)$dateBeginObj->format('n') - 1;
+            $dayOfWeekEndIndex = (int)$dateEndObj->format('w');
+            $monthEndIndex = (int)$dateEndObj->format('n') - 1;
+
+            $_SESSION['booking']['dateBeginTxt'] = $daysOfWeek[$dayOfWeekBeginIndex] . ', ' . $dateBeginObj->format('j') . ' ' . $months[$monthBeginIndex] . ' ' . $dateBeginObj->format('Y');
+            $_SESSION['booking']['dateEndTxt'] = $daysOfWeek[$dayOfWeekEndIndex] . ', ' . $dateEndObj->format('j') . ' ' . $months[$monthEndIndex] . ' ' . $dateEndObj->format('Y');
+
+
 
             $data_page = [
                 "page_description" => "Réservation",
