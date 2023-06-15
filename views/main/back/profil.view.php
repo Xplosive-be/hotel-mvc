@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-6">
                             <label for="tel" class="form-label">Numéro de téléphone :</label>
-                            <input type="tel" class="form-control" name="phone" id="phone" value="<?= $profil['acc_phone'] ?>" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[0-9]{4,}$" required>
+                            <input type="tel" class="form-control" name="phone" id="phone" value="<?= $profil['acc_phone'] ?>" placeholder="+32123456789" pattern="^[+][0-9]{1,4}[0-9]{4,}$" required>
                         </div>
                         <div class="d-flex justify-content-center">
                             <a class="mt-3 btn btn-danger mx-2 fw-bolder text-center" href="profilPassword">Changer le mot de passe</a>
