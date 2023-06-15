@@ -85,5 +85,14 @@ class BackManager extends Model
         $stmt->closeCursor();
         return true;
     }
+
+    public function updatePasswordProfil($newPassword, $idAccount) {
+        $stmt = $this->getBdd()->prepare('UPDATE `account` SET `acc_password` = :newPassword WHERE `acc_id` = :idAccount');
+        $stmt->bindParam(':newPassword', $newPassword, PDO::PARAM_STR);
+        $stmt->bindParam(':idAccount', $idAccount, PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }
+
 }
 

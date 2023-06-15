@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="phone" class="form-label">Numéro de téléphone :</label>
-                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[\s][0-9]{4,}$" required>
+                            <input type="tel" class="form-control" name="phone" id="phone" placeholder="+32 123456789" pattern="^[+][0-9]{1,4}[0-9]{4,}$" required>
                         </div>
                     </div>
                     <div class="row mb-3">

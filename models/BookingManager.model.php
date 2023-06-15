@@ -113,7 +113,7 @@ SELECT * FROM bedroom WHERE bedroom_id NOT IN (
                 ':cus_name' => $_SESSION['booking']['customers']['name'],
                 ':cus_surname' => $_SESSION['booking']['customers']['surname'],
                 ':cus_address' => $_SESSION['booking']['customers']['address'],
-                ':cus_addressbox' => !empty($_SESSION['booking']['customers']['box']) ? $_SESSION['booking']['customers']['box'] : null,
+                ':cus_addressbox' => $_SESSION['booking']['customers']['box'] ?? null,
                 ':cus_city' => $_SESSION['booking']['customers']['city'],
                 ':cus_codepostal' => $_SESSION['booking']['customers']['postalCode'],
                 ':cus_id_country' => $_SESSION['booking']['customers']['country'],

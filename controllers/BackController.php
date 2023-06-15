@@ -49,6 +49,7 @@ class BackController{
                     $_SESSION['phone'] = $account['acc_phone'];
                     $_SESSION['country'] = $account["acc_id_country"];
                     $_SESSION['admin'] = $account["acc_admin"];
+                    $_SESSION['acc_password'] = $account["acc_password"];
                     //  Message de succès de connection
                     $_SESSION['alert'] = [
                         "message" => "Connection réussis avec succès",
@@ -88,8 +89,6 @@ class BackController{
                 exit();
             }
         }
-
-        /** Envoie les données pour générer la page */
         $data_page = [
             "page_description" => "La page de connection",
             "page_title" => "Hôtel Belle-Nuit | Connectez-vous",
@@ -118,43 +117,44 @@ class BackController{
     }
     public function profil(){
         if(Securite::verifConnectSession()){
-        if (isset( $_POST['btnEdit'])) {
-            // Verification et sécurisation des nouvelles données.
-            $surname = Securite::secureHTML($_POST['surname']);
-            $name = Securite::secureHTML($_POST['name']);
-            $address = Securite::secureHTML($_POST['address']);
-            $country = Securite::secureHTML($_POST['country']);
-            $city = Securite::secureHTML($_POST['city']);
-            $box = Securite::secureHTML($_POST['box']);
-            $codePostal = Securite::secureHTML($_POST['codePostal']);
-            $phone = Securite::secureHTML($_POST['phone']);
-            //SQL pour mettre à jour la DB
-            $this->backManager->setEditProfil($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$_SESSION["idAccount"]);
-            //Update Session avec les nouvelles valeurs.
-            $_SESSION['surname'] = $surname;
-            $_SESSION['name'] = $name;
-            $_SESSION['address'] = $address;
-            $_SESSION['city'] = $city;
-            $_SESSION['country'] = $country;
-            $_SESSION['box'] = $box;
-            $_SESSION['codePostal'] = $codePostal;
-            $_SESSION['phone'] = $phone;
-            // $msg_succes = "Vos informations ont été modifiées avec succès.";
-            $_SESSION['alert'] = [
-                "message" => 'Vos informations ont été modifiés avec succès.',
-                "type" => 'alert-success'
-            ];
-        }
+            if (isset( $_POST['btnEdit'])) {
+                // Verification et sécurisation des nouvelles données.
+                $surname = Securite::secureHTML($_POST['surname']);
+                $name = Securite::secureHTML($_POST['name']);
+                $address = Securite::secureHTML($_POST['address']);
+                $country = Securite::secureHTML($_POST['country']);
+                $city = Securite::secureHTML($_POST['city']);
+                $box = Securite::secureHTML($_POST['box']);
+                $codePostal = Securite::secureHTML($_POST['codePostal']);
+                $phone = Securite::secureHTML($_POST['phone']);
+                //SQL pour mettre à jour la DB
+                $this->backManager->setEditProfil($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$_SESSION["idAccount"]);
+                //Update Session avec les nouvelles valeurs.
+                $_SESSION['surname'] = $surname;
+                $_SESSION['name'] = $name;
+                $_SESSION['address'] = $address;
+                $_SESSION['city'] = $city;
+                $_SESSION['country'] = $country;
+                $_SESSION['box'] = $box;
+                $_SESSION['codePostal'] = $codePostal;
+                $_SESSION['phone'] = $phone;
+
+                // $msg_succes = "Vos informations ont été modifiées avec succès.";
+                $_SESSION['alert'] = [
+                    "message" => 'Vos informations ont été modifiés avec succès.',
+                    "type" => 'alert-success'
+                ];
+            }
         } else {
             header('Location: login');
         }
         $data_page = [
             "page_description" => " Page de Profil",
-            "page_title" => "",
+            "page_title" => "Hôtel Belle-Nuit | Profil",
             "countrys" => $this->frontManager->getCountryList(),
             "profil" => $this->adminManager->getProfil($_SESSION['idAccount']),
             "view" => "views/main/back/profil.view.php",
-            "template" => "views/main/common/__template_front.php"
+            "template" => "views/main/common/__template_front.php",
         ];
         $this->genererPage($data_page);
     }
@@ -200,9 +200,7 @@ class BackController{
             $password = Securite::EncryptPassword($password);
             // Code généré pour permettre d'avoir un code unique pour valider son compte.
             $codeactivation = hash('md2', 'Hello'. rand(5000, 10000) . 'Inscription');
-
-//           $apply = $this->backManager->setApplyAccount($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$email,$password,$codeactivation);
-            $apply = false;
+            $apply = $this->backManager->setApplyAccount($name,$surname,$address,$box,$city,$codePostal,$country,$phone,$email,$password,$codeactivation);
             if($apply === true) {
                 $_SESSION['alert'] = [
                     "message" => "Votre compte a été créé. Vérifier votre boîte mail pour valider votre compte.",
@@ -218,12 +216,14 @@ class BackController{
         }
         $countrys = $this->frontManager->getCountryList();
         $data_page = [
-            "page_description" => " Page d'inscription",
-            "page_title" => "",
+
             "countrys" => $countrys,
-            "page_javascript" => ["verifpassword.js"],
+            "page_description" => "Inscription",
+            "page_title" => "Hôtel Belle-Nuit | Inscription",
             "view" => "views/main/back/apply.view.php",
-            "template" => "views/main/common/__template_front.php"
+            "template" => "views/main/common/__template_front.php",
+            "page_javascript" => ["validePassword.js"],
+
         ];
         $this->genererPage($data_page);
     }
@@ -268,7 +268,7 @@ class BackController{
                 header('Location: accueil');
             } else {
                 // si le code n'est pas bon
-                // redirection vers le $msg_error =  "Erreur de la validation. Contactez un administrateur!"
+                // redirection vers le $msg_error = "Erreur de la validation. Contactez un administrateur!"
                 $_SESSION['alert'] = [
                     "message" => "Erreur de la validation. Contactez un administrateur!",
                     "type" => 'alert-danger'

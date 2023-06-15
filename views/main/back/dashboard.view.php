@@ -1,4 +1,4 @@
-<h1 class='text-center my-3 text-danger fw-bolder'>Administration</h1>
+<h1 class='text-center my-3 text-danger fw-bolder'>Bienvenu(e) <?=  $_SESSION['surname'] . ' ' . $_SESSION['name']?></h1>
 <div class="container py-4">
     <div class="row align-items-md-stretch justify-content-center">
         <div class="col-12 col-md-auto mb-3">
@@ -16,3 +16,4 @@
         </div>
     </div>
 </div>
+
