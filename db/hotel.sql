@@ -52,7 +52,7 @@ INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_
 (1, 'TEST', 'Admin', 'Rue du Paradis', 3, 'Bruxelles', 0, 25, '+32496112233', 'admin@admin.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1),
 (2, '1', 'Client', 'Rue du Palais 4', 0, 'Bruxelles', 1000, 25, '+32496359742', 'client@client.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'a9064fd0dbdaf71e45b32e966c1ef29a', 0, 1),
 (3, '2', 'Client', 'Rue du Palais 4', 0, 'Bruxelles', 1100, 25, '+32496359742', 'client2@client.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '88b0288f166198cee5163e9d5ba53320', 0, 1),
-(19, '3', 'Client', 'Rue du Paradis', 0, 'Bruxelles', 1000, 25, '+32496359742', 'client3@client.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '3695e272f4cfb6b28b19387c04b10aec', 0, 0);
+(4, '3', 'Client', 'Rue du Paradis', 0, 'Bruxelles', 1000, 25, '+32496359742', 'client3@client.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '3695e272f4cfb6b28b19387c04b10aec', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -765,7 +765,7 @@ ALTER TABLE `spa`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `bedroom`
@@ -777,7 +777,7 @@ ALTER TABLE `bedroom`
 -- AUTO_INCREMENT pour la table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 
 --
 -- AUTO_INCREMENT pour la table `category_bedroom`
