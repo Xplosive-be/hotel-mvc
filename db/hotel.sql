@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 10 juin 2023 à 21:49
+-- Généré le : jeu. 15 juin 2023 à 17:47
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -32,7 +32,7 @@ CREATE TABLE `account` (
   `acc_name` varchar(30) NOT NULL,
   `acc_surname` varchar(30) NOT NULL,
   `acc_address` varchar(120) NOT NULL,
-  `acc_addressbox` int(11) NOT NULL,
+  `acc_addressbox` int(11) DEFAULT NULL,
   `acc_city` varchar(20) NOT NULL,
   `acc_codepostal` mediumint(9) NOT NULL,
   `acc_id_country` int(11) NOT NULL,
@@ -49,7 +49,10 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_addressbox`, `acc_city`, `acc_codepostal`, `acc_id_country`, `acc_phone`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`) VALUES
-(6, 'Smeyers', 'Samir', 'Rue du bourdon 74', 3, 'Bruxelles', 0, 25, '+32496359742', '1@1', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1);
+(1, 'TEST', 'Admin', 'Rue du Paradis', 3, 'Bruxelles', 0, 25, '+32496112233', 'admin@admin.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'e9d8e487b5827a0f8e7eb70a06b0ebf2', 1, 1),
+(2, '1', 'Client', 'Rue du Palais 4', 0, 'Bruxelles', 1000, 25, '+32496359742', 'client@client.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', 'a9064fd0dbdaf71e45b32e966c1ef29a', 0, 1),
+(3, '2', 'Client', 'Rue du Palais 4', 0, 'Bruxelles', 1100, 25, '+32496359742', 'client2@client.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '88b0288f166198cee5163e9d5ba53320', 0, 1),
+(19, '3', 'Client', 'Rue du Paradis', 0, 'Bruxelles', 1000, 25, '+32496359742', 'client3@client.be', '966602fd329284404b6b297914a16478f736207e5690c0ac4e5cba726e9c49350156f0d95cf54ce28ec194684d79c9a5497b841818695f071e01ac0b466619b2', '3695e272f4cfb6b28b19387c04b10aec', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -96,7 +99,7 @@ CREATE TABLE `bookings` (
   `cus_name` varchar(30) NOT NULL,
   `cus_surname` varchar(30) NOT NULL,
   `cus_address` varchar(120) NOT NULL,
-  `cus_addressbox` varchar(10) NOT NULL,
+  `cus_addressbox` varchar(10) DEFAULT NULL,
   `cus_city` varchar(20) NOT NULL,
   `cus_codepostal` mediumint(9) NOT NULL,
   `cus_id_country` int(11) NOT NULL,
@@ -105,15 +108,6 @@ CREATE TABLE `bookings` (
   `booking_cancelation` tinyint(1) NOT NULL DEFAULT 0,
   `booking_validation` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `bookings`
---
-
-INSERT INTO `bookings` (`booking_id`, `id_bedroom`, `id_acc`, `cus_gender`, `booking_date_begin`, `booking_arrival_time`, `booking_date_end`, `booking_price_total`, `booking_comments`, `cus_name`, `cus_surname`, `cus_address`, `cus_addressbox`, `cus_city`, `cus_codepostal`, `cus_id_country`, `cus_phone`, `cus_email`, `booking_cancelation`, `booking_validation`) VALUES
-(22, 1, 6, 'H', '2023-06-01', '15:00:00', '2023-06-03', 300, 'Test', 'Cida', 'Liliana', 'Rue du bourdon 74', '3', 'Bruxelles', 1180, 182, '+32 496359742', 'test@test.com', 0, 1),
-(23, 1, 6, 'F', '2023-06-10', '19:00:00', '2023-06-13', 215, 'test', 'Cida', 'Liliana', 'Rue du bourdon 74', '7', 'Bruxelles', 1180, 25, '+32 496359742', 'test@test.com', 0, 1),
-(24, 4, 6, 'F', '2023-06-12', '15:30:00', '2023-06-18', 1850, '', 'Admin', 'Liliana', 'Rue de l&#039;Admin 74', '1', 'Bruxelles', 1000, 177, '+32 149653597', 'test@test.com', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -498,16 +492,6 @@ CREATE TABLE `lnk_services_reservation` (
   `id_service` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `lnk_services_reservation`
---
-
-INSERT INTO `lnk_services_reservation` (`id_booking`, `id_service`) VALUES
-(22, 1),
-(22, 4),
-(23, 1),
-(24, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -781,7 +765,7 @@ ALTER TABLE `spa`
 -- AUTO_INCREMENT pour la table `account`
 --
 ALTER TABLE `account`
-  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT pour la table `bedroom`
@@ -793,7 +777,7 @@ ALTER TABLE `bedroom`
 -- AUTO_INCREMENT pour la table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `booking_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT pour la table `category_bedroom`

@@ -257,7 +257,7 @@ class BackController{
                     "message" => "Votre compte a été créé. Vérifier votre boîte mail pour valider votre compte.",
                     "type" => 'alert-success'
                 ];
-                header('refresh:0.5;url=accueil');
+                header('Location: accueil');
             } else {
                 $_SESSION['alert'] = [
                     "message" => "Votre adresse mail est déjà pris!",

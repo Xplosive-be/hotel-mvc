@@ -69,7 +69,7 @@ class AdminController
 
     public function adminEditAccount()
     {
-        if (Securite::verifAccessSession() & isset($_GET['id'])) {
+        if (Securite::verifAccessSession() && isset($_GET['id'])) {
             $profil = $this->adminManager->getProfil($_GET['id']);
             if (!$profil) {
                 header('Location: adminaccount');
@@ -97,14 +97,34 @@ class AdminController
                 } else {
                     $active = Securite::secureHTML($_POST['active']);
                 }
-                // Requête pour mettre à jour le profil dans la section Admin.
-                //SQL pour mettre à jour la DB
-                $this->adminManager->setAdminEditProfil($name, $surname, $address, $city, $country, $active, $box, $codePostal, $phone, $admin, $idAccount);
-                $_SESSION['alert'] = [
-                    "message" => 'Les informations ont été modifiés avec succès.',
-                    "type" => 'alert-success'
-                ];
-                header('Location: adEditAccount&id=' . $idAccount);
+
+                // Vérification de la modification du mot de passe
+                if (!empty($_POST['newPassword'])) {
+                    $newPassword = Securite::secureHTML($_POST['newPassword']);
+                    $this->backManager->updatePasswordProfil(Securite::EncryptPassword($newPassword), $idAccount);
+                    $this->adminManager->setAdminEditProfil($name, $surname, $address, $city, $country, $active, $box, $codePostal, $phone, $admin, $idAccount);
+                    $_SESSION['alert'] = [
+                        "message" => "Le mot de passe a été mis à jour avec succès.",
+                        "type" => "alert-success"
+                    ];
+                    sleep(0.5);
+
+                    header('Location: adEditAccount&id=' . $idAccount);
+                    exit();
+                } else {
+                    // Requête pour mettre à jour le profil dans la section Admin.
+                    $this->adminManager->setAdminEditProfil($name, $surname, $address, $city, $country, $active, $box, $codePostal, $phone, $admin, $idAccount);
+                    $_SESSION['alert'] = [
+                        "message" => 'Les informations ont été modifiées avec succès.',
+                        "type" => 'alert-success'
+                    ];
+                    sleep(0.5);
+
+                    header('Location: adEditAccount&id=' . $idAccount);
+                    exit();
+                }
+
+
             }
             $data_page = [
                 "page_description" => " Page de Profil",
@@ -123,6 +143,7 @@ class AdminController
             header('Location: accueil');
         }
     }
+
 
     public function adminDisableAccount()
     {
