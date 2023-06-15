@@ -158,7 +158,58 @@ class BackController{
         ];
         $this->genererPage($data_page);
     }
+    public function profilPassword()
+    {
+        if (Securite::verifConnectSession()) {
+            if (isset($_POST['btnEditPassword'])) {
+                $currentPassword = Securite::secureHTML($_POST['currentPassword']);
+                $newPassword = Securite::secureHTML($_POST['newPassword']);
+                $confirmPassword = Securite::secureHTML($_POST['confirmPassword']);
 
+                if (!empty($currentPassword) && Securite::EncryptPassword($currentPassword) === $_SESSION['acc_password']) {
+                    // Le mot de passe actuel est correct
+                    if (!empty($newPassword) && $newPassword === $confirmPassword) {
+                        $this->backManager->updatePasswordProfil(Securite::EncryptPassword($newPassword), $_SESSION["idAccount"]);
+                        session_destroy();
+                        $_SESSION['alert'] = [
+                            "message" => "Votre mot de passe a été mis à jour avec succès. Merci de vous reconnecter",
+                            "type" => "alert-success"
+                        ];
+                        header('Location: login');
+                        exit();
+                    } else {
+                        // Les nouveaux mots de passe ne correspondent pas
+                        $_SESSION['alert'] = [
+                            "message" => "Les nouveaux mots de passe ne correspondent pas.",
+                            "type" => "alert-danger"
+                        ];
+                        header('Location: profilPassword');
+                        exit();
+                    }
+                } else {
+                    // Le mot de passe actuel est incorrect
+                    $_SESSION['alert'] = [
+                        "message" => "Mot de passe actuel incorrect. Veuillez réessayer.",
+                        "type" => "alert-danger"
+                    ];
+                    header('Location: profilPassword');
+                    exit();
+                }
+            }
+        } else {
+            header('Location: login');
+            exit();
+        }
+
+        $data_page = [
+            "page_description" => "Changement Mot de passe",
+            "page_title" => "Hôtel Belle-Nuit | Changement Mot de passe",
+            "view" => "views/main/back/profilPassword.view.php",
+            "template" => "views/main/common/__template_front.php",
+        ];
+
+        $this->genererPage($data_page);
+    }
     public function ReservationView()
     {
         if (Securite::verifConnectSession()) {

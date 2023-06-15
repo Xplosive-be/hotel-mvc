@@ -47,6 +47,9 @@ try {
         case "profil" :
             $backController->profil();
             break;
+        case "profilPassword" :
+            $backController->profilPassword();
+            break;
         case "reservationView" :
             $backController->ReservationView();
             break;
